@@ -1,6 +1,6 @@
 package inf112.skeleton.app.objects;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
@@ -13,7 +13,7 @@ public class Robot implements IDrawable {
     }
 
     @Override
-    public Texture getImage() {
+    public TextureRegion getImage() {
         // TODO Auto-generated method stub
         return null;
     }

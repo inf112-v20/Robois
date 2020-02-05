@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import inf112.skeleton.app.objects.Board;
-import inf112.skeleton.app.objects.tiles.Flag;
 
 /**
  * Unit test for simple App.
@@ -37,16 +36,5 @@ public class BoardShould {
                 assertNotNull(brd.getTile(i, j));
             }
         }
-    }
-
-    @Test
-    public void beAbleToAddATileToAPosition(){
-        Flag testObject = new Flag();
-        int i = 5; 
-        int j = 5;
-
-        brd.setTile(i, j, testObject);
-
-        assertEquals(testObject, brd.getTile(i, j));
     }
 }

@@ -2,7 +2,7 @@ package inf112.skeleton.app.objects.tiles;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
-class FastForwardConveyorBelt implements IDrawable{
+public class FastForwardConveyorBelt implements IDrawable{
     public FastForwardConveyorBelt() {
         
     }

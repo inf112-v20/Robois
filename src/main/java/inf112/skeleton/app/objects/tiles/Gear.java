@@ -2,7 +2,7 @@ package inf112.skeleton.app.objects.tiles;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
-class Gear implements IDrawable{
+public class Gear implements IDrawable{
     public Gear() {
         
     }

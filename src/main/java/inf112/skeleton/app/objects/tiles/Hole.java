@@ -2,7 +2,7 @@ package inf112.skeleton.app.objects.tiles;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
-class Hole implements IDrawable{
+public class Hole implements IDrawable{
     public Hole() {
         
     }

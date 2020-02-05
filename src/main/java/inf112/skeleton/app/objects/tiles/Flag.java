@@ -2,7 +2,7 @@ package inf112.skeleton.app.objects.tiles;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
-class Flag implements IDrawable{
+public class Flag implements IDrawable{
     public Flag() {
         
     }

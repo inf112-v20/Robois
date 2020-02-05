@@ -1,15 +1,21 @@
 package inf112.skeleton.app.objects.tiles;
 
-import inf112.skeleton.app.objects.interfaces.IDrawable;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-class LaserFire implements IDrawable{
-    public LaserFire() {
-        
+import inf112.skeleton.app.objects.interfaces.IDrawable;
+import inf112.skeleton.app.utilities.TextureReader;
+
+public class LaserFire implements IDrawable {
+    
+    private TextureRegion tr;
+
+    public LaserFire(Texture texture) {
+        this.tr = TextureReader.getTextureRegion(0, 0, texture);
     }
 
     @Override
-    public String getImage() {
-        // TODO Auto-generated method stub
-        return null;
+    public TextureRegion getImage() {
+        return this.tr;
     }
 }

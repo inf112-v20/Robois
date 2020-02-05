@@ -1,15 +1,21 @@
 package inf112.skeleton.app.objects.tiles;
 
-import inf112.skeleton.app.objects.interfaces.IDrawable;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-class FastForwardConveyorBelt implements IDrawable{
-    public FastForwardConveyorBelt() {
-        
+import inf112.skeleton.app.objects.interfaces.IDrawable;
+import inf112.skeleton.app.utilities.TextureReader;
+
+public class FastForwardConveyorBelt implements IDrawable {
+
+    private TextureRegion tr;
+
+    public FastForwardConveyorBelt(Texture texture) {
+        this.tr = TextureReader.getTextureRegion(0, 0, texture);
     }
 
     @Override
-    public String getImage() {
-        // TODO Auto-generated method stub
-        return null;
+    public TextureRegion getImage() {
+        return this.tr;
     }
 }

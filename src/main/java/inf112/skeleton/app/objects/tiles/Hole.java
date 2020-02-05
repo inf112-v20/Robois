@@ -1,15 +1,21 @@
 package inf112.skeleton.app.objects.tiles;
 
-import inf112.skeleton.app.objects.interfaces.IDrawable;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-class Hole implements IDrawable{
-    public Hole() {
-        
+import inf112.skeleton.app.objects.interfaces.IDrawable;
+import inf112.skeleton.app.utilities.TextureReader;
+
+public class Hole implements IDrawable {
+    
+    private TextureRegion tr;
+
+    public Hole(Texture texture) {
+        this.tr = TextureReader.getTextureRegion(0, 0, texture);
     }
 
     @Override
-    public String getImage() {
-        // TODO Auto-generated method stub
-        return null;
+    public TextureRegion getImage() {
+        return this.tr;
     }
 }

@@ -1,6 +1,7 @@
 package inf112.skeleton.app.objects;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
+import inf112.skeleton.app.objects.tiles.Wall;
 
 public class Board {
 
@@ -12,18 +13,13 @@ public class Board {
         this.width = 12;
         this.height = 12;
         this.board = new IDrawable[12][12];
-        this.fillBoard();
+        this.fillStandardBoard();
     }
 
-    private void fillBoard() {
+    private void fillStandardBoard() {
         for (int i = 0; i < this.height; i++){
             for (int j = 0; j < this.width; j++){
-                this.board[i][j] = new IDrawable(){
-                    @Override
-                    public String getImage() {
-                        return null;
-                    }
-                };
+                this.setTile(i, j, new Wall());
             }
         }
     }
@@ -36,7 +32,11 @@ public class Board {
 		return this.width;
 	}
 
-	public IDrawable getPosition(int i, int j) {
+	public IDrawable getTile(int i, int j) {
 		return this.board[i][j];
+	}
+
+	public void setTile(int i, int j, IDrawable tile) {
+        this.board[i][j] = tile;
 	}
 }

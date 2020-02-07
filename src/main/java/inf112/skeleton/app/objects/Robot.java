@@ -38,6 +38,7 @@ public class Robot implements IDrawable {
     }
 
     public boolean move(CardinalDirection dir){
+    	this.setDirection(dir);
         switch (dir) {
             case NORTH:
                 this.y++;

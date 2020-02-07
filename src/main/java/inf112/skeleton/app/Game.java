@@ -8,8 +8,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -25,8 +25,6 @@ public class Game extends InputAdapter implements ApplicationListener {
     private HashMap<Integer, TextureRegion> textures;
     private TextureRegion[] regions;
     private Robot robot;
-    private int playerTurn = 0;
-    private int steps = 0;
 
     @Override
     public void create() {
@@ -90,11 +88,31 @@ public class Game extends InputAdapter implements ApplicationListener {
         batch.end();
 
         batch.begin();
-        batch.draw(this.textures.get(this.robot.getImageId()),
-            this.robot.getX()*70,
-            this.robot.getY()*70, 70, 70);
+        TextureRegion robot = this.textures.get(this.robot.getImageId());
+        Sprite s = new Sprite(robot);
+        s.setPosition(this.robot.getX()*70, this.robot.getY()*70);
+        s.setSize(70, 70);
+        rotateRobot(s);
+        s.draw(batch);
+        
         batch.end();
 
+    }
+    
+    private void rotateRobot(Sprite s) {
+        switch (this.robot.getDirection()) {
+	    	case NORTH:
+	    		break;
+	    	case WEST:
+	            s.rotate90(false);
+	            break;
+	    	case SOUTH:		
+	    		s.flip(false, true);
+	            break;
+	    	case EAST:
+	            s.rotate90(true);
+	    		break;
+        }
     }
 
     private void renderBoard() {

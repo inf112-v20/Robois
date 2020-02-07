@@ -12,10 +12,10 @@ public class Robot implements IDrawable {
     private int x;
     private int y;
 
-    public Robot() {
+    public Robot(int x, int y) {
         this.direction = CardinalDirection.NORTH;
-        this.x = 5;
-        this.y = 7;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -38,6 +38,7 @@ public class Robot implements IDrawable {
     }
 
     public boolean move(CardinalDirection dir){
+    	this.setDirection(dir);
         switch (dir) {
             case NORTH:
                 this.y++;

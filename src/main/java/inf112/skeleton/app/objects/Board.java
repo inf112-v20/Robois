@@ -10,6 +10,10 @@ public class Board {
     private int height;
     private int width;
 
+    /**
+     * Board constructor:
+     * initialized the width to a 12x12 board (TODO: make this dynamic)
+     */
     public Board(){
         this.width = 12;
         this.height = 12;
@@ -18,6 +22,9 @@ public class Board {
 
     }
 
+    /**
+     * Temporary method that fills the board with floor tiles.
+     */
     private void fillStandardBoard() {
         for (int i = 0; i < this.height; i++){
             for (int j = 0; j < this.width; j++){
@@ -34,11 +41,23 @@ public class Board {
 		return this.width;
 	}
 
-	public IDrawable getTile(int i, int j) {
-		return this.board[i][j];
+	/**
+	 * Get an IDrawable object from board
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public IDrawable getTile(int x, int y) {
+		return this.board[x][y];
 	}
 
-	public void setTile(int i, int j, IDrawable tile) {
-        this.board[i][j] = tile;
+	/**
+	 * Replaces a tile in board at the x y position.
+	 * @param x
+	 * @param y
+	 * @param tile
+	 */
+	public void setTile(int x, int y, IDrawable tile) {
+        this.board[x][y] = tile;
 	}
 }

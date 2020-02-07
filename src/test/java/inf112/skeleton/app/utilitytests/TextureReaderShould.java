@@ -1,13 +1,10 @@
 package inf112.skeleton.app.utilitytests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+//import org.junit.Before;
+//import org.junit.Test;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import inf112.skeleton.app.objects.Board;
-
+// Can't test this because we need an instance of libgdx running to be able
+// to test libgdx functions.
 public class TextureReaderShould { 
     
 }

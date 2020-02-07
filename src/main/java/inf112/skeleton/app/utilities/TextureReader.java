@@ -11,10 +11,22 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureReader {
 
+	/**
+	 * Returns a TextureRegion from a texture (A texture should be made up of 300x300 px
+	 * images). 
+	 * @param x
+	 * @param y
+	 * @param texture
+	 * @return The TextureRegion in the specified coordinates.
+	 */
     public static TextureRegion getTextureRegion(int x, int y, Texture texture){
         return new TextureRegion(texture, x*300, y*300, 300, 300);
     }
 
+    /**
+     * Get a HashMap with ID - TextureRegion pairs
+     * @return HashMap<ID, TextureRegion>
+     */
     public static HashMap<Integer, TextureRegion> getTextures(){
         Texture texture = new Texture(Gdx.files.internal("src/main/java/inf112/skeleton/app/assets/sprites/tiles.png"));
         HashMap<Integer, TextureRegion> textures = new HashMap<>();

@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,29 +14,34 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
+import inf112.skeleton.app.objects.Robot;
+import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.TextureReader;
 
-public class Game implements ApplicationListener {
+public class Game extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
     private Board board;
     private HashMap<Integer, TextureRegion> textures;
     private TextureRegion[] regions;
+    private Robot robot;
+    private int playerTurn = 0;
+    private int steps = 0;
 
     @Override
     public void create() {
+    	Gdx.input.setInputProcessor(this);
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
         board = new Board();
-
         this.textures = TextureReader.getTextures();
-        regions = new TextureRegion[board.getWidth()*board.getHeight()];
-
         createTextureRegions();
+        robot = new Robot();
     }
 
     private void createTextureRegions() {
+        regions = new TextureRegion[board.getWidth()*board.getHeight()];
         int i = 0;
         for (int x = 0; x < board.getWidth(); x++){
             for (int y = 0; y < board.getHeight(); y++){        
@@ -49,6 +56,29 @@ public class Game implements ApplicationListener {
         batch.dispose();
         font.dispose();
     }
+    
+    @Override
+    public boolean keyUp(int keyCode) {
+    	if (keyCode == Input.Keys.W) {
+    		this.robot.move(CardinalDirection.NORTH);
+        	return true;
+    	}
+    	if (keyCode == Input.Keys.D) {
+    		this.robot.move(CardinalDirection.EAST);
+        	return true;
+    	}
+    	if (keyCode == Input.Keys.S) {
+    		this.robot.move(CardinalDirection.SOUTH);
+        	return true;
+    	}
+    	if (keyCode == Input.Keys.A) {
+    		this.robot.move(CardinalDirection.WEST);
+        	return true;
+    	}
+    	
+    	return false;
+    	
+    }
 
     @Override
     public void render() {
@@ -58,6 +88,13 @@ public class Game implements ApplicationListener {
         batch.begin();
         renderBoard();
         batch.end();
+
+        batch.begin();
+        batch.draw(this.textures.get(this.robot.getImageId()),
+            this.robot.getX()*70,
+            this.robot.getY()*70, 70, 70);
+        batch.end();
+
     }
 
     private void renderBoard() {

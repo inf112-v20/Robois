@@ -20,6 +20,7 @@ public class TextureReader {
         HashMap<Integer, TextureRegion> textures = new HashMap<>();
         //Items
         textures.put(0, TextureReader.getTextureRegion(4, 0, texture)); // Floor
+        textures.put(881, TextureReader.getTextureRegion(4, 15, texture)); // Robot Up
         return textures;
     }
 }

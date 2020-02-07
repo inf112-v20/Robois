@@ -90,6 +90,8 @@ __Krav til det fullstendige systemet:__
 -   bruke optionskort
 -   velge brett før spillet begynner
 
+(kravene er bassert på regelboken for klassisk RoboRally)
+
 __Prioriteringsliste til første iterasjon:__
 
 1.   Lage brett

@@ -1,33 +1,37 @@
-# __Obligatorisk oppgave 1__
+# **Obligatorisk oppgave 1**
 
 ## Deloppgave 1: Organiser teamet
 
 ### Kompetanseoppsummering
 
-__Thomas:__
- >Går 2 året på Datateknologi og har jobbet en god del med .Net og .Net Core.
+**Thomas:**
 
-__Jens:__
+> Går 2 året på Datateknologi og har jobbet en god del med .Net og .Net Core.
+
+**Jens:**
+
 > Går 2. året datateknologi. Har jobbet med java, python og haskell gjennom fagene i studiet. Føler meg ganske trygg på java syntax, og har vært så vidt innom git før.
 
-__Yafet:__
+**Yafet:**
+
 > Startet Datateknologi og er på 2. året. Har for det meste oversikt over Java, Python og Haskell blant annet. Har vært borti github og gitlab og har litt forståelse for git.
 
-__Kasper:__
+**Kasper:**
+
 > Har tidligere erfaring med java og en rekke andre kodespråk. Lagd en rekke egne prosjekter og spill på fritiden. Følger vanlig studieløp under informatikk: Datateknologi og er på 2. året nå.
 
-__Team-roller:__  
+**Team-roller:**  
 Teamleder, backend, ui-ansvarlig, networking  
 _(Har ikke helt funnet ut hvem som tar hvilken rolle enda, siden vi har jobbet mye sammen nå i begynnelsen.)_
 
 ---
 
-## Deloppgave 2:  Få oversikt over forventet produkt
+## Deloppgave 2: Få oversikt over forventet produkt
 
-__Overordnet mål:__
+**Overordnet mål:**
 Lage et spillbart program med funksjoner og regler som angitt i regelboken for klassisk RoboRally.
 
-__Krav til det fullstendige systemet:__
+**Krav til det fullstendige systemet:**
 
 - vise spillebrett
 - vise spiller
@@ -73,28 +77,26 @@ __Krav til det fullstendige systemet:__
 - bruke optionskort
 - velge brett før spillet begynner
 
-&nbsp;
+**Prioriteringsliste til første iterasjon:**
 
-__Prioriteringsliste til første iterasjon:__
-
-1. Lage brett
-2. Vise brett
-3. Plassering av brikker
+1.  Lage brett
+2.  Vise brett
+3.  Plassering av brikker
 
 ---
 
 ## Deloppgave 3: Velg og tilpass en prosess for laget
 
-__Prosjektmetodikk:__ Test-driven development + Kanban, parprogrammering.
+**Prosjektmetodikk:** Test-driven development + Kanban, parprogrammering.
 
-__Viktige aspekter ved prosessen:__  
+**Viktige aspekter ved prosessen:**
 
-- Sette opp faste tider i uken til ekstra møter utenom den obligatoriske gruppetimen.  
-- Kommunisere godt med resten av gruppen når man gjør noe nytt slik at det blir enkelt å følge opp det arbeidet som blir gjort.  
-- Bruke førstkommende møte i uka til prosjekteringsaktiviteter for å finne ut av hva som må gjøres i løpet av uka (+-).  
+- Sette opp faste tider i uken til ekstra møter utenom den obligatoriske gruppetimen.
+- Kommunisere godt med resten av gruppen når man gjør noe nytt slik at det blir enkelt å følge opp det arbeidet som blir gjort.
+- Bruke førstkommende møte i uka til prosjekteringsaktiviteter for å finne ut av hva som må gjøres i løpet av uka (+-).
 - Parprogrammere. (Bruker liveshare på visual studio code slik at vi kan bruke flere pc’er på samme kode samtidig).
 
-__Team planlegging:__
+**Team planlegging:**
 
 - Minst to faste møter i uken. Eventuelt ekstra møter om nødvendig eller møter over skype/discord.
 - Bruke slack/discord for å snakke og kommunisere mellom møtene. Viktig å sende felles informasjon i gruppechat.
@@ -106,4 +108,4 @@ __Team planlegging:__
 
 ## Deloppgave 4: kode
 
-### __Brukerhistorier:__
+### **Brukerhistorier:**

@@ -90,7 +90,8 @@ __Krav til det fullstendige systemet:__
 -   bruke optionskort
 -   velge brett før spillet begynner
 
-(kravene er bassert på regelboken for klassisk RoboRally)
+(kravene er bassert på regelboken for klassisk RoboRally.
+Vi ønsker å emulere det originale brettspillet best mulig.)
 
 __Prioriteringsliste til første iterasjon:__
 

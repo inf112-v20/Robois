@@ -1,5 +1,7 @@
 package inf112.skeleton.app;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,11 +12,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
+import inf112.skeleton.app.utilities.TextureReader;
 
 public class Game implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
     private Board board;
+    private HashMap<Integer, TextureRegion> textures;
     private TextureRegion[] regions;
 
     @Override
@@ -24,17 +28,20 @@ public class Game implements ApplicationListener {
         font.setColor(Color.RED);
         board = new Board();
 
+        this.textures = TextureReader.getTextures();
         regions = new TextureRegion[board.getWidth()*board.getHeight()];
 
+        createTextureRegions();
+    }
+
+    private void createTextureRegions() {
         int i = 0;
         for (int x = 0; x < board.getWidth(); x++){
             for (int y = 0; y < board.getHeight(); y++){        
-                regions[i] = board.getTile(x, y).getImage();
+                this.regions[i] = this.textures.get(this.board.getTile(x, y).getImageId());
                 i++;
             }
         }
-
-        
     }
 
     @Override
@@ -49,9 +56,11 @@ public class Game implements ApplicationListener {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        renderBoard();
+        batch.end();
+    }
 
-        
-        // TODO: Refactor this
+    private void renderBoard() {
         int x = 0;
         int y = 0;
         for (int i = 0; i < regions.length; i++) {
@@ -70,7 +79,6 @@ public class Game implements ApplicationListener {
             
 		}
 		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
-        batch.end();
     }
 
     @Override

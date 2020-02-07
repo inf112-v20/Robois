@@ -6,5 +6,5 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * IDrawable
  */
 public interface IDrawable {
-    TextureRegion getImage();
+    Integer getImageId();
 }

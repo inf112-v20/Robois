@@ -8,13 +8,13 @@ import inf112.skeleton.app.objects.interfaces.IDrawable;
  * Robot
  */
 public class Robot implements IDrawable {
+    
     public Robot() {
 
     }
 
     @Override
-    public TextureRegion getImage() {
-        // TODO Auto-generated method stub
+    public Integer getImageId() {
         return null;
     }
 }

@@ -41,15 +41,19 @@ public class RobotShould {
     		case 0:
     	        robot.move(CardinalDirection.NORTH);
     	        y++;
+    	        break;
     		case 1:
     	        robot.move(CardinalDirection.EAST);
     	        x++;
+    	        break;
     		case 2:
     	        robot.move(CardinalDirection.SOUTH);
     	        y--;
+    	        break;
     		case 3: 
     	        robot.move(CardinalDirection.WEST);
     	        x--;
+    	        break;
     			
     		}
     	}

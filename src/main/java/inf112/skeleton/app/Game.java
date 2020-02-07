@@ -18,6 +18,11 @@ import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.TextureReader;
 
+/*
+ * Game
+ * 
+ * Where the main gameplay loop runs.
+ */
 public class Game extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
@@ -35,9 +40,13 @@ public class Game extends InputAdapter implements ApplicationListener {
         board = new Board();
         this.textures = TextureReader.getTextures();
         createTextureRegions();
-        robot = new Robot();
+        robot = new Robot(5, 5);
     }
 
+    /**
+     * Creates a one dimensional list of texture 
+     * regions that is used to render the board (background).
+     */
     private void createTextureRegions() {
         regions = new TextureRegion[board.getWidth()*board.getHeight()];
         int i = 0;
@@ -55,6 +64,12 @@ public class Game extends InputAdapter implements ApplicationListener {
         font.dispose();
     }
     
+    /**
+     * The keyUp function is Override so that we can
+     * implement cardinal movement to the game.
+     * 
+     * @param keyCode The key code of the input to be executed.
+     */
     @Override
     public boolean keyUp(int keyCode) {
     	if (keyCode == Input.Keys.W) {
@@ -78,27 +93,37 @@ public class Game extends InputAdapter implements ApplicationListener {
     	
     }
 
+    /**
+     * Render can be seen as the main gameplay loop, this is where
+     * the graphics of the game gets rendered.
+     */
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Rendering the background
         batch.begin();
         renderBoard();
         batch.end();
 
+        // Rendering the Robot
         batch.begin();
-        TextureRegion robot = this.textures.get(this.robot.getImageId());
-        Sprite s = new Sprite(robot);
+        Sprite s = new Sprite(this.textures.get(this.robot.getImageId()));
         s.setPosition(this.robot.getX()*70, this.robot.getY()*70);
         s.setSize(70, 70);
         rotateRobot(s);
         s.draw(batch);
-        
         batch.end();
 
     }
     
+    /**
+     * Rotates  the robot sprite depending on the 
+     * cardinal direction of the robot
+     * 
+     * @param s The robot sprite
+     */
     private void rotateRobot(Sprite s) {
         switch (this.robot.getDirection()) {
 	    	case NORTH:
@@ -115,6 +140,9 @@ public class Game extends InputAdapter implements ApplicationListener {
         }
     }
 
+    /**
+     * Render the board (background)
+     */
     private void renderBoard() {
         int x = 0;
         int y = 0;

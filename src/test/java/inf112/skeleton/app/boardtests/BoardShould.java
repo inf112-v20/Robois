@@ -3,6 +3,8 @@ package inf112.skeleton.app.boardtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +20,12 @@ public class BoardShould {
 
     @Before
     public void instantiateBoard() {
-        brd = new Board();
+        try {
+			brd = new Board();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         standardBoardWidth = brd.getWidth();
         standardBoardHeight = brd.getHeight();
     }

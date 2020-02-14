@@ -56,5 +56,10 @@ public class Robot implements IDrawable {
         return true;
     }
 
+	@Override
+	public boolean needBackground() {
+		return false;
+	}
+
     
 }

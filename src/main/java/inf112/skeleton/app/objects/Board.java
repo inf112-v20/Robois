@@ -1,6 +1,5 @@
 package inf112.skeleton.app.objects;
 
-
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.Floor;
 

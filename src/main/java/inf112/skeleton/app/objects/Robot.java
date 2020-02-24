@@ -1,21 +1,17 @@
 package inf112.skeleton.app.objects;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
-import inf112.skeleton.app.utilities.CardinalDirection;
 
-/**
- * Robot
- */
 public class Robot implements IDrawable {
     
-    private CardinalDirection direction;
     private int x;
     private int y;
+    private int direction;
 
-    public Robot(int x, int y) {
-        this.direction = CardinalDirection.NORTH;
+    public Robot(int x, int y, int d) {
         this.x = x;
         this.y = y;
+        this.direction = d;
     }
 
     @Override
@@ -23,38 +19,37 @@ public class Robot implements IDrawable {
         return 881;
     }
 
-    public CardinalDirection getDirection(){
-        return this.direction;
-    }
-    public void setDirection(CardinalDirection dir){
-        this.direction = dir;
-    }
-
     public int getX(){
         return this.x;
     }
+
     public int getY(){
         return this.y;
     }
 
-    public boolean move(CardinalDirection dir){
-    	this.setDirection(dir);
-        switch (dir) {
-            case NORTH:
-                this.y++;
-                break;
-            case EAST:
-                this.x++;
-                break;
-            case SOUTH:
-                this.y--;
-                break;
-            case WEST:
-                this.x--;
-                break;
+    public int getDirection(){
+        return this.direction;
+    }
+
+    public boolean move(int l){
+    	if (this.direction == 0) {
+            this.y += l;
+        }
+    	else if (this.direction == 1) {
+            this.x += l;
+        }
+    	else if (this.direction == 2) {
+            this.y -= l;
+        }
+    	else if (this.direction == 3) {
+            this.x -= l;
+        } else{
+            return false;
         }
         return true;
     }
 
-    
+    public void rotate(int i){
+        this.direction = (this.direction+i % 4 + 4) % 4;
+    }
 }

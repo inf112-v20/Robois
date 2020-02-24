@@ -15,12 +15,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
-import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.TextureReader;
 
-/*
- * Game
- * 
+/**
  * Where the main gameplay loop runs.
  */
 public class Game extends InputAdapter implements ApplicationListener {
@@ -40,7 +37,7 @@ public class Game extends InputAdapter implements ApplicationListener {
         board = new Board();
         this.textures = TextureReader.getTextures();
         createTextureRegions();
-        robot = new Robot(5, 5);
+        robot = new Robot(5, 5, 0);
     }
 
     /**
@@ -73,24 +70,22 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public boolean keyUp(int keyCode) {
     	if (keyCode == Input.Keys.W) {
-    		this.robot.move(CardinalDirection.NORTH);
+    		this.robot.move(1);
         	return true;
     	}
     	if (keyCode == Input.Keys.D) {
-    		this.robot.move(CardinalDirection.EAST);
+    		this.robot.rotate(1);
         	return true;
     	}
     	if (keyCode == Input.Keys.S) {
-    		this.robot.move(CardinalDirection.SOUTH);
+    		this.robot.move(-1);
         	return true;
     	}
     	if (keyCode == Input.Keys.A) {
-    		this.robot.move(CardinalDirection.WEST);
+    		this.robot.rotate(-1);
         	return true;
     	}
-    	
     	return false;
-    	
     }
 
     /**
@@ -112,10 +107,9 @@ public class Game extends InputAdapter implements ApplicationListener {
         Sprite s = new Sprite(this.textures.get(this.robot.getImageId()));
         s.setPosition(this.robot.getX()*70, this.robot.getY()*70);
         s.setSize(70, 70);
-        rotateRobot(s);
+        rotateRobot(s, robot);
         s.draw(batch);
         batch.end();
-
     }
     
     /**
@@ -124,19 +118,15 @@ public class Game extends InputAdapter implements ApplicationListener {
      * 
      * @param s The robot sprite
      */
-    private void rotateRobot(Sprite s) {
-        switch (this.robot.getDirection()) {
-	    	case NORTH:
-	    		break;
-	    	case WEST:
-	            s.rotate90(false);
-	            break;
-	    	case SOUTH:		
-	    		s.flip(false, true);
-	            break;
-	    	case EAST:
-	            s.rotate90(true);
-	    		break;
+    private void rotateRobot(Sprite s, Robot r) {
+        if (r.getDirection() == 1) {
+            s.rotate90(true);
+        }
+        if (r.getDirection() == 2) {
+            s.flip(false, true);
+        }
+        if (r.getDirection() == 3) {
+            s.rotate90(false);
         }
     }
 

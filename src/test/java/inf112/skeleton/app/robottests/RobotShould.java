@@ -6,38 +6,51 @@ import org.junit.Test;
 import inf112.skeleton.app.objects.Robot;
 
 public class RobotShould {
-    Robot robot;
+	int robotX, robotY = 5;
+	Robot robot = new Robot(robotX, robotY, 0);
 	
+	private void checkMovement(int steps, int direction){
+		robot.setDirection(direction);
+		robot.move(steps);
+		if (direction==0){
+			assertEquals(robotY-steps, robot.getY());
+		} else if (direction==1) {
+			assertEquals(robotX+steps, robot.getX());
+		} else if (direction==2) {
+			assertEquals(robotY+steps, robot.getY());
+		} else if (direction==3) {
+			assertEquals(robotX-steps, robot.getX());
+		}
+	}
+
+	private void checkRotation(int rotation, int direction){
+		robot.setDirection(direction);
+        robot.rotate(rotation);
+		assertEquals((direction + rotation%4+4)%4, robot.getDirection());
+	}
+
 	/** 
 	 * MOVEMENT
 	 * Move one forward in each direction
 	 */
     @Test
     public void move1UpOnMove1Direction0() {
-		robot = new Robot(5, 5, 0);		
-        robot.move(1);
-        assertEquals(6, robot.getY());
+		checkMovement(1,0);
 	}
 	
 	@Test
     public void move1RightOnMove1Direction1() {
-		robot = new Robot(5, 5, 1);		
-        robot.move(1);
-        assertEquals(6, robot.getX());
+		checkMovement(1,1);
 	}
 	
 	@Test
     public void move1DownOnMove1Direction2() {
-		robot = new Robot(5, 5, 2);
-        robot.move(1);
-        assertEquals(4, robot.getY());
+		checkMovement(1,2);
 	}
 	
 	@Test
     public void move1LeftOnMove1Direction3() {
-		robot = new Robot(5, 5, 3);
-        robot.move(1);
-        assertEquals(4, robot.getX());
+		checkMovement(1,3);
 	}
 	
 	/** 
@@ -45,92 +58,68 @@ public class RobotShould {
 	 */
     @Test
     public void move1DownOnMoveNEGATIVE1Direction0() {
-		robot = new Robot(5, 5, 0);		
-        robot.move(-1);
-        assertEquals(4, robot.getY());
+		checkMovement(-1,0);
 	}
 	
 	@Test
     public void move1LeftOnMoveNEGATIVE1Direction1() {
-		robot = new Robot(5, 5, 1);		
-        robot.move(-1);
-        assertEquals(4, robot.getX());
+		checkMovement(-1,1);
 	}
 	
 	@Test
     public void move1UpOnMoveNEGATIVE1Direction2() {
-		robot = new Robot(5, 5, 2);
-        robot.move(-1);
-        assertEquals(6, robot.getY());
+		checkMovement(-1,2);
 	}
 	
 	@Test
     public void move1RightOnMoveNEGATIVE1Direction3() {
-		robot = new Robot(5, 5, 3);
-        robot.move(-1);
-        assertEquals(6, robot.getX());
+		checkMovement(-1,3);
     }
 
 	/** 
 	 * Move two forward in each direction
 	 */
     @Test
-    public void move2UpOnMove1Direction0() {
-		robot = new Robot(5, 5, 0);		
-        robot.move(2);
-        assertEquals(7, robot.getY());
+    public void move2UpOnMove2Direction0() {
+		checkMovement(2,0);
 	}
 	
 	@Test
-    public void move2RightOnMove1Direction1() {
-		robot = new Robot(5, 5, 1);		
-        robot.move(2);
-        assertEquals(7, robot.getX());
+    public void move2RightOnMove2Direction1() {
+		checkMovement(2,1);
 	}
 	
 	@Test
-    public void move2DownOnMove1Direction2() {
-		robot = new Robot(5, 5, 2);
-        robot.move(2);
-        assertEquals(3, robot.getY());
+    public void move2DownOnMove2Direction2() {
+		checkMovement(2,2);
 	}
 	
 	@Test
-    public void move2LeftOnMove1Direction3() {
-		robot = new Robot(5, 5, 3);
-        robot.move(2);
-        assertEquals(3, robot.getX());
+    public void move2LeftOnMove2Direction3() {
+		checkMovement(2,3);
 	}
 
 	/** 
 	 * Move three forward in each direction
 	 */
     @Test
-    public void move3UpOnMove1Direction0() {
-		robot = new Robot(5, 5, 0);		
-        robot.move(3);
-        assertEquals(8, robot.getY());
+    public void move3UpOnMove3Direction0() {
+		checkMovement(3,0);
 	}
 	
 	@Test
-    public void move3RightOnMove1Direction1() {
-		robot = new Robot(5, 5, 1);		
-        robot.move(3);
-        assertEquals(8, robot.getX());
+    public void move3RightOnMove3Direction1() {
+		checkMovement(3,1);
 	}
 	
 	@Test
-    public void move3DownOnMove1Direction2() {
-		robot = new Robot(5, 5, 2);
-        robot.move(3);
-        assertEquals(2, robot.getY());
+    public void move3DownOnMove3Direction2() {
+		checkMovement(3,2);
 	}
 	
 	@Test
-    public void move3LeftOnMove1Direction3() {
-		robot = new Robot(5, 5, 3);
-        robot.move(3);
-        assertEquals(2, robot.getX());
+    public void move3LeftOnMove3Direction3() {
+		checkMovement(3,3);
 	}
 
 	/** 
@@ -139,60 +128,43 @@ public class RobotShould {
 	 */
 	@Test
     public void rotate1ClockWiseOnRotate1Direction0() {
-		robot = new Robot(5, 5, 0);
-        robot.rotate(1);
-        assertEquals(1, robot.getDirection());
+		checkRotation(1,0);
 	}
 
 	@Test
     public void rotate1ClockWiseOnRotate1Direction1() {
-		robot = new Robot(5, 5, 1);
-        robot.rotate(1);
-        assertEquals(2, robot.getDirection());
+		checkRotation(1,1);
 	}
 
 	@Test
     public void rotate1ClockWiseOnRotate1Direction2() {
-		robot = new Robot(5, 5, 2);
-        robot.rotate(1);
-        assertEquals(3, robot.getDirection());
+		checkRotation(1,2);
 	}
 
 	@Test
     public void rotate1ClockWiseOnRotate1Direction3() {
-		robot = new Robot(5, 5, 3);
-        robot.rotate(1);
-        assertEquals(0, robot.getDirection());
+		checkRotation(1,3);
 	}
-
 	/** 
 	 * Counter-clockwise rotation from each direction
 	 */
 	@Test
     public void rotate1CounterClockWiseOnRotate1Direction0() {
-		robot = new Robot(5, 5, 0);
-        robot.rotate(-1);
-        assertEquals(3, robot.getDirection());
+		checkRotation(-1,0);
 	}
 
 	@Test
     public void rotate1CounterClockWiseOnRotate1Direction1() {
-		robot = new Robot(5, 5, 1);
-        robot.rotate(-1);
-        assertEquals(0, robot.getDirection());
+		checkRotation(-1,1);
 	}
 
 	@Test
     public void rotate1CounterClockWiseOnRotate1Direction2() {
-		robot = new Robot(5, 5, 2);
-        robot.rotate(-1);
-        assertEquals(1, robot.getDirection());
+		checkRotation(-1,2);
 	}
 
 	@Test
     public void rotate1CounterClockWiseOnRotate1Direction3() {
-		robot = new Robot(5, 5, 3);
-        robot.rotate(-1);
-        assertEquals(2, robot.getDirection());
+		checkRotation(-1,3);
 	}
 }

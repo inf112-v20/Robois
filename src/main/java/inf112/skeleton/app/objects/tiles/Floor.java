@@ -10,4 +10,9 @@ public class Floor implements IDrawable {
     public Integer getImageId() {
         return this.textureId;
     }
+
+	@Override
+	public boolean needBackground() {
+		return false;
+	}
 }

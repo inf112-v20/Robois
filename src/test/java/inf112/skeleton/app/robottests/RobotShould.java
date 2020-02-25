@@ -1,68 +1,198 @@
 package inf112.skeleton.app.robottests;
 
 import static org.junit.Assert.assertEquals;
-
-import java.util.Random;
-
-import org.junit.Before;
 import org.junit.Test;
 
 import inf112.skeleton.app.objects.Robot;
-import inf112.skeleton.app.utilities.CardinalDirection;
 
 public class RobotShould {
     Robot robot;
-    int robotPositionX;
-    int robotPositionY;
-
-
-    @Before
-    public void instatiateRobot() {
-        robot = new Robot(0, 0);
-        robotPositionX = robot.getX();
-        robotPositionY = robot.getY();
-    }
-
+	
+	/** 
+	 * MOVEMENT
+	 * Move one forward in each direction
+	 */
     @Test
-    public void move1TileNorthOnUpKeyPress() {
-        robot.move(CardinalDirection.NORTH);
-        assertEquals(1, robot.getY());
-    }
-    
+    public void move1UpOnMove1Direction0() {
+		robot = new Robot(5, 5, 0);		
+        robot.move(1);
+        assertEquals(6, robot.getY());
+	}
+	
+	@Test
+    public void move1RightOnMove1Direction1() {
+		robot = new Robot(5, 5, 1);		
+        robot.move(1);
+        assertEquals(6, robot.getX());
+	}
+	
+	@Test
+    public void move1DownOnMove1Direction2() {
+		robot = new Robot(5, 5, 2);
+        robot.move(1);
+        assertEquals(4, robot.getY());
+	}
+	
+	@Test
+    public void move1LeftOnMove1Direction3() {
+		robot = new Robot(5, 5, 3);
+        robot.move(1);
+        assertEquals(4, robot.getX());
+	}
+	
+	/** 
+	 * Move one backwards in each direction
+	 */
     @Test
-    public void canMoveInAllDirections() {
-
-    	int x = robot.getY();
-    	int y = robot.getX();
-    	
-    	Random rnd = new Random();
-    	for (int i = 0; i < 100; i++) {
-    		switch(rnd.nextInt(4)) {
-    		case 0:
-    	        robot.move(CardinalDirection.NORTH);
-    	        y++;
-    	        break;
-    		case 1:
-    	        robot.move(CardinalDirection.EAST);
-    	        x++;
-    	        break;
-    		case 2:
-    	        robot.move(CardinalDirection.SOUTH);
-    	        y--;
-    	        break;
-    		case 3: 
-    	        robot.move(CardinalDirection.WEST);
-    	        x--;
-    	        break;
-    			
-    		}
-    	}
-
-        assertEquals(x, robot.getX());
-        assertEquals(y, robot.getY());
-        
+    public void move1DownOnMoveNEGATIVE1Direction0() {
+		robot = new Robot(5, 5, 0);		
+        robot.move(-1);
+        assertEquals(4, robot.getY());
+	}
+	
+	@Test
+    public void move1LeftOnMoveNEGATIVE1Direction1() {
+		robot = new Robot(5, 5, 1);		
+        robot.move(-1);
+        assertEquals(4, robot.getX());
+	}
+	
+	@Test
+    public void move1UpOnMoveNEGATIVE1Direction2() {
+		robot = new Robot(5, 5, 2);
+        robot.move(-1);
+        assertEquals(6, robot.getY());
+	}
+	
+	@Test
+    public void move1RightOnMoveNEGATIVE1Direction3() {
+		robot = new Robot(5, 5, 3);
+        robot.move(-1);
+        assertEquals(6, robot.getX());
     }
-    
 
+	/** 
+	 * Move two forward in each direction
+	 */
+    @Test
+    public void move2UpOnMove1Direction0() {
+		robot = new Robot(5, 5, 0);		
+        robot.move(2);
+        assertEquals(7, robot.getY());
+	}
+	
+	@Test
+    public void move2RightOnMove1Direction1() {
+		robot = new Robot(5, 5, 1);		
+        robot.move(2);
+        assertEquals(7, robot.getX());
+	}
+	
+	@Test
+    public void move2DownOnMove1Direction2() {
+		robot = new Robot(5, 5, 2);
+        robot.move(2);
+        assertEquals(3, robot.getY());
+	}
+	
+	@Test
+    public void move2LeftOnMove1Direction3() {
+		robot = new Robot(5, 5, 3);
+        robot.move(2);
+        assertEquals(3, robot.getX());
+	}
 
+	/** 
+	 * Move three forward in each direction
+	 */
+    @Test
+    public void move3UpOnMove1Direction0() {
+		robot = new Robot(5, 5, 0);		
+        robot.move(3);
+        assertEquals(8, robot.getY());
+	}
+	
+	@Test
+    public void move3RightOnMove1Direction1() {
+		robot = new Robot(5, 5, 1);		
+        robot.move(3);
+        assertEquals(8, robot.getX());
+	}
+	
+	@Test
+    public void move3DownOnMove1Direction2() {
+		robot = new Robot(5, 5, 2);
+        robot.move(3);
+        assertEquals(2, robot.getY());
+	}
+	
+	@Test
+    public void move3LeftOnMove1Direction3() {
+		robot = new Robot(5, 5, 3);
+        robot.move(3);
+        assertEquals(2, robot.getX());
+	}
+
+	/** 
+	 * ROTATION
+	 * Clockwise rotation from each direction
+	 */
+	@Test
+    public void rotate1ClockWiseOnRotate1Direction0() {
+		robot = new Robot(5, 5, 0);
+        robot.rotate(1);
+        assertEquals(1, robot.getDirection());
+	}
+
+	@Test
+    public void rotate1ClockWiseOnRotate1Direction1() {
+		robot = new Robot(5, 5, 1);
+        robot.rotate(1);
+        assertEquals(2, robot.getDirection());
+	}
+
+	@Test
+    public void rotate1ClockWiseOnRotate1Direction2() {
+		robot = new Robot(5, 5, 2);
+        robot.rotate(1);
+        assertEquals(3, robot.getDirection());
+	}
+
+	@Test
+    public void rotate1ClockWiseOnRotate1Direction3() {
+		robot = new Robot(5, 5, 3);
+        robot.rotate(1);
+        assertEquals(0, robot.getDirection());
+	}
+
+	/** 
+	 * Counter-clockwise rotation from each direction
+	 */
+	@Test
+    public void rotate1CounterClockWiseOnRotate1Direction0() {
+		robot = new Robot(5, 5, 0);
+        robot.rotate(-1);
+        assertEquals(3, robot.getDirection());
+	}
+
+	@Test
+    public void rotate1CounterClockWiseOnRotate1Direction1() {
+		robot = new Robot(5, 5, 1);
+        robot.rotate(-1);
+        assertEquals(0, robot.getDirection());
+	}
+
+	@Test
+    public void rotate1CounterClockWiseOnRotate1Direction2() {
+		robot = new Robot(5, 5, 2);
+        robot.rotate(-1);
+        assertEquals(1, robot.getDirection());
+	}
+
+	@Test
+    public void rotate1CounterClockWiseOnRotate1Direction3() {
+		robot = new Robot(5, 5, 3);
+        robot.rotate(-1);
+        assertEquals(2, robot.getDirection());
+	}
 }

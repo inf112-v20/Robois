@@ -1,6 +1,8 @@
 package inf112.skeleton.app;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -15,12 +17,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
-import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.TextureReader;
 
-/*
- * Game
- * 
+/**
  * Where the main gameplay loop runs.
  */
 public class Game extends InputAdapter implements ApplicationListener {
@@ -28,7 +27,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private BitmapFont font;
     private Board board;
     private HashMap<Integer, TextureRegion> textures;
-    private TextureRegion[] regions;
+    private TextureRegion[][] regions;
     private Robot robot;
 
     @Override
@@ -37,10 +36,15 @@ public class Game extends InputAdapter implements ApplicationListener {
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
-        board = new Board();
+        try {
+			board = new Board();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         this.textures = TextureReader.getTextures();
         createTextureRegions();
-        robot = new Robot(5, 5);
+        robot = new Robot(5, 5, 0);
     }
 
     /**
@@ -48,12 +52,10 @@ public class Game extends InputAdapter implements ApplicationListener {
      * regions that is used to render the board (background).
      */
     private void createTextureRegions() {
-        regions = new TextureRegion[board.getWidth()*board.getHeight()];
-        int i = 0;
+        regions = new TextureRegion[board.getHeight()][board.getWidth()];
         for (int x = 0; x < board.getWidth(); x++){
             for (int y = 0; y < board.getHeight(); y++){        
-                this.regions[i] = this.textures.get(this.board.getTile(x, y).getImageId());
-                i++;
+                this.regions[y][x] = this.textures.get(this.board.getTile(x, y).getImageId());
             }
         }
     }
@@ -73,24 +75,22 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public boolean keyUp(int keyCode) {
     	if (keyCode == Input.Keys.W) {
-    		this.robot.move(CardinalDirection.NORTH);
+    		this.robot.move(1);
         	return true;
     	}
     	if (keyCode == Input.Keys.D) {
-    		this.robot.move(CardinalDirection.EAST);
+    		this.robot.rotate(1);
         	return true;
     	}
     	if (keyCode == Input.Keys.S) {
-    		this.robot.move(CardinalDirection.SOUTH);
+    		this.robot.move(-1);
         	return true;
     	}
     	if (keyCode == Input.Keys.A) {
-    		this.robot.move(CardinalDirection.WEST);
+    		this.robot.rotate(-1);
         	return true;
     	}
-    	
     	return false;
-    	
     }
 
     /**
@@ -112,10 +112,9 @@ public class Game extends InputAdapter implements ApplicationListener {
         Sprite s = new Sprite(this.textures.get(this.robot.getImageId()));
         s.setPosition(this.robot.getX()*70, this.robot.getY()*70);
         s.setSize(70, 70);
-        rotateRobot(s);
+        rotateRobot(s, robot);
         s.draw(batch);
         batch.end();
-
     }
     
     /**
@@ -124,19 +123,15 @@ public class Game extends InputAdapter implements ApplicationListener {
      * 
      * @param s The robot sprite
      */
-    private void rotateRobot(Sprite s) {
-        switch (this.robot.getDirection()) {
-	    	case NORTH:
-	    		break;
-	    	case WEST:
-	            s.rotate90(false);
-	            break;
-	    	case SOUTH:		
-	    		s.flip(false, true);
-	            break;
-	    	case EAST:
-	            s.rotate90(true);
-	    		break;
+    private void rotateRobot(Sprite s, Robot r) {
+        if (r.getDirection() == 1) {
+            s.rotate90(true);
+        }
+        if (r.getDirection() == 2) {
+            s.flip(false, true);
+        }
+        if (r.getDirection() == 3) {
+            s.rotate90(false);
         }
     }
 
@@ -144,23 +139,14 @@ public class Game extends InputAdapter implements ApplicationListener {
      * Render the board (background)
      */
     private void renderBoard() {
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < regions.length; i++) {
-            batch.draw(regions[i], x*70, y*70, 70, 70);
-
-            if (x < 11){
-                x++;
-            } else {
-                x = 0;
-                y++;
-            }
-
-            if (y > 11){
-                y = 0;
-            }
-            
-		}
+    	for (int y = 0; y < this.regions.length; y++) {
+    		for (int x = 0; x < this.regions[y].length; x++) {
+    			if (this.board.getTile(x, y).needBackground()) {
+        			batch.draw(this.textures.get(0), x*70, y*70, 70, 70);
+    			}
+    			batch.draw(this.regions[y][x], x*70, y*70, 70, 70);
+    		}
+    	}
 		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
     }
 

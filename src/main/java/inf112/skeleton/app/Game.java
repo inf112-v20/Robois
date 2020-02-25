@@ -1,6 +1,8 @@
 package inf112.skeleton.app;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -25,7 +27,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private BitmapFont font;
     private Board board;
     private HashMap<Integer, TextureRegion> textures;
-    private TextureRegion[] regions;
+    private TextureRegion[][] regions;
     private Robot robot;
 
     @Override
@@ -34,7 +36,12 @@ public class Game extends InputAdapter implements ApplicationListener {
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
-        board = new Board();
+        try {
+			board = new Board();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         this.textures = TextureReader.getTextures();
         createTextureRegions();
         robot = new Robot(5, 5, 0);
@@ -45,12 +52,10 @@ public class Game extends InputAdapter implements ApplicationListener {
      * regions that is used to render the board (background).
      */
     private void createTextureRegions() {
-        regions = new TextureRegion[board.getWidth()*board.getHeight()];
-        int i = 0;
+        regions = new TextureRegion[board.getHeight()][board.getWidth()];
         for (int x = 0; x < board.getWidth(); x++){
             for (int y = 0; y < board.getHeight(); y++){        
-                this.regions[i] = this.textures.get(this.board.getTile(x, y).getImageId());
-                i++;
+                this.regions[y][x] = this.textures.get(this.board.getTile(x, y).getImageId());
             }
         }
     }
@@ -134,23 +139,14 @@ public class Game extends InputAdapter implements ApplicationListener {
      * Render the board (background)
      */
     private void renderBoard() {
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < regions.length; i++) {
-            batch.draw(regions[i], x*70, y*70, 70, 70);
-
-            if (x < 11){
-                x++;
-            } else {
-                x = 0;
-                y++;
-            }
-
-            if (y > 11){
-                y = 0;
-            }
-            
-		}
+    	for (int y = 0; y < this.regions.length; y++) {
+    		for (int x = 0; x < this.regions[y].length; x++) {
+    			if (this.board.getTile(x, y).needBackground()) {
+        			batch.draw(this.textures.get(0), x*70, y*70, 70, 70);
+    			}
+    			batch.draw(this.regions[y][x], x*70, y*70, 70, 70);
+    		}
+    	}
 		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
     }
 

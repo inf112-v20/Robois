@@ -52,4 +52,10 @@ public class Robot implements IDrawable {
     public void rotate(int i){
         this.direction = (this.direction+i % 4 + 4) % 4;
     }
+	@Override
+	public boolean needBackground() {
+		return false;
+	}
+
+    
 }

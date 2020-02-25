@@ -33,13 +33,13 @@ public class Robot implements IDrawable {
 
     public boolean move(int l){
     	if (this.direction == 0) {
-            this.y += l;
+            this.y -= l;
         }
     	else if (this.direction == 1) {
             this.x += l;
         }
     	else if (this.direction == 2) {
-            this.y -= l;
+            this.y += l;
         }
     	else if (this.direction == 3) {
             this.x -= l;

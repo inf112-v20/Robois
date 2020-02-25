@@ -7,17 +7,7 @@ public class Wall implements IDrawable {
     private Integer textureId = 1;
     
     public Wall(int type) {
-    	switch (type) {
-    	case 1:
-    		this.textureId = 1;
-    		break;
-    	case 2:
-    		this.textureId = 2;
-    		break;
-    	case 3:
-    		this.textureId = 3;
-    		break;
-    	}
+		this.textureId = type;
     }
 
     @Override

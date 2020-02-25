@@ -1,8 +1,10 @@
 package inf112.skeleton.app;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -17,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
+import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.utilities.TextureReader;
 
 /**
@@ -28,7 +31,8 @@ public class Game extends InputAdapter implements ApplicationListener {
     private Board board;
     private HashMap<Integer, TextureRegion> textures;
     private TextureRegion[][] regions;
-    private Robot robot;
+    private List<Robot> robots = new ArrayList<>();
+    private int r = 0;
 
     @Override
     public void create() {
@@ -39,13 +43,19 @@ public class Game extends InputAdapter implements ApplicationListener {
         try {
 			board = new Board();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         this.textures = TextureReader.getTextures();
         createTextureRegions();
-        robot = new Robot(5, 5, 0);
-    }
+        
+        for (int x = 0; x < board.getWidth(); x++) {
+            for (int y = 0; y < board.getHeight(); y++) {
+                if (board.getTile(x, y) instanceof Spawn){
+                    robots.add(new Robot(x, y, 0));
+                }
+            }
+        }
+    }   
 
     /**
      * Creates a one dimensional list of texture 
@@ -75,19 +85,23 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public boolean keyUp(int keyCode) {
     	if (keyCode == Input.Keys.W) {
-    		this.robot.move(1);
+            this.robots.get(this.r).move(1);
+            this.r = (this.r + 1) % this.robots.size();
         	return true;
     	}
     	if (keyCode == Input.Keys.D) {
-    		this.robot.rotate(1);
+    		this.robots.get(this.r).rotate(1);
+            this.r = (this.r + 1) % this.robots.size();
         	return true;
     	}
     	if (keyCode == Input.Keys.S) {
-    		this.robot.move(-1);
+    		this.robots.get(this.r).move(-1);
+            this.r = (this.r + 1) % this.robots.size();
         	return true;
     	}
     	if (keyCode == Input.Keys.A) {
-    		this.robot.rotate(-1);
+    		this.robots.get(this.r).rotate(-1);
+            this.r = (this.r + 1) % this.robots.size();
         	return true;
     	}
     	return false;
@@ -109,11 +123,14 @@ public class Game extends InputAdapter implements ApplicationListener {
 
         // Rendering the Robot
         batch.begin();
-        Sprite s = new Sprite(this.textures.get(this.robot.getImageId()));
-        s.setPosition(this.robot.getX()*70, this.robot.getY()*70);
-        s.setSize(70, 70);
-        rotateRobot(s, robot);
-        s.draw(batch);
+        for (Robot robot : this.robots) {
+            Sprite s = new Sprite(this.textures.get(robot.getImageId()));
+            int ym = this.board.getHeight()-robot.getY()-1;
+            s.setPosition(robot.getX()*70, ym*70);
+            s.setSize(70, 70);
+            rotateRobot(s, robot);
+            s.draw(batch);
+        }
         batch.end();
     }
     
@@ -141,10 +158,11 @@ public class Game extends InputAdapter implements ApplicationListener {
     private void renderBoard() {
     	for (int y = 0; y < this.regions.length; y++) {
     		for (int x = 0; x < this.regions[y].length; x++) {
+                int ym = this.regions.length-y-1;
     			if (this.board.getTile(x, y).needBackground()) {
-        			batch.draw(this.textures.get(0), x*70, y*70, 70, 70);
+        			batch.draw(this.textures.get(0), x*70, ym*70, 70, 70);
     			}
-    			batch.draw(this.regions[y][x], x*70, y*70, 70, 70);
+    			batch.draw(this.regions[y][x], x*70, ym*70, 70, 70);
     		}
     	}
 		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);

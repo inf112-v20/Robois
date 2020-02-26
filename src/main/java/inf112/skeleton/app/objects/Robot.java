@@ -31,6 +31,10 @@ public class Robot implements IDrawable {
         return this.direction;
     }
 
+    public void setDirection(int dir){
+        this.direction = dir;
+    }
+
     public boolean move(int l){
     	if (this.direction == 0) {
             this.y -= l;

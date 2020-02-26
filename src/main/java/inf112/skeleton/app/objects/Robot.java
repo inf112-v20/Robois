@@ -98,43 +98,4 @@ public class Robot implements IDrawable, IMovable {
     public void rotate(int i) {
         this.direction = (this.direction + i % 4 + 4) % 4;
     }
-
-    // /////
-    // public boolean push(int l, CardinalDirection dir){
-    // switch (dir){
-    // case NORTH:
-    // this.y -= l;
-    // return true;
-    // case EAST:
-    // this.x += l;
-    // return true;
-    // case SOUTH:
-    // this.y += l;
-    // return true;
-    // case WEST:
-    // this.x -= l;
-    // return true;
-    // default:
-    // return false;
-    // }
-    // }
-
-    // public boolean move(int l){
-    // switch (this.direction){
-    // case 0:
-    // this.y -= l;
-    // return true;
-    // case 1:
-    // this.x += l;
-    // return true;
-    // case 2:
-    // this.y += l;
-    // return true;
-    // case 3:
-    // this.x -= l;
-    // return true;
-    // default:
-    // return false;
-    // }
-    // }
 }

@@ -25,7 +25,6 @@ public class Board {
 		this.height = 12;
 		this.board = new IDrawable[12][12];
 		this.fillStandardBoard();
-
 	}
 
 	/**

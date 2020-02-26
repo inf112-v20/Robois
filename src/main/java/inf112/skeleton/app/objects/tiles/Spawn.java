@@ -6,7 +6,7 @@ public class Spawn implements IDrawable {
     int imageId;
 
     public Spawn(int spawnNr) {
-        this.imageId = spawnNr+10;
+        this.imageId = spawnNr + 10;
     }
 
     @Override

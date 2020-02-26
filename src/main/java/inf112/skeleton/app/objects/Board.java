@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.*;
+import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.CardinalityUtility;
 import inf112.skeleton.app.utilities.CsvReader;
 
 public class Board {
@@ -71,7 +73,6 @@ public class Board {
 				}
 			}
 		}
-
 	}
 
 	public Integer getHeight() {
@@ -102,5 +103,35 @@ public class Board {
 	 */
 	public void setTile(int x, int y, IDrawable tile) {
 		this.board[y][x] = tile;
+	}
+
+	public boolean canGo(int x, int y, CardinalDirection dir) {
+		if (getTile(x, y) instanceof Wall) {
+			Wall w = (Wall) getTile(x, y);
+			return !w.getWallPositions().contains(dir);
+		}
+
+		switch (dir) {
+			case NORTH:
+				y--;
+				break;
+			case SOUTH:
+				y++;
+				break;
+			case WEST:
+				x--;
+				break;
+			case EAST:
+				x++;
+				break;
+			default:
+				break;
+		}
+
+		if (getTile(x, y) instanceof Wall) {
+			Wall w = (Wall) getTile(x, y);
+			return !w.getWallPositions().contains(CardinalityUtility.getOpposite(dir));
+		}
+		return true;
 	}
 }

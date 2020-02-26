@@ -21,11 +21,11 @@ public class BoardShould {
     @Before
     public void instantiateBoard() {
         try {
-			brd = new Board();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            brd = new Board();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         standardBoardWidth = brd.getWidth();
         standardBoardHeight = brd.getHeight();
     }

@@ -133,4 +133,25 @@ public class Board {
 		}
 		return true;
 	}
+
+	public boolean isOutOfBounds(int x, int y, CardinalDirection dir) {
+		switch (dir) {
+			case NORTH:
+				y--;
+				break;
+			case SOUTH:
+				y++;
+				break;
+			case WEST:
+				x--;
+				break;
+			case EAST:
+				x++;
+				break;
+			default:
+				break;
+		}
+
+		return ((x >= this.getWidth()) || (x < 0) || (y >= this.getHeight()) || (y < 0));
+	}
 }

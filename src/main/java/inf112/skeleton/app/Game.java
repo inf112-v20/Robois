@@ -31,6 +31,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private HashMap<Integer, TextureRegion> textures;
     private TextureRegion[][] regions;
     private List<Robot> robots = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
     private int r = 0;
 
     @Override
@@ -50,7 +51,7 @@ public class Game extends InputAdapter implements ApplicationListener {
         for (int x = 0; x < board.getWidth(); x++) {
             for (int y = 0; y < board.getHeight(); y++) {
                 if (board.getTile(x, y) instanceof Spawn) {
-                    robots.add(new Robot(x, y, 0));
+                    players.add(new Player(x, y));
                 }
             }
         }
@@ -84,23 +85,23 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public boolean keyUp(int keyCode) {
         if (keyCode == Input.Keys.W) {
-            GameMovement.move(1, this.robots.get(r), board);
-            this.r = (this.r + 1) % this.robots.size();
+            GameMovement.move(1, players.get(r).getRobot(), board);
+            this.r = (this.r + 1) % this.players.size();
             return true;
         }
         if (keyCode == Input.Keys.D) {
-            GameMovement.rotate(1, this.robots.get(r));
-            this.r = (this.r + 1) % this.robots.size();
+            GameMovement.rotate(1, players.get(r).getRobot());
+            this.r = (this.r + 1) % this.players.size();
             return true;
         }
         if (keyCode == Input.Keys.S) {
-            GameMovement.moveBackwards(1, this.robots.get(r), board);
-            this.r = (this.r + 1) % this.robots.size();
+            GameMovement.moveBackwards(1, players.get(r).getRobot(), board);
+            this.r = (this.r + 1) % this.players.size();
             return true;
         }
         if (keyCode == Input.Keys.A) {
-            GameMovement.rotate(-1, this.robots.get(r));
-            this.r = (this.r + 1) % this.robots.size();
+            GameMovement.rotate(-1, players.get(r).getRobot());
+            this.r = (this.r + 1) % this.players.size();
             return true;
         }
         return false;
@@ -122,7 +123,8 @@ public class Game extends InputAdapter implements ApplicationListener {
 
         // Rendering the Robot
         batch.begin();
-        for (Robot robot : this.robots) {
+        for (Player player : this.players) {
+            Robot robot = player.getRobot();
             Sprite s = new Sprite(this.textures.get(robot.getImageId()));
             int ym = this.board.getHeight() - robot.getY() - 1;
             s.setPosition(robot.getX() * 70, ym * 70);

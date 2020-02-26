@@ -73,3 +73,9 @@ Har jobbet med Robotens bevegelsemetode og tester for å sjekke dette siden sist
 
 Mål: Implementere: Korrekt robot-bevegelseslogikk. Dytting av roboter. Vegger. Spawn og respawn. Player-klasse. 
 
+
+
+### **Onsdag** | 26-02
+
+Diskuterte retningsystemet. Er nå basert på at retningene nord, øst, sør, vest er gitt som 0,1,2,3 tilsvarende. Dette er basert på at vi bruker utregning for å beregne retningsfunksjoner som trenger integers. Vill heller lage enums NORTH, EAST, SOUTH, WEST som inneholder verdiene 0,1,2,3.  Utivdet move i roboten slik at man kan dytte andre roboter i samme retning som din robot beveger seg i. 
+

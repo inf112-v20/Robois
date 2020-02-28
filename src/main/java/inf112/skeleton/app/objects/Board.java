@@ -28,8 +28,6 @@ public class Board {
 	}
 
 	/**
-	 * Temporary method that fills the board with floor tiles.
-	 * 
 	 * @throws FileNotFoundException
 	 */
 	private void fillStandardBoard(String filename) throws FileNotFoundException {

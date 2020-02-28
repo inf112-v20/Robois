@@ -10,10 +10,8 @@ import org.junit.Test;
 import inf112.skeleton.app.GameMovement;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
-import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.Wall;
 import inf112.skeleton.app.utilities.CardinalDirection;
-import inf112.skeleton.app.utilities.CardinalityUtility;
 
 public class RobotShould {
 	int robotX, robotY;
@@ -358,8 +356,6 @@ public class RobotShould {
 		checkWallInteraction(CardinalDirection.WEST, false, 2);
 	}
 
-
-
 	/**
 	 * MOVEMENT OUT OF BOUND
 	 */
@@ -380,7 +376,6 @@ public class RobotShould {
 		}
 	}
 
-	
 	@Test
 	public void respawnOnX0Y0DirectionNORTH(){
 		checkRespawnOnOutOfBounds(0, 0, CardinalDirection.NORTH);

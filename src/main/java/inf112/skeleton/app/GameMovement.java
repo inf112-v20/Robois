@@ -22,26 +22,24 @@ public class GameMovement {
 
     private static void moveInDirection(int steps, IMovable movable, Board board, CardinalDirection dir) {
         if (steps != 0) {
-            if (board.isOutOfBounds(movable.getX(), movable.getY(), dir)){
-                retrunToSpawn(movable);
-                return;
-            }
-            
-            if (board.canGo(movable.getX(), movable.getY(), dir)) {
 
-                movable.move(dir);
-                move(steps - 1, movable, board);
-            } else {
-                
+            if (board.canGo(movable.getX(), movable.getY(), dir)) {
+                if (board.isOutOfBounds(movable.getX(), movable.getY(), dir)) {
+                    retrunToSpawn(movable);
+                } else {
+                    movable.move(dir);
+                    move(steps - 1, movable, board);
+                }
             }
         }
     }
 
     public static void rotate(int rotation, IMovable movable) {
-        movable.rotate(rotation);
+        // movable.rotate(rotation);
+        movable.setDirection((movable.getDirection() + rotation % 4 + 4) % 4);
     }
 
-    private static void retrunToSpawn(IMovable movable){
+    private static void retrunToSpawn(IMovable movable) {
         movable.setX(movable.getSpawnX());
         movable.setY(movable.getSpawnY());
     }

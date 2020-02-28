@@ -30,7 +30,6 @@ public class Game extends InputAdapter implements ApplicationListener {
     private Board board;
     private HashMap<Integer, TextureRegion> textures;
     private TextureRegion[][] regions;
-    private List<Robot> robots = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
     private int r = 0;
 
@@ -41,7 +40,8 @@ public class Game extends InputAdapter implements ApplicationListener {
         font = new BitmapFont();
         font.setColor(Color.RED);
         try {
-            board = new Board();
+            board = new Board("b1.csv");
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

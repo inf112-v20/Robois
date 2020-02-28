@@ -21,7 +21,7 @@ public class BoardShould {
     @Before
     public void instantiateBoard() {
         try {
-            brd = new Board();
+            brd = new Board("b0.csv");
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

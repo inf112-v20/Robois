@@ -24,9 +24,7 @@ public interface IMovable {
 
     boolean move(CardinalDirection dir);
 
-    void rotate(int r);
-
     int getSpawnX();
-    
+
     int getSpawnY();
 }

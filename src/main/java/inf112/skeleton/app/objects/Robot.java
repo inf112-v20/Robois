@@ -97,10 +97,6 @@ public class Robot implements IDrawable, IMovable {
         }
     }
 
-    public void rotate(int i) {
-        this.direction = (this.direction + i % 4 + 4) % 4;
-    }
-
     @Override
     public int getSpawnX() {
         return this.spawnX;
@@ -110,5 +106,4 @@ public class Robot implements IDrawable, IMovable {
     public int getSpawnY() {
         return this.spawnY;
     }
-    
 }

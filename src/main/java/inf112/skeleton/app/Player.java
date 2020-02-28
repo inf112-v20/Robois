@@ -20,13 +20,11 @@ public class Player {
         return this.robot;
     }
 
-    public int getSpawnX(){
+    public int getSpawnX() {
         return this.spawnX;
     }
 
-    public int getSpawnY(){
+    public int getSpawnY() {
         return this.spawnY;
     }
-
-
 }

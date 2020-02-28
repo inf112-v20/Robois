@@ -20,11 +20,11 @@ public class Board {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public Board() throws FileNotFoundException {
+	public Board(String filename) throws FileNotFoundException {
 		this.width = 12;
 		this.height = 12;
 		this.board = new IDrawable[12][12];
-		this.fillStandardBoard();
+		this.fillStandardBoard(filename);
 	}
 
 	/**
@@ -32,8 +32,8 @@ public class Board {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	private void fillStandardBoard() throws FileNotFoundException {
-		CsvReader reader = new CsvReader("src/main/java/inf112/skeleton/app/assets/boards/b0.csv");
+	private void fillStandardBoard(String filename) throws FileNotFoundException {
+		CsvReader reader = new CsvReader(filename);
 		int[][] boardids = reader.getBoardIds();
 
 		for (int y = 0; y < boardids.length; y++) {
@@ -125,6 +125,10 @@ public class Board {
 				break;
 			default:
 				break;
+		}
+
+		if (x > width - 1 || y > height - 1 || x < 0 || y < 0) {
+			return true;
 		}
 
 		if (getTile(x, y) instanceof Wall) {

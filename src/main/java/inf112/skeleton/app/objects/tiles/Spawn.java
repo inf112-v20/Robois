@@ -3,20 +3,19 @@ package inf112.skeleton.app.objects.tiles;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
 public class Spawn implements IDrawable {
-    int imageId;
+    int textureId;
 
     public Spawn(int spawnNr) {
-        this.imageId = spawnNr + 10;
+        this.textureId = spawnNr + 10;
     }
 
     @Override
     public Integer getImageId() {
-        return imageId;
+        return textureId;
     }
 
     @Override
     public boolean needBackground() {
         return false;
     }
-
 }

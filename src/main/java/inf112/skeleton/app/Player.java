@@ -10,8 +10,8 @@ public class Player {
     private int spawnX;
     private int spawnY;
 
-    public Player(int x, int y) {
-        this.robot = new Robot(x, y, 0);
+    public Player(int x, int y, int d) {
+        this.robot = new Robot(x, y, d);
         this.spawnX = x;
         this.spawnY = y;
     }

@@ -51,7 +51,7 @@ public class Game extends InputAdapter implements ApplicationListener {
         for (int x = 0; x < board.getWidth(); x++) {
             for (int y = 0; y < board.getHeight(); y++) {
                 if (board.getTile(x, y) instanceof Spawn) {
-                    players.add(new Player(x, y));
+                    players.add(new Player(x, y, 1));
                 }
             }
         }

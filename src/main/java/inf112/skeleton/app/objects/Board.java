@@ -160,9 +160,6 @@ public class Board {
 		if ((x >= this.getWidth()) || (x < 0) || (y >= this.getHeight()) || (y < 0)) {
 			return true;
 		}
-		if (getTile(x, y) instanceof Hole) {
-			return true;
-		}
-		return false;
+		return (getTile(x, y) instanceof Hole);
 	}
 }

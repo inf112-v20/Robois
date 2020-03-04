@@ -21,10 +21,9 @@
 - Prioriterer oppgavene utifra hva som vi føler driver spillet videre mot et MVP.
 
   - Dette innbærer logikk som vegger og spawn til roboter.
-
   
 
-### Brukerhistorier:
+### Brukerhistorier
 
 **Brukerhistorie (Beveglse av robot):**
 
@@ -63,10 +62,6 @@
 > - Lage en tile Walls
 > - Implementere Walls til å hindre movement til robot.
 
-
-
-
-
 ## Deloppgave 3: kode
 
 Programmet startes ved å kjøre main. Da vil det dannes en ny innstans av game(), som lager brettet og tilhørende objekter.
@@ -82,11 +77,7 @@ Roboten kan kun beveges med følgende taster:
 - D: Roterer med klokken
 - A: Roterer mot klokken
 
-
-
 Prosjektet kjører uten problemer slik som forventet ved siste kjøring før levering.
-
-
 
 ## Møtereferat
 
@@ -94,13 +85,9 @@ Prosjektet kjører uten problemer slik som forventet ved siste kjøring før lev
 
 Diskuterte veien videre etter Innlevering av Oblig1. Ryddet opp litt småting i kode, og gjorde klar til å fortsette med prosjektet.
 
-
-
 ### **Fredag** | 21-02 (Kasper, Thomas, Jens)
 
 Disktuerte hvordan å angripe Oblig2. Finne implementasjonsmetode og prioritere implementasjon av funksjonaliteten til spill. Begynner med å utvide implementasjonen av hvordan roboten beveger seg slik at den lettere kan ta inn implementasjon av programkort senere.
-
-
 
 ### **Tirsdag** | 25-02 (Kasper, Thomas, Jens)
 
@@ -108,19 +95,13 @@ Har jobbet med Robotens bevegelsemetode og tester for å sjekke dette siden sist
 
 Mål: Implementere: Korrekt robot-bevegelseslogikk. Dytting av roboter. Vegger. Spawn og respawn. Player-klasse. 
 
-
-
 ### **Onsdag** | 26-02 (Kasper, Thomas, Jens)
 
 Diskuterte retningsystemet. Er nå basert på at retningene nord, øst, sør, vest er gitt som 0,1,2,3 tilsvarende. Dette er basert på at vi bruker utregning for å beregne retningsfunksjoner som trenger integers. Vill heller lage enums NORTH, EAST, SOUTH, WEST som inneholder verdiene 0,1,2,3.  Utivdet move i roboten slik at man kan dytte andre roboter i samme retning som din robot beveger seg i. 
 
-
-
 ### **Fredag** | 28-02 (Kasper, Jens)
 
 Endret måten brett blir laget på slik at man kan sende inn et brett for å kunne bruke at annet brett til testing enn det vi bruker i selve spillet. Lagde tester for å sjekke at roboten ikke kan gå gjennom vegger. Skrev ferdig dokumentasjon til Oblig2.
-
-
 
 ## UML-diagram
 

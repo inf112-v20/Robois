@@ -40,6 +40,20 @@ public class TextureReader {
         textures.put(6, TextureReader.getTextureRegion(6, 3, texture)); // Wall 6
         textures.put(7, TextureReader.getTextureRegion(5, 3, texture)); // Wall 7
         textures.put(8, TextureReader.getTextureRegion(4, 3, texture)); // Wall 8
+        textures.put(21, TextureReader.getTextureRegion(2, 11, texture)); // Hole 1
+        textures.put(22, TextureReader.getTextureRegion(5, 14, texture)); // Hole 2
+        textures.put(23, TextureReader.getTextureRegion(4, 13, texture)); // Hole 3
+        textures.put(24, TextureReader.getTextureRegion(5, 13, texture)); // Hole 4
+        textures.put(25, TextureReader.getTextureRegion(4, 14, texture)); // Hole 5
+        textures.put(26, TextureReader.getTextureRegion(2, 13, texture)); // Hole 6
+        textures.put(27, TextureReader.getTextureRegion(2, 14, texture)); // Hole 7
+        textures.put(28, TextureReader.getTextureRegion(0, 14, texture)); // Hole 8
+        textures.put(29, TextureReader.getTextureRegion(0, 13, texture)); // Hole 9
+        textures.put(30, TextureReader.getTextureRegion(1, 13, texture)); // Hole 10
+        textures.put(31, TextureReader.getTextureRegion(3, 13, texture)); // Hole 11
+        textures.put(32, TextureReader.getTextureRegion(1, 14, texture)); // Hole 12
+        textures.put(33, TextureReader.getTextureRegion(3, 14, texture)); // Hole 13
+        textures.put(34, TextureReader.getTextureRegion(3, 11, texture)); // Hole 14
         textures.put(11, TextureReader.getTextureRegion(0, 15, texture)); // Spawn 1
         textures.put(881, TextureReader.getTextureRegion(4, 15, texture)); // Robot Up
         

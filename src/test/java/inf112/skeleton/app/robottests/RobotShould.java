@@ -10,7 +10,7 @@ import org.junit.Test;
 import inf112.skeleton.app.GameMovement;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
-import inf112.skeleton.app.objects.tiles.Wall;
+import inf112.skeleton.app.objects.tiles.*;
 import inf112.skeleton.app.utilities.CardinalDirection;
 
 public class RobotShould {
@@ -357,7 +357,7 @@ public class RobotShould {
 	}
 
 	/**
-	 * MOVEMENT OUT OF BOUND
+	 * MOVEMENT OUT OF BOUNDS
 	 */
 	private void checkRespawnOnOutOfBounds(int x, int y, CardinalDirection direction) {
 		robot.setDirection(direction.value);
@@ -394,5 +394,16 @@ public class RobotShould {
 	@Test
 	public void respawnOnX11Y11DirectionEAST(){
 		checkRespawnOnOutOfBounds(11, 11, CardinalDirection.EAST);
+	}
+
+	
+	/**
+	 * FALLING IN HOLE
+	 */
+	@Test
+	public void respawnOnMovingIntoHole(){
+		Hole hole = new Hole(1);
+		brd.setTile(robotX, robotY-1, hole);
+		checkRespawnOnOutOfBounds(robotX, robotY, CardinalDirection.NORTH);
 	}
 }

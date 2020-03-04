@@ -67,6 +67,9 @@ public class Board {
 					case 11:
 						board[y][x] = new Spawn(1);
 						break;
+					case 21:
+						board[y][x] = new Hole(1);
+						break;
 				}
 			}
 		}
@@ -154,6 +157,12 @@ public class Board {
 				break;
 		}
 
-		return ((x >= this.getWidth()) || (x < 0) || (y >= this.getHeight()) || (y < 0));
+		if ((x >= this.getWidth()) || (x < 0) || (y >= this.getHeight()) || (y < 0)) {
+			return true;
+		}
+		if (getTile(x, y) instanceof Hole) {
+			return true;
+		}
+		return false;
 	}
 }

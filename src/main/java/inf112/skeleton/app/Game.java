@@ -18,7 +18,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
+import inf112.skeleton.app.objects.abstracts.Location;
+import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.objects.tiles.Spawn;
+import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.CardinalityUtility;
 import inf112.skeleton.app.utilities.TextureReader;
 
 /**
@@ -85,7 +89,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public boolean keyUp(int keyCode) {
         if (keyCode == Input.Keys.W) {
-            GameMovement.move(1, players.get(r).getRobot(), board);
+            GameMovement.move(1, players.get(r).getRobot(), board, this);
             this.r = (this.r + 1) % this.players.size();
             return true;
         }
@@ -95,7 +99,7 @@ public class Game extends InputAdapter implements ApplicationListener {
             return true;
         }
         if (keyCode == Input.Keys.S) {
-            GameMovement.moveBackwards(1, players.get(r).getRobot(), board);
+            GameMovement.moveBackwards(1, players.get(r).getRobot(), board, this);
             this.r = (this.r + 1) % this.players.size();
             return true;
         }
@@ -179,4 +183,15 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public void resume() {
     }
+
+	public IMovable getMovable(int x, int y, CardinalDirection dir) {
+		for (Player p : this.players){
+            Robot r = p.getRobot();
+            Location l = CardinalityUtility.getNextTile(x, y, dir);
+            if (r.getX() == l.getX() && r.getY() == l.getY()){
+                return r;
+            }
+        }
+        return null;
+	}
 }

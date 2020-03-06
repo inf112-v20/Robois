@@ -10,28 +10,41 @@ import inf112.skeleton.app.utilities.CardinalityUtility;
  */
 public class GameMovement {
 
-    public static void move(int steps, IMovable movable, Board board) {
+    public static void move(int steps, IMovable movable, Board board, Game game) {
         CardinalDirection dir = movable.getCardinalDirection();
-        moveInDirection(steps, movable, board, dir);
+        moveInDirection(steps, movable, board, dir, game);
     }
 
-    public static void moveBackwards(int steps, IMovable movable, Board board) {
+    public static void moveBackwards(int steps, IMovable movable, Board board, Game game) {
         CardinalDirection dir = CardinalityUtility.getOpposite(movable.getCardinalDirection());
-        moveInDirection(steps, movable, board, dir);
+        moveInDirection(steps, movable, board, dir, game);
     }
 
-    private static void moveInDirection(int steps, IMovable movable, Board board, CardinalDirection dir) {
+    private static boolean moveInDirection(int steps, IMovable movable, Board board, CardinalDirection dir, Game game) {
         if (steps != 0) {
-
             if (board.canGo(movable.getX(), movable.getY(), dir)) {
                 if (board.isOutOfBounds(movable.getX(), movable.getY(), dir)) {
                     retrunToSpawn(movable);
+                    return true;
                 } else {
+                    // This is here so that we can test without a game parameter.
+                    if (game != null){
+                        // Check if there is a robot
+                        IMovable m = game.getMovable(movable.getX(), movable.getY(), dir);
+                        if (m != null){
+                            // If the robot exists move the robot.
+                            if (!moveInDirection(1, m, board, dir, game)){
+                                return false;
+                            }
+                        }
+                    }
                     movable.move(dir);
-                    move(steps - 1, movable, board);
+                    move(steps - 1, movable, board, game);
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public static void rotate(int rotation, IMovable movable) {

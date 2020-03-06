@@ -9,14 +9,16 @@ public class Robot implements IDrawable, IMovable {
 
     private int x;
     private int y;
+    private int direction;
     private int spawnX;
     private int spawnY;
-    private int direction;
+    private int spawnDirection;
+    
 
     public Robot(int x, int y, int d) {
         this.x = this.spawnX = x;
         this.y = this.spawnY = y;
-        this.direction = d;
+        this.direction = this.spawnDirection = d;
     }
 
     @Override
@@ -105,5 +107,10 @@ public class Robot implements IDrawable, IMovable {
     @Override
     public int getSpawnY() {
         return this.spawnY;
+    }
+
+    @Override
+    public int getSpawnDirection() {
+        return this.spawnDirection;
     }
 }

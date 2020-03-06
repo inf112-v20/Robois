@@ -27,4 +27,6 @@ public interface IMovable {
     int getSpawnX();
 
     int getSpawnY();
+
+    int getSpawnDirection();
 }

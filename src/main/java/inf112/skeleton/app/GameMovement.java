@@ -42,5 +42,6 @@ public class GameMovement {
     private static void retrunToSpawn(IMovable movable) {
         movable.setX(movable.getSpawnX());
         movable.setY(movable.getSpawnY());
+        movable.setDirection(movable.getSpawnDirection());
     }
 }

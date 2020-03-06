@@ -30,7 +30,7 @@ public class RobotShould {
 	 */
 	private void checkMovement(int steps, CardinalDirection direction) {
 		robot.setDirection(direction.value);
-		GameMovement.move(steps, robot, brd);
+		GameMovement.move(steps, robot, brd, null);
 
 		if (direction == CardinalDirection.NORTH) {
 			assertEquals(robotY - steps, robot.getY());
@@ -197,14 +197,14 @@ public class RobotShould {
 		robot.setDirection(direction.value);
 		Wall wall = new Wall(wallId);
 		if (!inWallTile) {
-			GameMovement.moveBackwards(1, robot, brd);
+			GameMovement.moveBackwards(1, robot, brd, null);
 			brd.setTile(robotX, robotY, wall);
 			robotX = robot.getX();
 			robotY = robot.getY();
 		} else {
 			brd.setTile(robotX, robotY, wall);
 		}
-		GameMovement.move(1, robot, brd);
+		GameMovement.move(1, robot, brd, null);
 		checkMovement(0, direction);
 	}
 
@@ -363,7 +363,7 @@ public class RobotShould {
 		robot.setDirection(direction.value);
 		robot.setX(x);
 		robot.setY(y);
-		GameMovement.move(1, robot, brd);
+		GameMovement.move(1, robot, brd, null);
 
 		if (direction == CardinalDirection.NORTH) {
 			assertEquals(robot.getSpawnY(), robot.getY());

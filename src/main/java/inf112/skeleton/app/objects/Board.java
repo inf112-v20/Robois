@@ -2,6 +2,7 @@ package inf112.skeleton.app.objects;
 
 import java.io.FileNotFoundException;
 
+import inf112.skeleton.app.objects.abstracts.Location;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.*;
 import inf112.skeleton.app.utilities.CardinalDirection;
@@ -111,22 +112,9 @@ public class Board {
 			return !w.getWallPositions().contains(dir);
 		}
 
-		switch (dir) {
-			case NORTH:
-				y--;
-				break;
-			case SOUTH:
-				y++;
-				break;
-			case WEST:
-				x--;
-				break;
-			case EAST:
-				x++;
-				break;
-			default:
-				break;
-		}
+		Location loc = CardinalityUtility.getNextTile(x, y, dir);
+		x = loc.getX();
+		y = loc.getY();
 
 		if (x > width - 1 || y > height - 1 || x < 0 || y < 0) {
 			return true;
@@ -140,23 +128,9 @@ public class Board {
 	}
 
 	public boolean isOutOfBounds(int x, int y, CardinalDirection dir) {
-		switch (dir) {
-			case NORTH:
-				y--;
-				break;
-			case SOUTH:
-				y++;
-				break;
-			case WEST:
-				x--;
-				break;
-			case EAST:
-				x++;
-				break;
-			default:
-				break;
-		}
-
+		Location loc = CardinalityUtility.getNextTile(x, y, dir);
+		x = loc.getX();
+		y = loc.getY();
 		if ((x >= this.getWidth()) || (x < 0) || (y >= this.getHeight()) || (y < 0)) {
 			return true;
 		}

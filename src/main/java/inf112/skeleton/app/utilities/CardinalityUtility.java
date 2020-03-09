@@ -22,22 +22,25 @@ public class CardinalityUtility {
     }
 
     public static Location getNextTile(int x, int y, CardinalDirection dir) {
+        int newX = x;
+        int newY = y;
+
         switch (dir) {
 			case NORTH:
-                y--;
+                newY--;
 				break;
 			case SOUTH:
-				y++;
+                newY++;
 				break;
 			case WEST:
-				x--;
+				newX--;
 				break;
 			case EAST:
-				x++;
+                newX++;
 				break;
 			default:
                 break;
         }
-        return new Location(x, y);
+        return new Location(newX, newY);
     }
 }

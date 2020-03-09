@@ -31,11 +31,8 @@ public class GameMovement {
                     if (game != null){
                         // Check if there is a robot
                         IMovable m = game.getMovable(movable.getX(), movable.getY(), dir);
-                        if (m != null){
-                            // If the robot exists move the robot.
-                            if (!moveInDirection(1, m, board, dir, game)){
+                        if (m != null && !moveInDirection(1, m, board, dir, game)){
                                 return false;
-                            }
                         }
                     }
                     movable.move(dir);

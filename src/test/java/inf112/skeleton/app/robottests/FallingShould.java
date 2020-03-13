@@ -13,9 +13,9 @@ import java.io.FileNotFoundException;
 import static org.junit.Assert.assertEquals;
 
 public class FallingShould {
-    int robotX, robotY;
-    Robot robot;
-    Board brd;
+    private int robotX, robotY;
+    private Robot robot;
+    private Board brd;
 
     @Before
     public void initialize() throws FileNotFoundException {

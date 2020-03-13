@@ -14,9 +14,9 @@ import inf112.skeleton.app.objects.tiles.*;
 import inf112.skeleton.app.utilities.CardinalDirection;
 
 public class RobotShould {
-	int robotX, robotY;
-	Robot robot;
-	Board brd;
+	private int robotX, robotY;
+	private Robot robot;
+	private Board brd;
 
 	@Before
 	public void initialize() throws FileNotFoundException {

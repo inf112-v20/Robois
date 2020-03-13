@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertEquals;
 
-public class WallShould {
+public class WallsShould {
     int robotX, robotY;
     Robot robot;
     Board brd;

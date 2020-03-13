@@ -3,18 +3,23 @@
 ## Deloppgave 1: Prosjekt og prosjektstruktur
 
 - Foreløpig fungerer rollene bra.
-- Teamleader innebærer å ha en overordnet kontroll over hva som skjer i prosjektet til enhver tid og hvem som jobber med hva. 
-  Ui-ansvarlig har hovedkontroll på hva som skjer når det kommer til implemenstasjon av ui og design av ui. (Hvordan ting ska se ut)
-  Kundekontakt må ha oversikt over hvilke designvalg som blir tatt og hvorfor når det kommer til impllementasjon og utvikling av programmet. Må vite hvordan og hvorfor koden fungerer. Må også ha god kontroll over hva leveransen (spillreglene) innebærer.
-  Networking har hovedansvar for å få spillet til å kunne kjøre på forskjellige pcer slik at flere kan spille samtidig.
+
+- **Teamleader** innebærer å ha en overordnet kontroll over hva som skjer i prosjektet til enhver tid og hvem som jobber med hva.  
+  **Ui-ansvarlig** har hovedkontroll på hva som skjer når det kommer til implemenstasjon av ui og design av ui. (Hvordan ting ska se ut)  
+  **Kundekontakt** må ha oversikt over hvilke designvalg som blir tatt og hvorfor når det kommer til impllementasjon og utvikling av programmet. Må vite hvordan og hvorfor koden fungerer. Må også ha god kontroll over hva leveransen (spillreglene) innebærer.  
+  **Networking** har hovedansvar for å få spillet til å kunne kjøre på forskjellige pcer slik at flere kan spille samtidig.
+  
 - Teamet har fungert veldig godt til nå. De valgene vi har gjort team-messig gjør at vi jobber godt sammen og for mye gjort.
+
 - Gruppen har god kommunikasjon og har god flyt som tillater alle å få komme med innspill og meninger. Det har ikke forekommet noen problemer når det kommer til dynamikken i gruppen.
+
 - Gruppen kommuniserer godt, noe som gjør det enkelt å jobbe i og mellom møter. I møtene blir kunnskap delt mellom team-medlemmer ved at vi praktisk viser hvordan ting gjøres på LiveShare. Bruker også tegninger og modeller for å formidle sine egne tanker til resten av gruppen i møtene. Det som ikke blir kommunisert i møter (og deretter skrives ned i referat) blir tatt i slacken slik at alle får med seg det som blir kommunisert.
+
 - Jobbing og kommunikasjon har fungert ganske som forventet. Vi har derimot ikke brukt veldig mye tdd ettersom vi synes det var lettere å skrive kode og deretter teste manuelt ved å kjøre spillet. Tdd er fortsatt noe vi kan se for oss at vi kommer til å bruke videre i prosjektet.
+
 - Mye av koden blir jobbet med i møtene vi har. Vi bruker liveshare som gjør at alle kan jobbe med samme kode samtidig på sine egne pcer. Det er da hosten(teamleader) som vil ha all koden på sin maskin og de fleste commits angående kode vil da komme fra samme person.
+
 - Forbedringpunkter: Være mer bestemte på hvilken metode vi velger å jobbe på. Har ikke vært et problem siden vi alle har vært enige og kommunisert bra hele veien, selv om arbeidsmetodikken ikke har vært helt som planlagt fra start.
-
-
 
 ## Deloppgave 2: krav
 
@@ -22,15 +27,13 @@
 
   - Dette innbærer logikk som vegger og spawn til roboter.
   
-
 ### Brukerhistorier
 
 **Brukerhistorie (Beveglse av robot):**
 
 > Som spiller trenger jeg at roboten kan beveges slik at jeg kan programmere den med programkort.
 >
-> **Akseptansekriterier:**
->
+> **Akseptansekriterier:**  
 > Roboten
 >
 > - må kunne gå fremover.
@@ -43,16 +46,12 @@
 > - Gi roboten en move funksjon som kan brukes fra andre klasser
 > - Gi roboten en rotate funksjon som kan brukes fra andre klasser
 > - Lage en spawn tile slik at roboten starter et sted
->
-
-
 
 **Brukerhistorie (Vegger)**:
 
 > Som spiller trenger jeg at roboten ikke kan bevege seg gjennom vegger slik at spillet inneholder rett spillmekanikk.
 >
-> **Akseptansekriterier:**
->
+> **Akseptansekriterier:**  
 > Roboten
 >
 > - Må ikke kunne gå gjennom vegger

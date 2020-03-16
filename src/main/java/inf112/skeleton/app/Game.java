@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +50,12 @@ public class Game extends InputAdapter implements ApplicationListener {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        this.textures = TextureReader.getTextures();
+
+        try {
+            this.textures = TextureReader.getTextures();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         createTextureRegions();
 
         for (int x = 0; x < board.getWidth(); x++) {

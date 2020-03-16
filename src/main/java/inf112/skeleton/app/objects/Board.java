@@ -37,40 +37,49 @@ public class Board {
 
 		for (int y = 0; y < boardids.length; y++) {
 			for (int x = 0; x < boardids[y].length; x++) {
-				switch (boardids[y][x]) {
-					case 0:
-						board[y][x] = new Floor();
-						break;
-					case 1:
-						board[y][x] = new Wall(1);
-						break;
-					case 2:
-						board[y][x] = new Wall(2);
-						break;
-					case 3:
-						board[y][x] = new Wall(3);
-						break;
-					case 4:
-						board[y][x] = new Wall(4);
-						break;
-					case 5:
-						board[y][x] = new Wall(5);
-						break;
-					case 6:
-						board[y][x] = new Wall(6);
-						break;
-					case 7:
-						board[y][x] = new Wall(7);
-						break;
-					case 8:
-						board[y][x] = new Wall(8);
-						break;
-					case 11:
-						board[y][x] = new Spawn(1);
-						break;
-					case 21:
-						board[y][x] = new Hole(1);
-						break;
+				int b = boardids[y][x];
+				if (b == 0) board[y][x] = new Floor();
+				if (b >= 1 && b <=8){
+					board[y][x] = new Wall(b);
+				}
+				if (b >= 11 && b <= 18){
+					board[y][x] = new Spawn(b-10);
+				}
+				if (b >= 21 && b <= 34){
+					board[y][x] = new Hole(b-20);
+				}
+				if (b >= 41 && b <= 64){
+					board[y][x] = new CBelt(b-40);
+				}
+				if (b >= 71 && b <= 94){
+					board[y][x] = new FCBelt(b-70);
+				}
+				if (b >= 101 && b <= 104){
+					board[y][x] = new Laser(b-100, 1);
+				}
+				if (b >= 105 && b <= 108){
+					board[y][x] = new Laser(b-100, 2);
+				}
+				if (b >= 111 && b <= 113){
+					board[y][x] = new Beam(b-110, 1);
+				}
+				if (b >= 114 && b <= 116){
+					board[y][x] = new Beam(b-110, 2);
+				}
+				if (b >= 121 && b <= 122){
+					board[y][x] = new Gear(b-120);
+				}
+				if (b >= 131 && b <= 138){
+					board[y][x] = new Pusher(b-130);
+				}
+				if (b >= 141 && b <= 144){
+					board[y][x] = new Flag(b-140);
+				}
+				if (b == 151){
+					board[y][x] = new Wrench(b-150, 1);
+				}
+				if (b == 152){
+					board[y][x] = new Wrench(b-150, 2);
 				}
 			}
 		}

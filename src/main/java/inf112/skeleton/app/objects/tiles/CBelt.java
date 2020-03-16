@@ -6,7 +6,7 @@ import inf112.skeleton.app.objects.interfaces.IDrawable;
  * CBelt
  */
 public class CBelt implements IDrawable {
-    int id;
+    private int id;
 
     public CBelt(int type) {
         this.id = 40 + type;

@@ -3,10 +3,10 @@ package inf112.skeleton.app.objects.tiles;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
 /**
- * CBelt
+ * FCBelt
  */
 public class FCBelt implements IDrawable {
-    int id;
+    private int id;
 
     public FCBelt(int type) {
         this.id = 70 + type;

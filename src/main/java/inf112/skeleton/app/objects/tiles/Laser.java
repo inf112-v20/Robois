@@ -3,15 +3,19 @@ package inf112.skeleton.app.objects.tiles;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
 /**
- * CBelt
+ * Laser
  */
 public class Laser implements IDrawable {
-    int id;
-    int damage;
+    private int id;
+    private int damage;
 
     public Laser(int type, int damage) {
         this.id = 100 + type;
         this.damage = damage;
+    }
+
+    public Integer getDamage() {
+        return this.damage;
     }
 
     @Override

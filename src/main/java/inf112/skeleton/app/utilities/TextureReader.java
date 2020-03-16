@@ -1,16 +1,9 @@
 package inf112.skeleton.app.utilities;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -48,7 +41,7 @@ public class TextureReader {
         Texture texture = new Texture(Gdx.files.internal(tileSrc));
         HashMap<Integer, TextureRegion> textures = new HashMap<>();
 
-        JSONTexture[] jsonTextures = JSONToJSONTexture(jsonSrc);
+        JSONTexture[] jsonTextures = jsonToJsonTexture(jsonSrc);
 
         for (JSONTexture j : jsonTextures) {
             textures.put(j.id, TextureReader.getTextureRegion(j.x, j.y, texture));
@@ -57,7 +50,7 @@ public class TextureReader {
         return textures;
     }
 
-    private static JSONTexture[] JSONToJSONTexture(String src) {
+    private static JSONTexture[] jsonToJsonTexture(String src) {
         JSONTexture[] jsonTextures;
         Gson gson = new Gson();
         try (Reader reader = new FileReader(src)) {

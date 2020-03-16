@@ -3,15 +3,19 @@ package inf112.skeleton.app.objects.tiles;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 
 /**
- * CBelt
+ * Beam
  */
 public class Beam implements IDrawable {
-    int id;
-    int damage;
+    private int id;
+    private int damage;
 
     public Beam(int type, int damage) {
         this.id = 110 + type;
         this.damage = damage;
+    }
+
+    public Integer getDamage() {
+        return this.damage;
     }
 
     @Override

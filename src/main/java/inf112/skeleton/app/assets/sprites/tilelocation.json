@@ -95,5 +95,21 @@
     { "id": 881, "x": 4, "y": 15, "name": "robot_north" },
     { "id": 882, "x": 4, "y": 15, "name": "robot_east" },
     { "id": 883, "x": 4, "y": 15, "name": "robot_south" },
-    { "id": 884, "x": 4, "y": 15, "name": "robot_west" }
+    { "id": 884, "x": 4, "y": 15, "name": "robot_west" },
+    { "id": 121, "x": 5, "y": 6, "name": "gear_cw"},
+    { "id": 122, "x": 4, "y": 6, "name": "gear_ccw"},
+    { "id": 131, "x": 2, "y": 0, "name": "pusher_n_o"},
+    { "id": 132, "x": 2, "y": 1, "name": "pusher_n_e"},
+    { "id": 133, "x": 3, "y": 1, "name": "pusher_e_o"},
+    { "id": 134, "x": 3, "y": 0, "name": "pusher_e_e"},
+    { "id": 135, "x": 0, "y": 1, "name": "pusher_s_o"},
+    { "id": 136, "x": 0, "y": 0, "name": "pusher_s_e"},
+    { "id": 137, "x": 1, "y": 1, "name": "pusher_w_o"},
+    { "id": 138, "x": 1, "y": 0, "name": "pusher_w_e"},
+    { "id": 141, "x": 6, "y": 6, "name": "flag1"},
+    { "id": 142, "x": 6, "y": 7, "name": "flag2"},
+    { "id": 143, "x": 6, "y": 8, "name": "flag3"},
+    { "id": 144, "x": 6, "y": 9, "name": "flag4"},
+    { "id": 151, "x": 6, "y": 1, "name": "wrench_1"},
+    { "id": 152, "x": 6, "y": 0, "name": "wrench_2"}
 ]

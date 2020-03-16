@@ -66,6 +66,21 @@ public class Board {
 				if (b >= 114 && b <= 116){
 					board[y][x] = new Beam(b-110, 2);
 				}
+				if (b >= 121 && b <= 122){
+					board[y][x] = new Gear(b-120);
+				}
+				if (b >= 131 && b <= 138){
+					board[y][x] = new Pusher(b-130);
+				}
+				if (b >= 141 && b <= 144){
+					board[y][x] = new Flag(b-140);
+				}
+				if (b == 151){
+					board[y][x] = new Wrench(b-150, 1);
+				}
+				if (b == 152){
+					board[y][x] = new Wrench(b-150, 2);
+				}
 			}
 		}
 	}

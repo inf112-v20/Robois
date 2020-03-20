@@ -43,4 +43,20 @@ public class CardinalityUtility {
         }
         return new Location(newX, newY);
     }
+
+    public static CardinalDirection getNewDirection(int rotation, CardinalDirection direction){
+        int x = (direction.value + rotation % 4 + 4) % 4;
+        switch (x){
+            case 0:
+                return CardinalDirection.NORTH;
+            case 1:
+                return CardinalDirection.EAST;
+            case 2:
+                return CardinalDirection.SOUTH;
+            case 3:
+                return CardinalDirection.EAST;
+            default:
+                return null;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package inf112.skeleton.app.objects.tiles;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;
+import inf112.skeleton.app.utilities.CardinalDirection;
 
 /**
  * FCBelt
@@ -20,5 +21,9 @@ public class FCBelt implements IDrawable {
     @Override
     public boolean needBackground() {
         return false;
+    }
+
+    public CardinalDirection getDirection(){
+        return CardinalDirection.NORTH;
     }
 }

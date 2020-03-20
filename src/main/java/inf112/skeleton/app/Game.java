@@ -20,8 +20,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.abstracts.Location;
+import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.interfaces.IMovable;
-import inf112.skeleton.app.objects.tiles.Spawn;
+import inf112.skeleton.app.objects.tiles.*;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 import inf112.skeleton.app.utilities.TextureReader;
@@ -37,6 +38,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private TextureRegion[][] regions;
     private List<Player> players = new ArrayList<>();
     private int r = 0;
+    private int phaseNr = 0;
 
     @Override
     public void create() {
@@ -114,7 +116,64 @@ public class Game extends InputAdapter implements ApplicationListener {
             this.r = (this.r + 1) % this.players.size();
             return true;
         }
+        if (keyCode == Input.Keys.SPACE){
+            runPhaseChange();
+        }
         return false;
+    }
+
+    private void runPhaseChange() {
+        phaseNr++;
+        System.out.println("Running phase nr: " + phaseNr);
+
+        for (Player p : players){
+            doFCBeltPhaseTurn(p);
+        }
+        for (Player p : players){
+            doPhaseTurn(p);
+        }
+
+    }
+
+    private void doFCBeltPhaseTurn(Player p){
+        Robot robot = p.getRobot();
+        IDrawable tile = board.getTile(robot.getX(), robot.getY());
+
+        if (tile instanceof FCBelt) {
+            FCBelt fcbelt = (FCBelt) tile;
+            GameMovement.moveInDirection(1, robot, board, fcbelt.getDirection(), this);
+        }
+    }
+
+    private void doPhaseTurn(Player p) {
+        Robot robot = p.getRobot();
+        IDrawable tile = board.getTile(robot.getX(), robot.getY());
+
+        if (tile instanceof CBelt) {
+            CBelt cbelt = (CBelt) tile;
+            GameMovement.moveInDirection(1, robot, board, cbelt.getDirection(), this);
+            IDrawable nextTile = board.getTile(robot.getX(), robot.getY());
+            if (nextTile instanceof CBelt){
+                CBelt nextcbelt = (CBelt) nextTile;
+
+                if ((cbelt.getDirection().value+1)%4 == nextcbelt.getDirection().value){
+                    GameMovement.rotate(1, robot);
+                }
+                if ((cbelt.getDirection().value-1)%4 == nextcbelt.getDirection().value){
+                    GameMovement.rotate(-1, robot);
+                }
+
+                
+            }
+        }
+        if (tile instanceof FCBelt) {
+            FCBelt fcbelt = (FCBelt) tile;
+            GameMovement.moveInDirection(1, robot, board, fcbelt.getDirection(), this);
+        }
+        if (tile instanceof Flag) {
+            Flag falg = (Flag) tile;
+            
+        }
     }
 
     /**

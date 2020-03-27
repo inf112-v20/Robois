@@ -20,7 +20,7 @@ public class GameMovement {
         moveInDirection(steps, movable, board, dir, game);
     }
 
-    private static boolean moveInDirection(int steps, IMovable movable, Board board, CardinalDirection dir, Game game) {
+    public static boolean moveInDirection(int steps, IMovable movable, Board board, CardinalDirection dir, Game game) {
         if (steps != 0) {
             if (board.canGo(movable.getX(), movable.getY(), dir)) {
                 if (board.isOutOfBounds(movable.getX(), movable.getY(), dir)) {
@@ -46,6 +46,7 @@ public class GameMovement {
 
     public static void rotate(int rotation, IMovable movable) {
         // movable.rotate(rotation);
+        //movable.setDirection(CardinalityUtility.getNewDirection(rotation, movable.getCardinalDirection()).value);
         movable.setDirection((movable.getDirection() + rotation % 4 + 4) % 4);
     }
 

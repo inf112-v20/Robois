@@ -20,7 +20,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.abstracts.Location;
+import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.interfaces.IMovable;
+import inf112.skeleton.app.objects.tiles.CBelt;
+import inf112.skeleton.app.objects.tiles.FCBelt;
 import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
@@ -37,6 +40,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private TextureRegion[][] regions;
     private List<Player> players = new ArrayList<>();
     private int r = 0;
+    private int phaseNr = 0;
 
     @Override
     public void create() {
@@ -114,7 +118,74 @@ public class Game extends InputAdapter implements ApplicationListener {
             this.r = (this.r + 1) % this.players.size();
             return true;
         }
+        if (keyCode == Input.Keys.SPACE) {
+            runPhaseChange();
+        }
         return false;
+    }
+
+    private void runPhaseChange() {
+        phaseNr++;
+        System.out.println("Running phase nr: " + phaseNr);
+
+        for (Player p : players) {
+            doFCBeltPhaseTurn(p);
+        }
+        for (Player p : players) {
+            doPhaseTurn(p);
+        }
+
+    }
+
+    private void doFCBeltPhaseTurn(Player p) {
+        Robot robot = p.getRobot();
+        IDrawable tile = board.getTile(robot.getX(), robot.getY());
+
+        if (tile instanceof FCBelt) {
+            FCBelt fcbelt = (FCBelt) tile;
+            GameMovement.moveInDirection(1, robot, board, fcbelt.getDirection(), this);
+            IDrawable nextTile = board.getTile(robot.getX(), robot.getY());
+            if (nextTile instanceof FCBelt) {
+                FCBelt nextcbelt = (FCBelt) nextTile;
+
+                if ((fcbelt.getDirection().value + 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
+                    GameMovement.rotate(1, robot);
+                }
+                if ((fcbelt.getDirection().value - 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
+                    GameMovement.rotate(-1, robot);
+                }
+
+            }
+        }
+    }
+
+    private void doPhaseTurn(Player p) {
+        Robot robot = p.getRobot();
+        IDrawable tile = board.getTile(robot.getX(), robot.getY());
+
+        if (tile instanceof CBelt) {
+            CBelt cbelt = (CBelt) tile;
+            GameMovement.moveInDirection(1, robot, board, cbelt.getDirection(), this);
+            IDrawable nextTile = board.getTile(robot.getX(), robot.getY());
+            if (nextTile instanceof CBelt) {
+                CBelt nextcbelt = (CBelt) nextTile;
+
+                if ((cbelt.getDirection().value + 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
+                    GameMovement.rotate(1, robot);
+                }
+                if ((cbelt.getDirection().value - 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
+                    GameMovement.rotate(-1, robot);
+                }
+
+            }
+        }
+        if (tile instanceof FCBelt) {
+            doFCBeltPhaseTurn(p);
+        }
+        // if (tile instanceof Flag) {
+        // Flag falg = (Flag) tile;
+
+        // }
     }
 
     /**
@@ -190,14 +261,14 @@ public class Game extends InputAdapter implements ApplicationListener {
     public void resume() {
     }
 
-	public IMovable getMovable(int x, int y, CardinalDirection dir) {
-		for (Player p : this.players){
+    public IMovable getMovable(int x, int y, CardinalDirection dir) {
+        for (Player p : this.players) {
             Robot r = p.getRobot();
             Location l = CardinalityUtility.getNextTile(x, y, dir);
-            if (r.getX() == l.getX() && r.getY() == l.getY()){
+            if (r.getX() == l.getX() && r.getY() == l.getY()) {
                 return r;
             }
         }
         return null;
-	}
+    }
 }

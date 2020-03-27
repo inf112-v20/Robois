@@ -1,24 +1,18 @@
 package inf112.skeleton.app.objects.tiles;
 
-import inf112.skeleton.app.objects.interfaces.IDrawable;
-
 /**
  * CBelt
  */
-public class CBelt implements IDrawable {
-    private int id;
+public class CBelt extends Belt {
+    private int imageId;
 
     public CBelt(int type) {
-        this.id = 40 + type;
+        super(type);
+        this.imageId = 40 + type;
     }
 
     @Override
     public Integer getImageId() {
-        return this.id;
-    }
-
-    @Override
-    public boolean needBackground() {
-        return false;
+        return this.imageId;
     }
 }

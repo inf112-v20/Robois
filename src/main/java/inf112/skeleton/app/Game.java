@@ -180,10 +180,10 @@ public class Game extends InputAdapter implements ApplicationListener {
         if (tile instanceof FCBelt) {
             doFCBeltPhaseTurn(p);
         }
-        if (tile instanceof Flag) {
-            Flag falg = (Flag) tile;
+        // if (tile instanceof Flag) {
+        // Flag falg = (Flag) tile;
 
-        }
+        // }
     }
 
     /**

@@ -10,15 +10,12 @@ public class Belt implements IDrawable {
     private int imageId;
     private CardinalDirection direction;
 
-    final int type;
-    final int DIR_NORTH[] = { 3, 8, 9, 13, 19, 23 };
-    final int DIR_EAST[] = { 2, 5, 12, 14, 17, 20 };
-    final int DIR_SOUTH[] = { 1, 6, 10, 15, 18, 21 };
-    final int DIR_WEST[] = { 4, 7, 11, 16, 22, 24 };
+    private final int DIR_NORTH[] = { 3, 8, 9, 13, 19, 23 };
+    private final int DIR_EAST[] = { 2, 5, 12, 14, 17, 20 };
+    private final int DIR_SOUTH[] = { 1, 6, 10, 15, 18, 21 };
+    private final int DIR_WEST[] = { 4, 7, 11, 16, 22, 24 };
 
     public Belt(int type) {
-        this.type = type;
-        this.imageId = 40 + type;
 
         if (contains(DIR_NORTH, type)) {
             this.direction = CardinalDirection.NORTH;

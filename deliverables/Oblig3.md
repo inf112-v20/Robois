@@ -2,9 +2,32 @@
 
 (TODO)
 
-## Brukerhistorier
+**Brukerhistorie (Implementere grafikk for tiles)**:
 
-(TODO)
+Som spiller trenger jeg å se alle interaktive "tiles" på brettet slik at jeg kan styre roboten med hensyn til disse.
+
+**Akseptansekriterier:**  
+
+- Må kunne se alle tiles visuelt med sin korrekte grafikk.
+
+**Arbeidsoppgaver:**
+
+- Implementere en bedre måte å få informasjonene om tiles på, kanskje en JSON fil? (Dette vil gjøre det mye mer dynamisk å implementere nye tiles).
+- Gå gjennom alle tiles for å registrere de tilsvarende x-y koordinatene.
+- Lage en klasse for hver tile, for å gi dem informasjon som passer til den spesifikke tilen, f.eks. Conveyor Belt trenger informasjon om retning. Men dette trenger vi ikke å implementere helt enda, fordi vi vil bare se tilene i første omgang.
+
+**Brukerhistorie (Dytte roboter)**:
+
+Som robot trenger jeg å kunne dytte andre roboter slik at det ikke kan gå to roboter på samme plass og at spillet inneholder korrekte regler.
+
+**Akseptansekriterier:**  
+
+- En robot dyttes av en annen istedenfor at de går på samme sted.
+- En robot kan ikke dyttes gjennom vegger.
+
+**Arbeidsoppgaver:**
+
+- Lage logikk i GameMovement slik at robotene reagerer med hverandre rekursivt. Dvs. Hvis en robot treffer en annen, så skal den andre roboten bevege seg.
 
 ## Møtereferat
 
@@ -20,7 +43,7 @@ Implementerte At roboter kan dytte hverandre. For å gjøre dette oppdaterte vi 
 
 ---
 
-### **??** | ??-?? (Kasper, Thomas)
+### **??** | d-m (Kasper, Thomas)
 
 (TODO)
 
@@ -36,8 +59,8 @@ Jens ryddet opp i testene og endret strukturen slik at hver tile har sin egen te
 
 ### **Fredag** | 20-03 (Jens, Kasper, Thomas, Yafet)
 
-**Fra forrige gang:**  
-Kasper så på programkort, men fikk problemer da vi ikke har noe prioriterings nummer å gå utifra ettersom reglene for roborally ikke ligger ute lenger.  
+**Fra forrige gang:**
+Kasper så på programkort, men fikk problemer da vi ikke har noe prioriterings nummer å gå utifra ettersom reglene for roborally ikke ligger ute lenger.
 Jens og Thomas begynte å se på hva som måtte implementeres først, nå som alle tiles kunne rendres.  
 
 **På møtet:**  
@@ -45,6 +68,12 @@ Alle jobbet sammen i liveshare for å begynne og implementere resterende tiles. 
 
 **Til neste gang:**  
 Få gjort ferdig rotasjon av conveyor belts, slik at vi kan gå videre til å implementere gjenverende tiles. Foreløpig jobber alle med dette siden det er såpass elementært i forhold til spillets gang at alle forstår hvordan det fungerer.
+
+---
+
+## UML-diagram
+
+![alt text](..\deliverablesAssets\diagrams\classDiagramOblig3.png "Class digram Oblig3")
 
 ---
 

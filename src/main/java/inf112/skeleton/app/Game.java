@@ -124,6 +124,9 @@ public class Game extends InputAdapter implements ApplicationListener {
         return false;
     }
 
+    /**
+     * Run a new phase change
+     */
     private void runPhaseChange() {
         phaseNr++;
         System.out.println("Running phase nr: " + phaseNr);
@@ -137,6 +140,11 @@ public class Game extends InputAdapter implements ApplicationListener {
 
     }
 
+    /**
+     * Run one step of the FCBelt phase turn.
+     * 
+     * @param p a player 
+     */
     private void doFCBeltPhaseTurn(Player p) {
         Robot robot = p.getRobot();
         IDrawable tile = board.getTile(robot.getX(), robot.getY());
@@ -159,6 +167,11 @@ public class Game extends InputAdapter implements ApplicationListener {
         }
     }
 
+    /**
+     * Do the whole phaseturn
+     * 
+     * @param p a player
+     */
     private void doPhaseTurn(Player p) {
         Robot robot = p.getRobot();
         IDrawable tile = board.getTile(robot.getX(), robot.getY());
@@ -261,6 +274,13 @@ public class Game extends InputAdapter implements ApplicationListener {
     public void resume() {
     }
 
+    /**
+     * Get a movable (robot) from in a specific location.
+     * 
+     * @param x     x-coordinate
+     * @param y     y-coordinate
+     * @param dir   direction from x-y-coordinate
+     */
     public IMovable getMovable(int x, int y, CardinalDirection dir) {
         for (Player p : this.players) {
             Robot r = p.getRobot();

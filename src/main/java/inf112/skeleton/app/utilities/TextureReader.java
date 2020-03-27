@@ -50,6 +50,12 @@ public class TextureReader {
         return textures;
     }
 
+    /**
+     * Get an array of JSONTexture from a json file.
+     * 
+     * @param src src of json file.
+     * @return array of JSONTexture.
+     */
     private static JSONTexture[] jsonToJsonTexture(String src) {
         JSONTexture[] jsonTextures;
         Gson gson = new Gson();

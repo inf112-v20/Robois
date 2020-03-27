@@ -10,16 +10,41 @@ import inf112.skeleton.app.utilities.CardinalityUtility;
  */
 public class GameMovement {
 
+    /**
+     * Moves a movable object in the direction that object is facing.
+     * 
+     * @param steps     number of steps
+     * @param movable   movable object
+     * @param board     board object
+     * @param game      game object
+     */
     public static void move(int steps, IMovable movable, Board board, Game game) {
         CardinalDirection dir = movable.getCardinalDirection();
         moveInDirection(steps, movable, board, dir, game);
     }
 
+    /**
+     * Moves a movable object in the opposite direction of its own direction.
+     * 
+     * @param steps     number of steps
+     * @param movable   movable object
+     * @param board     board object
+     * @param game      game object
+     */
     public static void moveBackwards(int steps, IMovable movable, Board board, Game game) {
         CardinalDirection dir = CardinalityUtility.getOpposite(movable.getCardinalDirection());
         moveInDirection(steps, movable, board, dir, game);
     }
 
+    /**
+     * Move a movable in a specific direction.
+     * 
+     * @param steps     number of steps in a direction (Number of recursive calls).
+     * @param movable   movable object
+     * @param board     board object
+     * @param dir       cardinal direction to move in.
+     * @param game      game object
+     */
     public static boolean moveInDirection(int steps, IMovable movable, Board board, CardinalDirection dir, Game game) {
         if (steps != 0) {
             if (board.canGo(movable.getX(), movable.getY(), dir)) {
@@ -44,11 +69,21 @@ public class GameMovement {
         return false;
     }
 
+    /**
+     * Rotates a movable object to a specific rotation specified by a rotation integer.
+     * 
+     * @param rotation  integer value of the rotation of the object 0-3.
+     * @param movable   a movable object that implements the IMovable interface.
+     */
     public static void rotate(int rotation, IMovable movable) {
-        // movable.rotate(rotation);
         //movable.setDirection(CardinalityUtility.getNewDirection(rotation, movable.getCardinalDirection()).value);
         movable.setDirection((movable.getDirection() + rotation % 4 + 4) % 4);
-    }
+
+    /**
+     * Returns a movable to its original spawn location.
+     * 
+     * @param movable   a movable object.
+     */    }
 
     private static void retrunToSpawn(IMovable movable) {
         movable.setX(movable.getSpawnX());

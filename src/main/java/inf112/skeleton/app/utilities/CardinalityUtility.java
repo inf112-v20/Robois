@@ -6,6 +6,13 @@ import inf112.skeleton.app.objects.abstracts.Location;
  * CardinalityUtility
  */
 public class CardinalityUtility {
+
+    /**
+     * Get the oppisite direction of a cardinal direction.
+     * 
+     * @param dir direction to get inverse of
+     * @return opposite direction.
+     */
     public static CardinalDirection getOpposite(CardinalDirection dir) {
         switch (dir) {
             case NORTH:
@@ -21,6 +28,14 @@ public class CardinalityUtility {
         }
     }
 
+    /**
+     * Get next tile in a direction from a x-y coordinate
+     * 
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @param dir direction to retrieve tile from
+     * @return Location
+     */
     public static Location getNextTile(int x, int y, CardinalDirection dir) {
         int newX = x;
         int newY = y;
@@ -42,21 +57,5 @@ public class CardinalityUtility {
                 break;
         }
         return new Location(newX, newY);
-    }
-
-    public static CardinalDirection getNewDirection(int rotation, CardinalDirection direction){
-        int x = (direction.value + rotation % 4 + 4) % 4;
-        switch (x){
-            case 0:
-                return CardinalDirection.NORTH;
-            case 1:
-                return CardinalDirection.EAST;
-            case 2:
-                return CardinalDirection.SOUTH;
-            case 3:
-                return CardinalDirection.EAST;
-            default:
-                return null;
-        }
     }
 }

@@ -7,6 +7,12 @@ public class CsvReader {
     private int[][] boardids;
     private String directory = "src/main/java/inf112/skeleton/app/assets/boards/";
 
+    /**
+     * A CsvReader to read boards
+     * 
+     * @param filename filename of the board csv file, eg. b1.csv
+     * @throws FileNotFoundException
+     */
     public CsvReader(String filename) throws FileNotFoundException {
         File file = new File(directory + filename);
         Scanner scan = new Scanner(file);

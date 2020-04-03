@@ -19,7 +19,7 @@ public class GameMovement {
      * @param game      game object
      */
     public static void move(int steps, IMovable movable, Board board, Game game) {
-        CardinalDirection dir = movable.getCardinalDirection();
+        CardinalDirection dir = movable.getDirection();
         moveInDirection(steps, movable, board, dir, game);
     }
 
@@ -32,7 +32,7 @@ public class GameMovement {
      * @param game      game object
      */
     public static void moveBackwards(int steps, IMovable movable, Board board, Game game) {
-        CardinalDirection dir = CardinalityUtility.getOpposite(movable.getCardinalDirection());
+        CardinalDirection dir = CardinalityUtility.getOpposite(movable.getDirection());
         moveInDirection(steps, movable, board, dir, game);
     }
 
@@ -76,8 +76,7 @@ public class GameMovement {
      * @param movable   a movable object that implements the IMovable interface.
      */
     public static void rotate(int rotation, IMovable movable) {
-        //movable.setDirection(CardinalityUtility.getNewDirection(rotation, movable.getCardinalDirection()).value);
-        movable.setDirection((movable.getDirection() + rotation % 4 + 4) % 4);
+        movable.setDirection(CardinalityUtility.getRelativeDirection(rotation, movable.getDirection()));
 
     /**
      * Returns a movable to its original spawn location.

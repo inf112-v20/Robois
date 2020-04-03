@@ -10,7 +10,6 @@ import org.junit.Test;
 import inf112.skeleton.app.GameMovement;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
-import inf112.skeleton.app.objects.tiles.*;
 import inf112.skeleton.app.utilities.CardinalDirection;
 
 public class RobotShould {
@@ -21,7 +20,7 @@ public class RobotShould {
 	@Before
 	public void initialize() throws FileNotFoundException {
 		robotX = robotY = 5;
-		robot = new Robot(robotX, robotY, 0);
+		robot = new Robot(robotX, robotY, CardinalDirection.NORTH);
 		brd = new Board("b0.csv");
 	}
 
@@ -29,7 +28,7 @@ public class RobotShould {
 	 * MOVEMENT
 	 */
 	private void checkMovement(int steps, CardinalDirection direction) {
-		robot.setDirection(direction.value);
+		robot.setDirection(direction);
 		GameMovement.move(steps, robot, brd, null);
 
 		if (direction == CardinalDirection.NORTH) {
@@ -139,7 +138,7 @@ public class RobotShould {
 	 * ROTATION
 	 */
 	private void checkRotation(int rotation, CardinalDirection direction) {
-		robot.setDirection(direction.value);
+		robot.setDirection(direction);
 		GameMovement.rotate(rotation, robot);
 		assertEquals((direction.value + rotation % 4 + 4) % 4, robot.getDirection());
 	}

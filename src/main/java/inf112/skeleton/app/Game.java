@@ -151,13 +151,13 @@ public class Game extends InputAdapter implements ApplicationListener {
      * @param s The robot sprite
      */
     private void rotateRobot(Sprite s, Robot r) {
-        if (r.getDirection() == 1) {
+        if (r.getDirection() == CardinalDirection.EAST) {
             s.rotate90(true);
         }
-        if (r.getDirection() == 2) {
+        if (r.getDirection() == CardinalDirection.SOUTH) {
             s.flip(false, true);
         }
-        if (r.getDirection() == 3) {
+        if (r.getDirection() == CardinalDirection.WEST) {
             s.rotate90(false);
         }
     }

@@ -98,106 +98,23 @@ public class Game extends InputAdapter implements ApplicationListener {
      */
     @Override
     public boolean keyUp(int keyCode) {
-        if (keyCode == Input.Keys.W) {
-            GameMovement.move(1, players.get(r).getRobot(), board, this);
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.D) {
-            GameMovement.rotate(1, players.get(r).getRobot());
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.S) {
-            GameMovement.moveBackwards(1, players.get(r).getRobot(), board, this);
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.A) {
-            GameMovement.rotate(-1, players.get(r).getRobot());
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.SPACE) {
-            runPhaseChange();
-        }
-        return false;
+        return GameInput.executeKeyUp(keyCode, this);
     }
 
     /**
-     * Run a new phase change
+     * Update the current player variable to the next player
      */
-    private void runPhaseChange() {
-        phaseNr++;
-        System.out.println("Running phase nr: " + phaseNr);
-
-        for (Player p : players) {
-            doFCBeltPhaseTurn(p);
-        }
-        for (Player p : players) {
-            doPhaseTurn(p);
-        }
-
+    public void nextPlayer() {
+        this.r = (this.r + 1) % this.players.size();
     }
 
     /**
-     * Run one step of the FCBelt phase turn.
+     * Get the current robot in use.
      * 
-     * @param p a player 
+     * @return the current robot.
      */
-    private void doFCBeltPhaseTurn(Player p) {
-        Robot robot = p.getRobot();
-        IDrawable tile = board.getTile(robot.getX(), robot.getY());
-
-        if (tile instanceof FCBelt) {
-            FCBelt fcbelt = (FCBelt) tile;
-            GameMovement.moveInDirection(1, robot, board, fcbelt.getDirection(), this);
-            IDrawable nextTile = board.getTile(robot.getX(), robot.getY());
-            if (nextTile instanceof FCBelt) {
-                FCBelt nextcbelt = (FCBelt) nextTile;
-
-                if ((fcbelt.getDirection().value + 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(1, robot);
-                }
-                if ((fcbelt.getDirection().value - 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(-1, robot);
-                }
-            }
-        }
-    }
-
-    /**
-     * Do the whole phaseturn
-     * 
-     * @param p a player
-     */
-    private void doPhaseTurn(Player p) {
-        Robot robot = p.getRobot();
-        IDrawable tile = board.getTile(robot.getX(), robot.getY());
-
-        if (tile instanceof CBelt) {
-            CBelt cbelt = (CBelt) tile;
-            GameMovement.moveInDirection(1, robot, board, cbelt.getDirection(), this);
-            IDrawable nextTile = board.getTile(robot.getX(), robot.getY());
-            if (nextTile instanceof CBelt) {
-                CBelt nextcbelt = (CBelt) nextTile;
-
-                if ((cbelt.getDirection().value + 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(1, robot);
-                }
-                if ((cbelt.getDirection().value - 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(-1, robot);
-                }
-
-            }
-        }
-        if (tile instanceof FCBelt) {
-            doFCBeltPhaseTurn(p);
-        }
-        // if (tile instanceof Flag) {
-        // Flag falg = (Flag) tile;
-
-        // }
+    public IMovable getCurrentRobot() {
+        return players.get(r).getRobot();
     }
 
     /**
@@ -276,9 +193,9 @@ public class Game extends InputAdapter implements ApplicationListener {
     /**
      * Get a movable (robot) from in a specific location.
      * 
-     * @param x     x-coordinate
-     * @param y     y-coordinate
-     * @param dir   direction from x-y-coordinate
+     * @param x   x-coordinate
+     * @param y   y-coordinate
+     * @param dir direction from x-y-coordinate
      */
     public IMovable getMovable(int x, int y, CardinalDirection dir) {
         for (Player p : this.players) {
@@ -289,5 +206,39 @@ public class Game extends InputAdapter implements ApplicationListener {
             }
         }
         return null;
+    }
+
+    /**
+     * Increment the phase number to the next one.
+     */
+    public void nextPhase() {
+        this.phaseNr++;
+    }
+
+    /**
+     * Get the current phase the game is on.
+     * 
+     * @return the current phase
+     */
+    public int getPhase() {
+        return this.phaseNr;
+    }
+
+    /**
+     * Get the game's board.
+     * 
+     * @return the game's board
+     */
+    public Board getBoard() {
+        return this.board;
+    }
+
+    /**
+     * List of players
+     * 
+     * @return list of players.
+     */
+    public List<Player> getPlayers() {
+        return this.players;
     }
 }

@@ -109,7 +109,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     }
 
     /**
-     * Get the robot who's turn it is.
+     * Get the current robot in use.
      * 
      * @return the current robot.
      */

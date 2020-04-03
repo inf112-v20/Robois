@@ -28,6 +28,25 @@ public class CardinalityUtility {
         }
     }
 
+    public static CardinalDirection getCardinalDirection (int dir) {
+        switch (dir) {
+            case 0:
+                return CardinalDirection.NORTH;
+            case 1:
+                return CardinalDirection.EAST;
+            case 2:
+                return CardinalDirection.SOUTH;
+            case 3:
+                return CardinalDirection.WEST;
+            default:
+                return null;
+        }
+    }
+
+    public static CardinalDirection getRelativeDirection(int rotation, CardinalDirection dir) {
+        return getCardinalDirection((dir.value + rotation % 4 + 4) % 4);
+    }
+
     /**
      * Get next tile in a direction from a x-y coordinate
      * 

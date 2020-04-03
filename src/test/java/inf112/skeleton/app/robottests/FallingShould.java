@@ -20,12 +20,12 @@ public class FallingShould {
     @Before
     public void initialize() throws FileNotFoundException {
         robotX = robotY = 5;
-        robot = new Robot(robotX, robotY, 0);
+        robot = new Robot(robotX, robotY, CardinalDirection.NORTH);
         brd = new Board("b0.csv");
     }
 
     private void checkRespawnOnOutOfBounds(int x, int y, CardinalDirection direction) {
-        robot.setDirection(direction.value);
+        robot.setDirection(direction);
         robot.setX(x);
         robot.setY(y);
         GameMovement.move(1, robot, brd, null);

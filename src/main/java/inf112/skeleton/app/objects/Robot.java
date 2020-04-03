@@ -11,9 +11,9 @@ public class Robot implements IDrawable, IMovable {
     private int y;
     private int spawnX;
     private int spawnY;
-    private int direction;
+    private CardinalDirection direction;
 
-    public Robot(int x, int y, int d) {
+    public Robot(int x, int y, CardinalDirection d) {
         this.x = this.spawnX = x;
         this.y = this.spawnY = y;
         this.direction = d;
@@ -40,32 +40,17 @@ public class Robot implements IDrawable, IMovable {
         this.y = y;
     }
 
-    public int getDirection() {
+    public CardinalDirection getDirection() {
         return this.direction;
     }
 
-    public void setDirection(int dir) {
+    public void setDirection(CardinalDirection dir) {
         this.direction = dir;
     }
 
     @Override
     public boolean needBackground() {
         return false;
-    }
-
-    public CardinalDirection getCardinalDirection() {
-        switch (this.direction) {
-            case 0:
-                return CardinalDirection.NORTH;
-            case 1:
-                return CardinalDirection.EAST;
-            case 2:
-                return CardinalDirection.SOUTH;
-            case 3:
-                return CardinalDirection.WEST;
-            default:
-                return null;
-        }
     }
 
     @Override
@@ -75,21 +60,21 @@ public class Robot implements IDrawable, IMovable {
 
     @Override
     public boolean move(CardinalDirection dir) {
-        return moveOneTile(dir.value);
+        return moveOneTile(dir);
     }
 
-    private boolean moveOneTile(int direction) {
+    private boolean moveOneTile(CardinalDirection direction) {
         switch (direction) {
-            case 0:
+            case NORTH:
                 this.y -= 1;
                 return true;
-            case 1:
+            case EAST:
                 this.x += 1;
                 return true;
-            case 2:
+            case SOUTH:
                 this.y += 1;
                 return true;
-            case 3:
+            case WEST:
                 this.x -= 1;
                 return true;
             default:

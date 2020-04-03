@@ -14,11 +14,9 @@ public interface IMovable {
 
     void setY(int y);
 
-    int getDirection();
+    CardinalDirection getDirection();
 
-    void setDirection(int dir);
-
-    CardinalDirection getCardinalDirection();
+    void setDirection(CardinalDirection dir);
 
     boolean move();
 

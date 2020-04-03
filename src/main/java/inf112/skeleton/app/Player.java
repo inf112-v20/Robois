@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.objects.Robot;
+import inf112.skeleton.app.utilities.CardinalDirection;
 
 /**
  * Player
@@ -11,7 +12,7 @@ public class Player {
     private int spawnY;
 
     public Player(int x, int y) {
-        this.robot = new Robot(x, y, 0);
+        this.robot = new Robot(x, y, CardinalDirection.NORTH);
         this.spawnX = x;
         this.spawnY = y;
     }

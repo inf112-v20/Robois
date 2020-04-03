@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,10 +19,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.abstracts.Location;
-import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.interfaces.IMovable;
-import inf112.skeleton.app.objects.tiles.CBelt;
-import inf112.skeleton.app.objects.tiles.FCBelt;
 import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;

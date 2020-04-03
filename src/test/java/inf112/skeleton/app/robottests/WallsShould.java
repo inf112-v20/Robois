@@ -21,7 +21,7 @@ public class WallsShould {
     public void initialize() throws FileNotFoundException {
         robotX = robotY = 5;
         robot = new Robot(robotX, robotY, CardinalDirection.NORTH);
-        brd = new Board("b0.csv");
+        brd = new Board("bt.csv");
     }
 
     private void checkMovement(int steps, CardinalDirection direction) {

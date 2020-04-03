@@ -7,6 +7,8 @@ import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.CBelt;
 import inf112.skeleton.app.objects.tiles.FCBelt;
+import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.CardinalityUtility;
 
 public class GamePhase {
     /**
@@ -24,7 +26,6 @@ public class GamePhase {
         for (Player p : players) {
             doPhaseTurn(p, game.getBoard(), game);
         }
-
     }
 
     /**
@@ -43,13 +44,12 @@ public class GamePhase {
             if (nextTile instanceof FCBelt) {
                 FCBelt nextcbelt = (FCBelt) nextTile;
 
-                if ((fcbelt.getDirection().value + 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(1, robot);
+                if (CardinalityUtility.getRelativeRight(fcbelt.getDirection()) == nextcbelt.getDirection()) {
+                    GameMovement.rotate(CardinalDirection.RIGHT, robot);
                 }
-                if ((fcbelt.getDirection().value - 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(-1, robot);
+                else if (CardinalityUtility.getRelativeLeft(fcbelt.getDirection()) == nextcbelt.getDirection()) {
+                    GameMovement.rotate(CardinalDirection.LEFT, robot);
                 }
-
             }
         }
     }
@@ -70,13 +70,12 @@ public class GamePhase {
             if (nextTile instanceof CBelt) {
                 CBelt nextcbelt = (CBelt) nextTile;
 
-                if ((cbelt.getDirection().value + 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(1, robot);
+                if (CardinalityUtility.getRelativeRight(cbelt.getDirection()) == nextcbelt.getDirection()) {
+                    GameMovement.rotate(CardinalDirection.RIGHT, robot);
                 }
-                if ((cbelt.getDirection().value - 1 % 4 + 4) % 4 == nextcbelt.getDirection().value) {
-                    GameMovement.rotate(-1, robot);
+                else if (CardinalityUtility.getRelativeLeft(cbelt.getDirection()) == nextcbelt.getDirection()) {
+                    GameMovement.rotate(CardinalDirection.LEFT, robot);
                 }
-
             }
         }
         if (tile instanceof FCBelt) {

@@ -14,19 +14,29 @@ public class CardinalityUtility {
      * @return opposite direction.
      */
     public static CardinalDirection getOpposite(CardinalDirection dir) {
-        switch (dir) {
-            case NORTH:
-                return CardinalDirection.SOUTH;
-            case SOUTH:
-                return CardinalDirection.NORTH;
-            case EAST:
-                return CardinalDirection.WEST;
-            case WEST:
-                return CardinalDirection.EAST;
-            default:
-                return null;
-        }
+        return getRelativeDirection(CardinalDirection.BACKWARDS, dir);
     }
+    
+    /**
+     * Get the left direction relative to the given direction
+     * 
+     * @param dir direction robot is facing
+     * @return CardinalDirection
+     */
+    public static CardinalDirection getRelativeLeft(CardinalDirection dir) {
+        return getRelativeDirection(CardinalDirection.LEFT, dir);
+    }
+    
+    /**
+     * Get the right direction relative to the given direction
+     * 
+     * @param dir direction robot is facing
+     * @return CardinalDirection
+     */
+    public static CardinalDirection getRelativeRight(CardinalDirection dir) {
+        return getRelativeDirection(CardinalDirection.RIGHT, dir);
+    }
+    
 
     public static CardinalDirection getCardinalDirection (int dir) {
         switch (dir) {
@@ -43,8 +53,15 @@ public class CardinalityUtility {
         }
     }
 
-    public static CardinalDirection getRelativeDirection(int rotation, CardinalDirection dir) {
-        return getCardinalDirection((dir.value + rotation % 4 + 4) % 4);
+    /**
+     * Get the new direction robot is facing when rotating an amount relative to the direction dir
+     * 
+     * @param rotation what kind of rotation
+     * @param dir direction robot is facing
+     * @return CardinalDirection
+     */
+    public static CardinalDirection getRelativeDirection(CardinalDirection rotation, CardinalDirection dir) {
+        return getCardinalDirection((dir.value + rotation.value % 4 + 4) % 4);
     }
 
     /**

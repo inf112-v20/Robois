@@ -75,7 +75,7 @@ public class GameMovement {
      * @param rotation  integer value of the rotation of the object 0-3.
      * @param movable   a movable object that implements the IMovable interface.
      */
-    public static void rotate(int rotation, IMovable movable) {
+    public static void rotate(CardinalDirection rotation, IMovable movable) {
         movable.setDirection(CardinalityUtility.getRelativeDirection(rotation, movable.getDirection()));
 
     /**

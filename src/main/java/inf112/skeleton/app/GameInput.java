@@ -2,7 +2,7 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.Input;
 
-import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.RelativeDirection;
 
 public class GameInput {
     /**
@@ -19,7 +19,7 @@ public class GameInput {
             return true;
         }
         if (keyCode == Input.Keys.D) {
-            GameMovement.rotate(CardinalDirection.RIGHT, game.getCurrentRobot());
+            GameMovement.rotate(RelativeDirection.RIGHT, game.getCurrentRobot());
             game.nextPlayer();
             return true;
         }
@@ -29,7 +29,7 @@ public class GameInput {
             return true;
         }
         if (keyCode == Input.Keys.A) {
-            GameMovement.rotate(CardinalDirection.LEFT, game.getCurrentRobot());
+            GameMovement.rotate(RelativeDirection.LEFT, game.getCurrentRobot());
             game.nextPlayer();
             return true;
         }

@@ -98,30 +98,23 @@ public class Game extends InputAdapter implements ApplicationListener {
      */
     @Override
     public boolean keyUp(int keyCode) {
-        if (keyCode == Input.Keys.W) {
-            GameMovement.move(1, players.get(r).getRobot(), board, this);
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.D) {
-            GameMovement.rotate(1, players.get(r).getRobot());
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.S) {
-            GameMovement.moveBackwards(1, players.get(r).getRobot(), board, this);
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.A) {
-            GameMovement.rotate(-1, players.get(r).getRobot());
-            this.r = (this.r + 1) % this.players.size();
-            return true;
-        }
-        if (keyCode == Input.Keys.SPACE) {
-            GamePhase.runPhaseChange(this);
-        }
-        return false;
+        return GameInput.executeKeyUp(keyCode, this);
+    }
+
+    /**
+     * Update the current player variable to the next player
+     */
+    public void nextPlayer() {
+        this.r = (this.r + 1) % this.players.size();
+    }
+
+    /**
+     * Get the robot who's turn it is.
+     * 
+     * @return the current robot.
+     */
+    public IMovable getCurrentRobot() {
+        return players.get(r).getRobot();
     }
 
     /**

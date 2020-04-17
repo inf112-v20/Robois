@@ -7,7 +7,7 @@ import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.CBelt;
 import inf112.skeleton.app.objects.tiles.FCBelt;
-import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
 public class GamePhase {
@@ -45,10 +45,10 @@ public class GamePhase {
                 FCBelt nextcbelt = (FCBelt) nextTile;
 
                 if (CardinalityUtility.getRelativeRight(fcbelt.getDirection()) == nextcbelt.getDirection()) {
-                    GameMovement.rotate(CardinalDirection.RIGHT, robot);
+                    GameMovement.rotate(RelativeDirection.RIGHT, robot);
                 }
                 else if (CardinalityUtility.getRelativeLeft(fcbelt.getDirection()) == nextcbelt.getDirection()) {
-                    GameMovement.rotate(CardinalDirection.LEFT, robot);
+                    GameMovement.rotate(RelativeDirection.LEFT, robot);
                 }
             }
         }
@@ -71,10 +71,10 @@ public class GamePhase {
                 CBelt nextcbelt = (CBelt) nextTile;
 
                 if (CardinalityUtility.getRelativeRight(cbelt.getDirection()) == nextcbelt.getDirection()) {
-                    GameMovement.rotate(CardinalDirection.RIGHT, robot);
+                    GameMovement.rotate(RelativeDirection.RIGHT, robot);
                 }
                 else if (CardinalityUtility.getRelativeLeft(cbelt.getDirection()) == nextcbelt.getDirection()) {
-                    GameMovement.rotate(CardinalDirection.LEFT, robot);
+                    GameMovement.rotate(RelativeDirection.LEFT, robot);
                 }
             }
         }

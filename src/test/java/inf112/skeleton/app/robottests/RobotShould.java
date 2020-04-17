@@ -11,6 +11,7 @@ import inf112.skeleton.app.GameMovement;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
 public class RobotShould {
@@ -138,7 +139,7 @@ public class RobotShould {
 	/**
 	 * ROTATION
 	 */
-	private void checkRotation(CardinalDirection rotation, CardinalDirection direction) {
+	private void checkRotation(RelativeDirection rotation, CardinalDirection direction) {
 		robot.setDirection(direction);
 		GameMovement.rotate(rotation, robot);
 		assertEquals(CardinalityUtility.getRelativeDirection(rotation, direction), robot.getDirection());
@@ -149,22 +150,22 @@ public class RobotShould {
 	 */
 	@Test
 	public void rotate1ClockWiseOnRotate1Direction0() {
-		checkRotation(CardinalDirection.RIGHT, CardinalDirection.NORTH);
+		checkRotation(RelativeDirection.RIGHT, CardinalDirection.NORTH);
 	}
 
 	@Test
 	public void rotate1ClockWiseOnRotate1Direction1() {
-		checkRotation(CardinalDirection.RIGHT, CardinalDirection.EAST);
+		checkRotation(RelativeDirection.RIGHT, CardinalDirection.EAST);
 	}
 
 	@Test
 	public void rotate1ClockWiseOnRotate1Direction2() {
-		checkRotation(CardinalDirection.RIGHT, CardinalDirection.SOUTH);
+		checkRotation(RelativeDirection.RIGHT, CardinalDirection.SOUTH);
 	}
 
 	@Test
 	public void rotate1ClockWiseOnRotate1Direction3() {
-		checkRotation(CardinalDirection.RIGHT, CardinalDirection.WEST);
+		checkRotation(RelativeDirection.RIGHT, CardinalDirection.WEST);
 	}
 
 	/**
@@ -172,21 +173,21 @@ public class RobotShould {
 	 */
 	@Test
 	public void rotate1CounterClockWiseOnRotate1Direction0() {
-		checkRotation(CardinalDirection.LEFT, CardinalDirection.NORTH);
+		checkRotation(RelativeDirection.LEFT, CardinalDirection.NORTH);
 	}
 
 	@Test
 	public void rotate1CounterClockWiseOnRotate1Direction1() {
-		checkRotation(CardinalDirection.LEFT, CardinalDirection.EAST);
+		checkRotation(RelativeDirection.LEFT, CardinalDirection.EAST);
 	}
 
 	@Test
 	public void rotate1CounterClockWiseOnRotate1Direction2() {
-		checkRotation(CardinalDirection.LEFT, CardinalDirection.SOUTH);
+		checkRotation(RelativeDirection.LEFT, CardinalDirection.SOUTH);
 	}
 
 	@Test
 	public void rotate1CounterClockWiseOnRotate1Direction3() {
-		checkRotation(CardinalDirection.LEFT, CardinalDirection.WEST);
+		checkRotation(RelativeDirection.LEFT, CardinalDirection.WEST);
 	}
 }

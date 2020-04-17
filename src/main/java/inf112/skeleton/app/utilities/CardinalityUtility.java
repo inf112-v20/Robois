@@ -14,7 +14,7 @@ public class CardinalityUtility {
      * @return opposite direction.
      */
     public static CardinalDirection getOpposite(CardinalDirection dir) {
-        return getRelativeDirection(CardinalDirection.BACKWARDS, dir);
+        return getRelativeDirection(RelativeDirection.BACKWARDS, dir);
     }
     
     /**
@@ -24,7 +24,7 @@ public class CardinalityUtility {
      * @return CardinalDirection
      */
     public static CardinalDirection getRelativeLeft(CardinalDirection dir) {
-        return getRelativeDirection(CardinalDirection.LEFT, dir);
+        return getRelativeDirection(RelativeDirection.LEFT, dir);
     }
     
     /**
@@ -34,7 +34,7 @@ public class CardinalityUtility {
      * @return CardinalDirection
      */
     public static CardinalDirection getRelativeRight(CardinalDirection dir) {
-        return getRelativeDirection(CardinalDirection.RIGHT, dir);
+        return getRelativeDirection(RelativeDirection.RIGHT, dir);
     }
     
 
@@ -60,7 +60,7 @@ public class CardinalityUtility {
      * @param dir direction robot is facing
      * @return CardinalDirection
      */
-    public static CardinalDirection getRelativeDirection(CardinalDirection rotation, CardinalDirection dir) {
+    public static CardinalDirection getRelativeDirection(RelativeDirection rotation, CardinalDirection dir) {
         return getCardinalDirection((dir.value + rotation.value % 4 + 4) % 4);
     }
 

@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
 /**
@@ -75,7 +76,7 @@ public class GameMovement {
      * @param rotation  integer value of the rotation of the object 0-3.
      * @param movable   a movable object that implements the IMovable interface.
      */
-    public static void rotate(CardinalDirection rotation, IMovable movable) {
+    public static void rotate(RelativeDirection rotation, IMovable movable) {
         movable.setDirection(CardinalityUtility.getRelativeDirection(rotation, movable.getDirection()));
 
     /**

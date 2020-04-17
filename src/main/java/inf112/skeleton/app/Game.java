@@ -76,6 +76,7 @@ public class Game extends InputAdapter implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
+        Gdx.graphics.setWindowedMode(width, height);
     }
 
     @Override

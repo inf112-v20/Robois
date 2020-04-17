@@ -3,7 +3,9 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.graphics.Color;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
+import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.TextureReader;
 
@@ -24,6 +27,13 @@ public class GameRendering {
     private Board board;
     private TextureRegion[][] regions;
     private HashMap<Integer, TextureRegion> textures;
+
+    private Integer TW = 47;
+    private Integer TH = 47;
+    private Integer xOffset = 50;
+    private Integer yOffset = 150;
+
+    private List<TextureRegion> hand;
 
     public GameRendering(Game game) {
         this.game = game;
@@ -39,6 +49,19 @@ public class GameRendering {
         }
         
         createTextureRegions();
+
+        TextureRegion r = TextureReader.getSpecificTexture();
+        this.hand = new ArrayList<>();
+        this.hand.add(r);
+        this.hand.add(r);
+        this.hand.add(r);
+        this.hand.add(r);
+        this.hand.add(r);
+        this.hand.add(r);
+        this.hand.add(r);
+        this.hand.add(r);
+
+        System.out.println(this.hand);
     }
 
     /**
@@ -61,11 +84,15 @@ public class GameRendering {
             Robot robot = player.getRobot();
             Sprite s = new Sprite(this.textures.get(robot.getImageId()));
             int ym = game.getBoard().getHeight() - robot.getY() - 1;
-            s.setPosition(robot.getX() * 70, ym * 70);
-            s.setSize(70, 70);
-            rotateRobot(s, robot);
+            s.setPosition(robot.getX() * TW + xOffset, ym * TH + yOffset);
+            s.setSize(TW, TH);
+            rotateMovableObject(s, robot);
             s.draw(batch);
         }
+        this.batch.end();
+
+        this.batch.begin();
+        renderHand();
         this.batch.end();
     }
 
@@ -83,6 +110,11 @@ public class GameRendering {
         }
     }
 
+    private void renderHand() {
+        for (int x = 0; x < this.hand.size(); x++){
+            batch.draw(this.hand.get(x), x*71+50, 30, 66, 100);
+        }
+    }
     
     /**
      * Render the board (background)
@@ -92,20 +124,20 @@ public class GameRendering {
             for (int x = 0; x < this.regions[y].length; x++) {
                 int ym = this.regions.length - y - 1;
                 if (this.board.getTile(x, y).needBackground()) {
-                    batch.draw(this.textures.get(0), x * 70, ym * 70, 70, 70);
+                    batch.draw(this.textures.get(0), x * TW + xOffset, ym * TH + yOffset, TW, TH);
                 }
-                batch.draw(this.regions[y][x], x * 70, ym * 70, 70, 70);
+                batch.draw(this.regions[y][x], x * TW + xOffset, ym * TH + yOffset, TW, TH);
             }
         }
         font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
     }
     
     /**
-     * Rotates the robot sprite depending on the cardinal direction of the robot
+     * Rotates a movable object.
      * 
-     * @param s The robot sprite
+     * @param s The rotated sprite
      */
-    private void rotateRobot(Sprite s, Robot r) {
+    private void rotateMovableObject(Sprite s, IMovable r) {
         if (r.getDirection() == CardinalDirection.EAST) {
             s.rotate90(true);
         }

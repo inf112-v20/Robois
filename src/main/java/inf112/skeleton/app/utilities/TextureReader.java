@@ -50,6 +50,14 @@ public class TextureReader {
         return textures;
     }
 
+    public static TextureRegion getSpecificTexture() {
+        String tileSrc = "src/main/java/inf112/skeleton/app/assets/sprites/5.png";
+
+        Texture texture = new Texture(Gdx.files.internal(tileSrc));
+
+        return new TextureRegion(texture, 0, 0, 200, 303);
+    }
+
     /**
      * Get an array of JSONTexture from a json file.
      * 

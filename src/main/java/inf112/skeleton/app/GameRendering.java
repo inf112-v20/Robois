@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
-import inf112.skeleton.app.ui_objects.IRenderable;
 import inf112.skeleton.app.ui_objects.Panel;
 import inf112.skeleton.app.ui_objects.UIBoard;
 import inf112.skeleton.app.utilities.TextureReader;
@@ -25,7 +24,7 @@ public class GameRendering {
     private TextureRegion[][] regions;
     private HashMap<Integer, TextureRegion> textures;
 
-    Panel p = new Panel(0, 0, 16*80, 9*80, null);
+    Panel mainGamePanel;
 
     public GameRendering(Game game) {
         this.board = game.getBoard();
@@ -41,7 +40,8 @@ public class GameRendering {
 
         createTextureRegions();
 
-        p.addObject(new UIBoard(50, 150, 47*12, 47*12, game, this.regions, this.textures));
+        mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
+        mainGamePanel.addObject(new UIBoard(40, 230, 55*12, 55*12, game, this.regions, this.textures));
     }
 
     /**
@@ -52,12 +52,11 @@ public class GameRendering {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        for (IRenderable r : this.p.getObjects()){
-            this.batch.begin();
-            r.render(batch);
-            this.batch.end();
-        }
+        this.mainGamePanel.render(this.batch);
 
+        this.batch.begin();
+        font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
+        this.batch.end();
     }
 
     /**

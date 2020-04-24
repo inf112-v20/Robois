@@ -22,8 +22,9 @@ public class ProgramCard implements IRenderable {
         
         this.priorityFont = new BitmapFont();
         this.priorityFont.setColor(Color.GREEN);
+        this.priorityFont.getData().setScale((int) width/100f);
 
-        this.r = TextureReader.getSpecificTexture(type.src, width, height);
+        this.r = TextureReader.getSpecificTexture(type.src, 99, 155);
     }
 
     @Override
@@ -48,10 +49,13 @@ public class ProgramCard implements IRenderable {
 
     @Override
     public void render(Batch batch) {
-        this.r.setRegionWidth(getWidth());
-        this.r.setRegionHeight(getHeight());
         batch.draw(this.r, getX(), getY(), getWidth(), getHeight());
-
-        priorityFont.draw(batch, Integer.toString(this.priority), getX()+getWidth()-45, getY()+getHeight()-18);
+        int startX;
+        if (Integer.toString(this.priority).length() > 2) {
+            startX = (int) (getX()+(getWidth()/1.75f));
+        } else {
+            startX = (int) (getX()+(getWidth()/1.63f));
+        }
+        priorityFont.draw(batch, Integer.toString(this.priority), startX, (int) (getY()+getHeight()/1.125f));
     }
 }

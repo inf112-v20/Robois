@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.ui_objects.Panel;
 import inf112.skeleton.app.ui_objects.ProgramCard;
+import inf112.skeleton.app.ui_objects.ProgramCardLocked;
 import inf112.skeleton.app.ui_objects.ProgramCardType;
 import inf112.skeleton.app.ui_objects.UIBoard;
 import inf112.skeleton.app.utilities.TextureReader;
@@ -44,9 +45,17 @@ public class GameRendering {
 
         mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
         mainGamePanel.addObject(new UIBoard(40, 230, 55*12, 55*12, game, this.regions, this.textures));
-        mainGamePanel.addObject(new ProgramCard(500, 200, 100, 432, ProgramCardType.MOVE1));
-        mainGamePanel.addObject(new ProgramCard(650, 200, 100, 512, ProgramCardType.MOVE2));
-        mainGamePanel.addObject(new ProgramCard(800, 200, 100, 32, ProgramCardType.MOVE3));
+        
+        
+        
+        ProgramCardLocked l = new ProgramCardLocked(1060, 20, 500, 155);
+        mainGamePanel.addObject(l);
+
+        l.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
+        l.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
+        l.addCard(ProgramCardType.MOVE3, ProgramCardType.getRandomInt(ProgramCardType.MOVE3));
+        l.addCard(ProgramCardType.ROTATE_RIGTH, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_RIGTH));
+        l.addCard(ProgramCardType.ROTATE_LEFT, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_LEFT));
     }
 
     /**

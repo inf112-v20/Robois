@@ -51,10 +51,8 @@ public class Panel implements IRenderable {
 
     @Override
     public void render(Batch batch) {
-        batch.begin();
         for (IRenderable r : this.getObjects()){
             r.render(batch);
         }
-        batch.end();
     }
 }

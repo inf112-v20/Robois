@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.ui_objects.Panel;
+import inf112.skeleton.app.ui_objects.ProgramCard;
+import inf112.skeleton.app.ui_objects.ProgramCardType;
 import inf112.skeleton.app.ui_objects.UIBoard;
 import inf112.skeleton.app.utilities.TextureReader;
 
@@ -42,6 +44,9 @@ public class GameRendering {
 
         mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
         mainGamePanel.addObject(new UIBoard(40, 230, 55*12, 55*12, game, this.regions, this.textures));
+        mainGamePanel.addObject(new ProgramCard(500, 200, 100, 432, ProgramCardType.MOVE1));
+        mainGamePanel.addObject(new ProgramCard(650, 200, 100, 512, ProgramCardType.MOVE2));
+        mainGamePanel.addObject(new ProgramCard(800, 200, 100, 32, ProgramCardType.MOVE3));
     }
 
     /**
@@ -52,7 +57,9 @@ public class GameRendering {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        this.batch.begin();
         this.mainGamePanel.render(this.batch);
+        this.batch.end();
 
         this.batch.begin();
         font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);

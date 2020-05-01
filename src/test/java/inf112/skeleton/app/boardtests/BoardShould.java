@@ -23,7 +23,6 @@ public class BoardShould {
         try {
             brd = new Board("b0.csv");
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         standardBoardWidth = brd.getWidth();

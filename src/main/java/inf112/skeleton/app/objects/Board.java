@@ -22,9 +22,6 @@ public class Board {
 	 * @throws FileNotFoundException
 	 */
 	public Board(String filename) throws FileNotFoundException {
-		this.width = 12;
-		this.height = 12;
-		this.board = new IDrawable[12][12];
 		this.fillStandardBoard(filename);
 	}
 
@@ -35,11 +32,18 @@ public class Board {
 		CsvReader reader = new CsvReader(filename);
 		int[][] boardids = reader.getBoardIds();
 
+		this.width = boardids[0].length;
+		this.height = boardids.length;
+		this.board = new IDrawable[height][width];
+
 		for (int y = 0; y < boardids.length; y++) {
 			for (int x = 0; x < boardids[y].length; x++) {
 				int b = boardids[y][x];
+
 				if (b == 0) board[y][x] = new Floor();
 				if (b >= 1 && b <=8){
+					System.out.println(y);
+					System.out.println(x);
 					board[y][x] = new Wall(b);
 				}
 				if (b >= 11 && b <= 18){

@@ -10,11 +10,13 @@ public class Player {
     private Robot robot;
     private int spawnX;
     private int spawnY;
+    private int HP;
 
     public Player(int x, int y) {
         this.robot = new Robot(x, y, CardinalDirection.NORTH);
         this.spawnX = x;
         this.spawnY = y;
+        this.HP = 9;
     }
 
     public Robot getRobot() {
@@ -27,5 +29,9 @@ public class Player {
 
     public int getSpawnY() {
         return this.spawnY;
+    }
+
+    public int getHP() {
+        return this.HP;
     }
 }

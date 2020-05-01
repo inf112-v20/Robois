@@ -123,6 +123,9 @@ public class Board {
 		if (getTile(x, y) instanceof Wall) {
 			Wall w = (Wall) getTile(x, y);
 			return !w.getWallPositions().contains(dir);
+		}else if (getTile(x, y) instanceof Pusher) {
+			Pusher p = (Pusher) getTile(x, y);
+			return !(p.getPusherWallPosition() == dir);
 		}
 
 		Location loc = CardinalityUtility.getNextTile(x, y, dir);
@@ -136,6 +139,9 @@ public class Board {
 		if (getTile(x, y) instanceof Wall) {
 			Wall w = (Wall) getTile(x, y);
 			return !w.getWallPositions().contains(CardinalityUtility.getOpposite(dir));
+		} else if (getTile(x, y) instanceof Pusher) {
+			Pusher p = (Pusher) getTile(x, y);
+			return !(p.getPusherWallPosition() == CardinalityUtility.getOpposite(dir));
 		}
 		return true;
 	}

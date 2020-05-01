@@ -7,6 +7,8 @@ import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.CBelt;
 import inf112.skeleton.app.objects.tiles.FCBelt;
+import inf112.skeleton.app.objects.tiles.Gear;
+import inf112.skeleton.app.objects.tiles.Pusher;
 import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
@@ -80,6 +82,16 @@ public class GamePhase {
         }
         if (tile instanceof FCBelt) {
             doFCBeltPhaseTurn(p, board, game);
+        }
+        if (tile instanceof Pusher) {
+            Pusher pusher = (Pusher) tile;
+            if (pusher.getActive() == (game.getPhase() % 2)) {
+                GameMovement.moveInDirection(1, robot, board, CardinalityUtility.getOpposite(pusher.getPusherWallPosition()), game);
+            }
+        }
+        if (tile instanceof Gear) {
+            Gear gear = (Gear) tile;
+            GameMovement.rotate(gear.getRotation(), robot);
         }
     }
 }

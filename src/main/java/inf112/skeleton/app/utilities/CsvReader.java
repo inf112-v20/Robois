@@ -22,17 +22,13 @@ public class CsvReader {
         final int m = Integer.parseInt(numLine.split(",")[1]);
 
         // Allocate arrays with length n
-        boardids = new int[n][m];
+        boardids = new int[m][n];
 
-        int y = 0;
-        while (scan.hasNext()) {
+        for (int y = 0; y < m; y++){
             String[] inputArr = scan.nextLine().split(",");
-            for (int x = 0; x < n; x++) {
+            for (int x = 0; x < n; x++){
                 boardids[y][x] = Integer.parseInt(inputArr[x]);
             }
-            if (y >= m)
-                break;
-            y++;
         }
         scan.close();
     }

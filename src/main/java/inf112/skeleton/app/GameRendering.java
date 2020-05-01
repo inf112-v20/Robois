@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.ui_objects.Panel;
-import inf112.skeleton.app.ui_objects.ProgramCard;
 import inf112.skeleton.app.ui_objects.ProgramCardLocked;
 import inf112.skeleton.app.ui_objects.ProgramCardType;
 import inf112.skeleton.app.ui_objects.UIBoard;

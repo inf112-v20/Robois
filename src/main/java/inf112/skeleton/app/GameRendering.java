@@ -43,7 +43,7 @@ public class GameRendering {
         createTextureRegions();
 
         mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
-        mainGamePanel.addObject(new UIBoard(40, 230, 55*12, 55*12, game, this.regions, this.textures));
+        mainGamePanel.addObject(new UIBoard(40, 200, 55*12, 55*12, game, this.regions, this.textures));
         
         
         

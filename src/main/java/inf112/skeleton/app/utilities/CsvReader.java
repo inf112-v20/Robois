@@ -7,6 +7,8 @@ public class CsvReader {
     private int[][] boardids;
     private String directory = "src/main/java/inf112/skeleton/app/assets/boards/";
 
+    private final int width;
+    private final int height;
     /**
      * A CsvReader to read boards
      * 
@@ -18,15 +20,15 @@ public class CsvReader {
         Scanner scan = new Scanner(file);
 
         String numLine = scan.nextLine();
-        final int n = Integer.parseInt(numLine.split(",")[0]);
-        final int m = Integer.parseInt(numLine.split(",")[1]);
+        this.width = Integer.parseInt(numLine.split(",")[0]);
+        this.height = Integer.parseInt(numLine.split(",")[1]);
 
         // Allocate arrays with length n
-        boardids = new int[m][n];
+        boardids = new int[height][width];
 
-        for (int y = 0; y < m; y++){
+        for (int y = 0; y < height; y++){
             String[] inputArr = scan.nextLine().split(",");
-            for (int x = 0; x < n; x++){
+            for (int x = 0; x < width; x++){
                 boardids[y][x] = Integer.parseInt(inputArr[x]);
             }
         }
@@ -35,5 +37,11 @@ public class CsvReader {
 
     public int[][] getBoardIds() {
         return this.boardids;
+    }
+    public int getWidth() {
+        return this.width;
+    }
+    public int getHeight() {
+        return this.height;
     }
 }

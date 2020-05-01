@@ -32,8 +32,8 @@ public class Board {
 		CsvReader reader = new CsvReader(filename);
 		int[][] boardids = reader.getBoardIds();
 
-		this.width = boardids[0].length;
-		this.height = boardids.length;
+		this.width = reader.getWidth();
+		this.height = reader.getHeight();
 		this.board = new IDrawable[height][width];
 
 		for (int y = 0; y < boardids.length; y++) {
@@ -42,8 +42,6 @@ public class Board {
 
 				if (b == 0) board[y][x] = new Floor();
 				if (b >= 1 && b <=8){
-					System.out.println(y);
-					System.out.println(x);
 					board[y][x] = new Wall(b);
 				}
 				if (b >= 11 && b <= 18){

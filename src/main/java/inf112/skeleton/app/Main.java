@@ -12,6 +12,7 @@ public class Main {
         int s = 100;
         cfg.width = (16 * s);
         cfg.height = (9 * s);
+        cfg.resizable = false;
 
         ProgramCardType.test();
         

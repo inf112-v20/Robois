@@ -26,7 +26,7 @@ public class UIBoard implements IRenderable {
     private HashMap<Integer, TextureRegion> textures;
 
     public UIBoard(int x, int y, int width, int height, Game game, TextureRegion[][] regions, HashMap<Integer, TextureRegion> textures) {
-        this.location = new Location(x, y);
+
         this.width = width;
         this.height = height;
         this.game = game;
@@ -36,9 +36,12 @@ public class UIBoard implements IRenderable {
 
         if (this.width > this.height) {
             this.tileSize = this.width / this.board.getWidth();
+            y += (this.height - this.regions.length*this.tileSize) / 2;
         } else {
             this.tileSize = this.height / this.board.getHeight();
+            x += (this.width - this.regions[0].length*this.tileSize) / 2;
         }
+        this.location = new Location(x, y);
     }
 
     @Override
@@ -61,7 +64,6 @@ public class UIBoard implements IRenderable {
         return this.height;
     }
 
-    //TODO: Make this look not horrible
     @Override
     public void render(Batch batch) {
 

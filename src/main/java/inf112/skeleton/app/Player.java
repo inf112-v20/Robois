@@ -1,7 +1,10 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.objects.Robot;
+import inf112.skeleton.app.objects.tiles.Flag;
 import inf112.skeleton.app.utilities.CardinalDirection;
+
+import java.util.ArrayList;
 
 /**
  * Player
@@ -11,6 +14,8 @@ public class Player {
     private int spawnX;
     private int spawnY;
     private int HP;
+    private boolean destroyed = false;
+    private ArrayList<Integer> flags = new ArrayList<>();
 
     public Player(int x, int y) {
         this.robot = new Robot(x, y, CardinalDirection.NORTH);
@@ -34,4 +39,40 @@ public class Player {
     public int getHP() {
         return this.HP;
     }
+
+    public void takeDamage(int dmg) {
+        this.HP -= dmg;
+        if (HP <= 0) {
+            destroyed = true;
+        }
+    }
+
+    public boolean isDestroyed() { return this.destroyed; }
+
+    public void respawn() {
+        destroyed = false;
+        HP = 9;
+    }
+
+    public ArrayList<Integer> getFlags() {
+        return flags;
+    }
+
+    public void pickupFlag(Flag f) {
+        flags.add(f.getFlagNr());
+        updateRobotSpawn();
+    }
+
+    public void repair(int dmg) {
+        if (HP <= (9-dmg)) {
+            this.HP += dmg;
+        }
+        updateRobotSpawn();
+    }
+
+    private void updateRobotSpawn() {
+        robot.setSpawnX(robot.getX());
+        robot.setSpawnY(robot.getY());
+    }
+
 }

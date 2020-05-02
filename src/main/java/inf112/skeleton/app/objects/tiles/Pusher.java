@@ -12,7 +12,7 @@ import java.util.List;
 public class Pusher implements IDrawable {
     private int id;
     private CardinalDirection pusherWallPosition;
-    private int active = 0; //Indicates what phases the pushers should be active
+    private int active = 0; //Indicates what phases the pushers should be active. 0 for even rounds, 1 for odd.
 
     public Pusher(int type) {
         switch (type) {

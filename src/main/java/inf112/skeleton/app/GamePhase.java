@@ -1,14 +1,12 @@
 package inf112.skeleton.app;
 
+import java.util.Arrays;
 import java.util.List;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
-import inf112.skeleton.app.objects.tiles.CBelt;
-import inf112.skeleton.app.objects.tiles.FCBelt;
-import inf112.skeleton.app.objects.tiles.Gear;
-import inf112.skeleton.app.objects.tiles.Pusher;
+import inf112.skeleton.app.objects.tiles.*;
 import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
@@ -92,6 +90,33 @@ public class GamePhase {
         if (tile instanceof Gear) {
             Gear gear = (Gear) tile;
             GameMovement.rotate(gear.getRotation(), robot);
+        }
+
+        if (tile instanceof Flag) {
+            Flag f = (Flag) tile;
+            int flagNr = f.getFlagNr();
+            switch (flagNr) {
+                case (1):
+                    if (p.getFlags().isEmpty()) {
+                        p.pickupFlag(f);
+                    }
+                    break;
+                case (2):
+                    if (p.getFlags().contains(1)) {
+                        p.pickupFlag(f);
+                    }
+                    break;
+                case (3):
+                    if (p.getFlags().containsAll(Arrays.asList(1,2))) {
+                        p.pickupFlag(f);
+                    }
+                    break;
+                case (4):
+                    if (p.getFlags().containsAll(Arrays.asList(1,2,3))) {
+                        p.pickupFlag(f);
+                    }
+                    break;
+            }
         }
     }
 }

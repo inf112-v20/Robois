@@ -60,6 +60,24 @@ Jens: Legge inn riktig tiles til spawn-området. Legge til noen Pushers på bret
 
 ---
 
+### **Lørdag** | 02-05 (Jens, Kasper, Thomas)
+
+**Fra forrige gang:**  
+Siden vi tok møtet dagen etterpå, ble ingenting gjort i mellopmtiden.
+
+**På møtet:**  
+Thomas & Kasper: Implementerte "Hand" klassen, hvor en spiller velger kortene sine, og har implementert bakgrunn til spillbrettet.
+Lagde informationDisplay UI klassen som kan vise informasjon til spilleren gjennom tekst.  
+Jens: Begynte å implemtere lasere. Disse oppfører seg nå som vegger, men gjør ikke skade enda.  
+Implementerte flag. Flag kan nå plukkes opp, men bare i riktig rekkefølge. Når man plukker opp et flag
+vil man endre respawn-location til der man plukket opp flagget.
+Player-klassen har nå flere funksjoner for å behandle skade, spawn og flag.
+
+**Til neste gang:**  
+Jens: Legge inn riktig tiles til spawn-området. Legge til noen Pushers på brettet.
+
+---
+
 ## Manuelle tester
 
 ### Robot Conveyor Belt Movement

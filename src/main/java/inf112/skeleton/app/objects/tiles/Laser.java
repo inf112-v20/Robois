@@ -45,6 +45,8 @@ public class Laser implements IDrawable {
                     beamid = 111; } 
                 else { beamid = 114; }
                 break;
+            default:
+                break;
         }
         this.id = 100 + type;
         this.damage = damage;

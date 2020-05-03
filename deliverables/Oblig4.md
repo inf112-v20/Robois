@@ -63,7 +63,7 @@ Jens: Legge inn riktig tiles til spawn-området. Legge til noen Pushers på bret
 ### **Lørdag** | 02-05 (Jens, Kasper, Thomas)
 
 **Fra forrige gang:**  
-Siden vi tok møtet dagen etterpå, ble ingenting gjort i mellopmtiden.
+Siden vi tok møtet dagen etterpå, ble ingenting gjort i mellomtiden.
 
 **På møtet:**  
 Thomas & Kasper: Implementerte "Hand" klassen, hvor en spiller velger kortene sine, og har implementert bakgrunn til spillbrettet.
@@ -73,8 +73,17 @@ Implementerte flag. Flag kan nå plukkes opp, men bare i riktig rekkefølge. Nå
 vil man endre respawn-location til der man plukket opp flagget.
 Player-klassen har nå flere funksjoner for å behandle skade, spawn og flag.
 
-**Til neste gang:**  
-Jens: Legge inn riktig tiles til spawn-området. Legge til noen Pushers på brettet.
+---
+
+### **Søndag** | 03-05 (Jens, Kasper, Thomas)
+
+**Fra forrige gang:**  
+Siden vi tok møtet dagen etterpå, ble ingenting gjort i mellomtiden.
+
+**På møtet:**  
+Thomas: Implementerte en inputAdapter for å styre muse-klikk. Implementerte velging av kort fra de 9 kortene du kunne velge mellom til kortene som roboten skal bruke. Endret på hvordan begge hendene ble rendret.  
+Jens & Kasper: Implementerte lasere, slik at roboter kan ta skade av dem og at de stopper når de treffer noe. Roboter kan nå også dø av å ta 9 skade og respawner da på korrekt spawn-location med 9 hp igjen.  
+Fasehåndteringen er delt inn i de forskjellige delene, slik at beveglse skjer før lasere skytes og flagg, repairs og backup skjer etter lasere er fyrt av.
 
 ---
 

@@ -8,12 +8,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import inf112.skeleton.app.objects.abstracts.Location;
 
 public class Panel implements IRenderable {
-    Location location;
-    int width;
-    int height;
-    boolean canClick = true;
-    boolean canRender = true;
-    List<IRenderable> objects;
+    private Location location;
+    private int width;
+    private int height;
+    private boolean canClick = true;
+    private boolean canRender = true;
+    private List<IRenderable> objects;
 
     public Panel(int x, int y, int width, int height, List<IRenderable> objects) {
         location = new Location(x, y);    

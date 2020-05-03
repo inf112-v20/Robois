@@ -79,7 +79,7 @@ public class UIBoard implements IRenderable {
                 renderTile(batch, y, x, ym, false);
             }
         }
-
+        
         renderRobot(batch);
     }
 

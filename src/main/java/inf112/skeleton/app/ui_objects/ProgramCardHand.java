@@ -1,21 +1,15 @@
 package inf112.skeleton.app.ui_objects;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import inf112.skeleton.app.Game;
 
 public class ProgramCardHand implements IRenderable {
     private int x, y, width, height, maxCapasity;
-    boolean canClick = true;
-    boolean canRender = true;
-    Game game;
-    ProgramCard[] hand;
-    ProgramCardLocked lockedHand;
+    private boolean canClick = true;
+    private boolean canRender = true;
+    private ProgramCard[] hand;
+    private ProgramCardLocked lockedHand;
     
 
     public ProgramCardHand(int x, int y, int width, int height, Game game, ProgramCardLocked lockedHand) {
@@ -23,7 +17,6 @@ public class ProgramCardHand implements IRenderable {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.game = game;
         this.lockedHand = lockedHand;
         this.maxCapasity = game.getCurrentPlayer().getHP();
         this.hand = new ProgramCard[9];
@@ -68,7 +61,7 @@ public class ProgramCardHand implements IRenderable {
         for (int i = 0; i < hand.length; i++) {
             hand[i] = null;
         }
-        for (int x = 0; x < 9; x++){
+        for (int x = 0; x < maxCapasity; x++){
             ProgramCardType t = ProgramCardType.getRandomCard();
             
             addCard(new ProgramCard(1, 1, this.width / 3, ProgramCardType.getRandomInt(t), t));

@@ -8,14 +8,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import inf112.skeleton.app.utilities.TextureReader;
 
 public class ProgramCard implements IRenderable {
-    int x, y, width, height, priority;
-    ProgramCardType type;
+    // Create getters and setters
+    public int x, y, width, height, priority;
+    private ProgramCardType type;
 
-    boolean canClick = true;
-    boolean canRender = true;
+    private boolean canClick = true;
+    private boolean canRender = true;
 
-    TextureRegion r;
-    BitmapFont priorityFont;
+    private TextureRegion r;
+    private BitmapFont priorityFont;
 
     public ProgramCard(int x, int y, int width, int priority, ProgramCardType type) {
         this.x = x;
@@ -67,14 +68,12 @@ public class ProgramCard implements IRenderable {
 
     @Override
     public boolean click(int x, int y) {
-        if (x >= getX() && x < getX() + getWidth()) {
-            if (y >= getY() && y < getY() + getHeight()) {
-                System.out.println("card");
+        if (x >= getX() && x < getX() + getWidth() && y >= getY() && y < getY() + getHeight()) {
                 if (canClick()){
                     System.out.println(String.format("Clicked card at x:%d y:%d", x, y));
                     return true;
                 }
-            }
+            
         }
         return false;
     }

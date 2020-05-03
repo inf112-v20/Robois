@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class ProgramCardLocked implements IRenderable {
     private int x, y, width, height;
-    boolean canClick = true;
-    boolean canRender = true;
-    ProgramCard[] lockedCards;
+    private boolean canClick = true;
+    private boolean canRender = true;
+    private ProgramCard[] lockedCards;
 
-    ProgramCardHand hand;
+    private ProgramCardHand hand;
 
     public ProgramCardLocked(int x, int y, int width, int height) {
         this.x = x;

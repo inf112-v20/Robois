@@ -30,7 +30,6 @@ public class Game extends InputAdapter implements ApplicationListener {
     private List<ProgramCard> lockedProgramCards;
 
     private GameRendering gameRendering;
-    private GameInput gameInput;
 
     @Override
     public void create() {
@@ -55,8 +54,8 @@ public class Game extends InputAdapter implements ApplicationListener {
         }
 
         this.gameRendering = new GameRendering(this);
-        this.gameInput = new GameInput(this, this.gameRendering);
-        Gdx.input.setInputProcessor(this.gameInput);
+        GameInput gameInput = new GameInput(this, this.gameRendering);
+        Gdx.input.setInputProcessor(gameInput);
     }
 
     @Override

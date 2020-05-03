@@ -33,7 +33,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public void create() {
         try {
-            board = new Board("b1.csv");
+            board = new Board("b_re.csv");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

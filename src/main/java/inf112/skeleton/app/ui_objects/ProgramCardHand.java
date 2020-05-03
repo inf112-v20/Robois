@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import inf112.skeleton.app.Game;
 
 public class ProgramCardHand implements IRenderable {
-    private int x, y, width, height, maxCapasity;
+    private int x, y, width, height;
     private boolean canClick = true;
     private boolean canRender = true;
     private ProgramCard[] hand;
     private ProgramCardLocked lockedHand;
+    private Game game;
     
 
     public ProgramCardHand(int x, int y, int width, int height, Game game, ProgramCardLocked lockedHand) {
@@ -18,8 +19,8 @@ public class ProgramCardHand implements IRenderable {
         this.width = width;
         this.height = height;
         this.lockedHand = lockedHand;
-        this.maxCapasity = game.getCurrentPlayer().getHP();
         this.hand = new ProgramCard[9];
+        this.game = game;
         getNewHand();
         reDraw();
     }
@@ -56,16 +57,20 @@ public class ProgramCardHand implements IRenderable {
             hand[i].width = this.width / 3;
         }
     }
+    private int getMaxCapasity() {
+        return game.getCurrentPlayer().getHP();
+    }
 
     public void getNewHand() {
         for (int i = 0; i < hand.length; i++) {
             hand[i] = null;
         }
-        for (int x = 0; x < maxCapasity; x++){
+        for (int x = 0; x < getMaxCapasity(); x++){
             ProgramCardType t = ProgramCardType.getRandomCard();
             
             addCard(new ProgramCard(1, 1, this.width / 3, ProgramCardType.getRandomInt(t), t));
         }
+        reDraw();
     }
 
     @Override

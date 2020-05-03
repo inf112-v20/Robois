@@ -14,7 +14,6 @@ import inf112.skeleton.app.objects.abstracts.Location;
 import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.objects.tiles.Laser;
-import inf112.skeleton.app.ui_objects.ProgramCard;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
@@ -29,15 +28,12 @@ public class Game extends InputAdapter implements ApplicationListener {
     private int r = 0;
     private int phaseNr = 0;
 
-    private List<ProgramCard> lockedProgramCards;
-
     private GameRendering gameRendering;
 
     @Override
     public void create() {
-        Gdx.input.setInputProcessor(this);
         try {
-            board = new Board("b_re.csv");
+            board = new Board("b1.csv");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -166,9 +162,6 @@ public class Game extends InputAdapter implements ApplicationListener {
      */
     public List<Laser> getLasers() {
         return this.lasers;
-    }
-    public List<ProgramCard> getLockedProgramCards() {
-        return this.lockedProgramCards;
     }
 
 	  public Player getCurrentPlayer() {

@@ -25,10 +25,14 @@ public class Pusher implements IDrawable {
             case 7: case 8:
                 pusherWallPosition = CardinalDirection.EAST;
                 break;
+            default:
+                break;
         }
         switch (type) {
             case 1: case 3: case 5: case 7:
                 active = 1;
+                break;
+            default:
                 break;
         }
         this.id = 130 + type;

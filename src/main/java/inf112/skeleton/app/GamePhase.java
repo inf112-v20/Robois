@@ -8,7 +8,14 @@ import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.abstracts.Location;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
-import inf112.skeleton.app.objects.tiles.*;
+import inf112.skeleton.app.objects.tiles.Beam;
+import inf112.skeleton.app.objects.tiles.CBelt;
+import inf112.skeleton.app.objects.tiles.FCBelt;
+import inf112.skeleton.app.objects.tiles.Flag;
+import inf112.skeleton.app.objects.tiles.Gear;
+import inf112.skeleton.app.objects.tiles.Laser;
+import inf112.skeleton.app.objects.tiles.Pusher;
+import inf112.skeleton.app.objects.tiles.Wrench;
 import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
@@ -129,13 +136,15 @@ public class GamePhase {
                         p.pickupFlag(f);
                     }
                     break;
+                default:
+                    break;
             }
         }
         if (tile instanceof Wrench) {
             Wrench wrench = (Wrench) tile;
             p.repair(wrench.getDamage());
         }
-        if (p.isDestroyed() == true) {
+        if (p.isDestroyed()) {
             p.respawn();
         }
     }

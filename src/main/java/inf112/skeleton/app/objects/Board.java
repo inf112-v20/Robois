@@ -123,10 +123,10 @@ public class Board {
 			return !w.getWallPositions().contains(dir);
 		}else if (getTile(x, y) instanceof Pusher) {
 			Pusher p = (Pusher) getTile(x, y);
-			return !(p.getPusherWallPosition() == dir);
+			return (p.getPusherWallPosition() != dir);
 		}else if (getTile(x, y) instanceof Laser) {
 			Laser l = (Laser) getTile(x, y);
-			return !(l.getLaserWallPosition() == dir);
+			return (l.getLaserWallPosition() != dir);
 		}
 
 		Location loc = CardinalityUtility.getNextTile(x, y, dir);
@@ -142,10 +142,10 @@ public class Board {
 			return !w.getWallPositions().contains(CardinalityUtility.getOpposite(dir));
 		}else if (getTile(x, y) instanceof Pusher) {
 			Pusher p = (Pusher) getTile(x, y);
-			return !(p.getPusherWallPosition() == CardinalityUtility.getOpposite(dir));
+			return (p.getPusherWallPosition() != CardinalityUtility.getOpposite(dir));
 		}else if (getTile(x, y) instanceof Laser) {
 			Laser l = (Laser) getTile(x, y);
-			return !(l.getLaserWallPosition() == CardinalityUtility.getOpposite(dir));
+			return (l.getLaserWallPosition() != CardinalityUtility.getOpposite(dir));
 		}
 		return true;
 	}

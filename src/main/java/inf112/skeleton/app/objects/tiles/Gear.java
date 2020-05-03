@@ -17,6 +17,9 @@ public class Gear implements IDrawable {
                 break;
             case 2:
                 rotation = RelativeDirection.LEFT;
+                break;
+            default:
+                break;
         }
         this.id = 120 + type;
     }

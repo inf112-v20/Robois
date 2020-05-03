@@ -17,7 +17,6 @@ import inf112.skeleton.app.ui_objects.InformationDisplay;
 import inf112.skeleton.app.ui_objects.Panel;
 import inf112.skeleton.app.ui_objects.ProgramCardHand;
 import inf112.skeleton.app.ui_objects.ProgramCardLocked;
-import inf112.skeleton.app.ui_objects.ProgramCardType;
 import inf112.skeleton.app.ui_objects.UIBoard;
 import inf112.skeleton.app.utilities.TextureReader;
 

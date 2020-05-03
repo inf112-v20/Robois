@@ -91,4 +91,8 @@ public class Robot implements IDrawable, IMovable {
     public int getSpawnY() {
         return this.spawnY;
     }
+
+    public void setSpawnX( int x ) { this.spawnX = x; }
+
+    public void setSpawnY( int y ) { this.spawnY = y; }
 }

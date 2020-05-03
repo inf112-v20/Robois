@@ -12,6 +12,8 @@ public class Flag implements IDrawable {
         this.id = 140 + type;
     }
 
+    public Integer getFlagNr() { return (this.id - 140); }
+
     @Override
     public Integer getImageId() {
         return this.id;

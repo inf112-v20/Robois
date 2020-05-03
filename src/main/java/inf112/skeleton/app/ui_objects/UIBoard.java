@@ -22,6 +22,7 @@ public class UIBoard implements IRenderable {
     private Board board;
     private Game game;
     private boolean canClick = true;
+    private boolean canRender = true;
 
     private TextureRegion[][] regions;
     private HashMap<Integer, TextureRegion> textures;
@@ -67,7 +68,7 @@ public class UIBoard implements IRenderable {
 
     @Override
     public void render(Batch batch) {
-
+        if (!canRender()) return;
         //Board
         for (int y = 0; y < this.regions.length; y++) {
             for (int x = 0; x < this.regions[y].length; x++) {
@@ -130,5 +131,16 @@ public class UIBoard implements IRenderable {
     @Override
     public void setCanClick(boolean b) {
         this.canClick = b;
+    }
+
+    
+    @Override
+    public boolean canRender() {
+        return this.canRender;
+    }
+
+    @Override
+    public void setCanRender(boolean r) {
+        this.canRender = r;
     }
 }

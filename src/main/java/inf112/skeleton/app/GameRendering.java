@@ -67,15 +67,7 @@ public class GameRendering {
         ProgramCardHand h = new ProgramCardHand(1000, 300, 300, 500, game, l);
         mainGamePanel.addObject(h);
 
-        h.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
-        h.addCard(ProgramCardType.MOVE3, ProgramCardType.getRandomInt(ProgramCardType.MOVE3));
-        h.addCard(ProgramCardType.ROTATE_RIGTH, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_RIGTH));
-        h.addCard(ProgramCardType.ROTATE_LEFT, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_LEFT));
-        h.addCard(ProgramCardType.ROTATE_LEFT, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_LEFT));
-        h.addCard(ProgramCardType.ROTATE_RIGTH, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_RIGTH));
-        h.addCard(ProgramCardType.ROTATE_LEFT, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_LEFT));
-        h.addCard(ProgramCardType.ROTATE_RIGTH, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_RIGTH));
-        h.addCard(ProgramCardType.ROTATE_LEFT, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_LEFT));
+        l.setHand(h);
     }
 
     /**
@@ -99,7 +91,7 @@ public class GameRendering {
         this.batch.end();
 
         this.batch.begin();
-        this.scenes.get(currentScene).render(this.batch);
+        getCurrentPanel().render(this.batch);
         this.batch.end();
 
         this.batch.begin();
@@ -127,5 +119,9 @@ public class GameRendering {
 
     public void onMouseDown(int x, int y){
         this.scenes.get(currentScene).click(x, y);
+    }
+
+    public Panel getCurrentPanel() {
+        return this.scenes.get(currentScene);
     }
 }

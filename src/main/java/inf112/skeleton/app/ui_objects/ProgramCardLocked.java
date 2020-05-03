@@ -1,39 +1,57 @@
 package inf112.skeleton.app.ui_objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class ProgramCardLocked implements IRenderable {
     private int x, y, width, height;
-    private boolean canClick = true;
-    List<ProgramCard> lockedCards;
+    boolean canClick = true;
+    boolean canRender = true;
+    ProgramCard[] lockedCards;
+
+    ProgramCardHand hand;
 
     public ProgramCardLocked(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        lockedCards = new ArrayList<>();
+        lockedCards = new ProgramCard[5];
     }
 
-    public void addCard(ProgramCardType type, int priority) {
-        try {
-            if (!canAddCard()) throw new IndexOutOfBoundsException();
-            ProgramCard c = new ProgramCard(this.x + (this.width / 5)*this.lockedCards.size() + (5*this.lockedCards.size()), this.y, this.width / 5, priority, type);
-            this.lockedCards.add(c);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("You have locked in all your cards.");
+    public void addCard(ProgramCard c) {
+        for (int x = 0; x < lockedCards.length; x++) { 
+            if (lockedCards[x] == null){
+                lockedCards[x] = c;
+                return;
+            }
+        }
+    }
+    public void removeCard(ProgramCard c) {
+        for (int i = 0; i < this.lockedCards.length; i++){ 
+            if (this.lockedCards[i] == c) {
+                this.lockedCards[i] = null;
+            }
+        }
+    }
+    
+    public void reDraw() {
+        for (int i = 0; i < lockedCards.length; i++) {
+            if (lockedCards[i] == null) continue;
+            lockedCards[i].x = this.x + (this.width / 5)*i + (5*i);
+            lockedCards[i].y = this.y;
+            lockedCards[i].width = this.width / 5;
         }
     }
 
-    public void addCard(ProgramCard card) {
-        addCard(card.getType(), card.getPriority());
+    public void setHand(ProgramCardHand hand) {
+        this.hand = hand;
     }
 
     public boolean canAddCard() {
-        return this.lockedCards.size() < 5;
+        for (int x = 0; x < lockedCards.length; x++) {
+            if (lockedCards[x] == null) return true;
+        }
+        return false;
     }
 
     @Override
@@ -58,14 +76,24 @@ public class ProgramCardLocked implements IRenderable {
 
     @Override
     public void render(Batch batch) {
-        for (int x = 0; x < this.lockedCards.size(); x++){
-            this.lockedCards.get(x).render(batch);
+        if (!canRender()) return;
+        for (int x = 0; x < this.lockedCards.length; x++){
+            if (this.lockedCards[x] == null) continue;
+            this.lockedCards[x].render(batch);
         }
     }
 
     @Override
     public boolean click(int x, int y) {
-        return true;
+        for (int i = 0; i < this.lockedCards.length; i++){
+            if (this.lockedCards[i] != null && this.lockedCards[i].click(x, y)) {
+                this.hand.addCard(this.lockedCards[i]);
+                removeCard(this.lockedCards[i]);
+                this.hand.reDraw();
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -76,6 +104,17 @@ public class ProgramCardLocked implements IRenderable {
     @Override
     public void setCanClick(boolean b) {
         this.canClick = b;
+    }
+
+    
+    @Override
+    public boolean canRender() {
+        return this.canRender;
+    }
+
+    @Override
+    public void setCanRender(boolean r) {
+        this.canRender = r;
     }
 
 }

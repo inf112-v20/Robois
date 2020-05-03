@@ -12,6 +12,7 @@ public class Panel implements IRenderable {
     int width;
     int height;
     boolean canClick = true;
+    boolean canRender = true;
     List<IRenderable> objects;
 
     public Panel(int x, int y, int width, int height, List<IRenderable> objects) {
@@ -51,6 +52,7 @@ public class Panel implements IRenderable {
 
     @Override
     public void render(Batch batch) {
+        if (!canRender()) return;
         for (IRenderable r : this.getObjects()){
             r.render(batch);
         }
@@ -72,5 +74,15 @@ public class Panel implements IRenderable {
     @Override
     public void setCanClick(boolean b) {
         this.canClick = b;
+    }
+
+    @Override
+    public boolean canRender() {
+        return this.canRender;
+    }
+
+    @Override
+    public void setCanRender(boolean r) {
+        this.canRender = r;
     }
 }

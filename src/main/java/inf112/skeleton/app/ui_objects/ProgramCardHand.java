@@ -1,6 +1,8 @@
 package inf112.skeleton.app.ui_objects;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,9 +11,10 @@ import inf112.skeleton.app.Game;
 
 public class ProgramCardHand implements IRenderable {
     private int x, y, width, height, maxCapasity;
-    private boolean canClick = true;
+    boolean canClick = true;
+    boolean canRender = true;
     Game game;
-    List<ProgramCard> hand;
+    ProgramCard[] hand;
     ProgramCardLocked lockedHand;
     
 
@@ -23,25 +26,52 @@ public class ProgramCardHand implements IRenderable {
         this.game = game;
         this.lockedHand = lockedHand;
         this.maxCapasity = game.getCurrentPlayer().getHP();
-        this.hand = new ArrayList<>();
+        this.hand = new ProgramCard[9];
+        getNewHand();
+        reDraw();
     }
 
-    public void addCard(ProgramCardType type, int priority) {
-        try {
-            if (this.hand.size() >= this.maxCapasity) throw new IndexOutOfBoundsException();
-            int cardX = this.x + (this.width / 3)*(Math.floorMod(this.hand.size(), 3)) + (5*Math.floorMod(this.hand.size(), 3));
-            
+    public void addCard(ProgramCard c) {
+        for (int x = 8; x >= 0; x--) { 
+            if (hand[x] == null){
+                hand[x] = c;
+                return;
+            }
+        }
+    }
+
+    public void removeCard(ProgramCard c) {
+        for (int i = 0; i < this.hand.length; i++){ 
+            if (this.hand[i] == c) {
+                this.hand[i] = null;
+            }
+        }
+    }
+
+    public void reDraw() {
+        for (int i = 0; i < hand.length; i++) {
+            if (hand[i] == null) continue;
+            int cardX = this.x + (this.width / 3)*(Math.floorMod(i, 3)) + (5*Math.floorMod(i, 3));
             int cardY = this.y;
-            if (this.hand.size() >= 6) {
+            if (i >= 6) {
                 cardY += 310;
-            } else if (this.hand.size() > 2) {
+            } else if (i > 2) {
                 cardY += 155;
             }
+            hand[i].x = cardX;
+            hand[i].y = cardY;
+            hand[i].width = this.width / 3;
+        }
+    }
 
-            ProgramCard c = new ProgramCard(cardX, cardY, this.width / 3, priority, type);
-            this.hand.add(c);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("You have locked in all your cards.");
+    public void getNewHand() {
+        for (int i = 0; i < hand.length; i++) {
+            hand[i] = null;
+        }
+        for (int x = 0; x < 9; x++){
+            ProgramCardType t = ProgramCardType.getRandomCard();
+            
+            addCard(new ProgramCard(1, 1, this.width / 3, ProgramCardType.getRandomInt(t), t));
         }
     }
 
@@ -67,18 +97,20 @@ public class ProgramCardHand implements IRenderable {
 
     @Override
     public void render(Batch batch) {
-        for (int x = 0; x < this.hand.size(); x++){
-            this.hand.get(x).render(batch);
+        if (!canRender()) return;
+        for (int x = 0; x < this.hand.length; x++){
+            if (this.hand[x] == null) continue;
+            this.hand[x].render(batch);
         }
     }
 
     @Override
     public boolean click(int x, int y) {
-        for (ProgramCard c : this.hand) {
-            if (c.click(x, y) && this.lockedHand.canAddCard()) {
-                System.out.println("added card");
-                this.lockedHand.addCard(c);
-                this.hand.remove(c);
+        for (int i = 0; i < this.hand.length; i++){
+            if (this.hand[i] != null && this.hand[i].click(x, y) && this.lockedHand.canAddCard()) {
+                this.lockedHand.addCard(this.hand[i]);
+                removeCard(this.hand[i]);
+                this.lockedHand.reDraw();
                 return true;
             }
         }
@@ -93,5 +125,15 @@ public class ProgramCardHand implements IRenderable {
     @Override
     public void setCanClick(boolean b) {
         this.canClick = b;
+    }
+    
+    @Override
+    public boolean canRender() {
+        return this.canRender;
+    }
+
+    @Override
+    public void setCanRender(boolean r) {
+        this.canRender = r;
     }
 }

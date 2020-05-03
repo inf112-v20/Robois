@@ -12,6 +12,7 @@ public class ProgramCard implements IRenderable {
     ProgramCardType type;
 
     boolean canClick = true;
+    boolean canRender = true;
 
     TextureRegion r;
     BitmapFont priorityFont;
@@ -53,6 +54,7 @@ public class ProgramCard implements IRenderable {
 
     @Override
     public void render(Batch batch) {
+        if (!canRender()) return;
         batch.draw(this.r, getX(), getY(), getWidth(), getHeight());
         int startX;
         if (Integer.toString(this.priority).length() > 2) {
@@ -67,6 +69,7 @@ public class ProgramCard implements IRenderable {
     public boolean click(int x, int y) {
         if (x >= getX() && x < getX() + getWidth()) {
             if (y >= getY() && y < getY() + getHeight()) {
+                System.out.println("card");
                 if (canClick()){
                     System.out.println(String.format("Clicked card at x:%d y:%d", x, y));
                     return true;
@@ -91,5 +94,15 @@ public class ProgramCard implements IRenderable {
     }
     public int getPriority(){
         return this.priority;
+    }
+    
+    @Override
+    public boolean canRender() {
+        return this.canRender;
+    }
+
+    @Override
+    public void setCanRender(boolean r) {
+        this.canRender = r;
     }
 }

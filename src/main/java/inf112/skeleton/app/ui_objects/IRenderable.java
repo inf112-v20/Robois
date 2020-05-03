@@ -8,4 +8,6 @@ public interface IRenderable extends IClickable {
     int getWidth();
     int getHeight();
     void render(Batch batch);
+    boolean canRender();
+    void setCanRender(boolean r);
 }

@@ -10,8 +10,9 @@ import inf112.skeleton.app.objects.abstracts.Location;
 public class InformationDisplay implements IRenderable {
     private Location location;
     private int width;
-    private int height;
+    private int height;    
     private boolean canClick = true;
+    private boolean canRender = true;
     private Game game;
 
     private BitmapFont font;
@@ -50,6 +51,7 @@ public class InformationDisplay implements IRenderable {
 
     @Override
     public void render(Batch batch) {
+        if (!canRender()) return;
         String phase = String.format("Current Phase: %d", game.getPhase());
         font.draw(batch, phase, getX(), getY());
     }
@@ -69,4 +71,13 @@ public class InformationDisplay implements IRenderable {
         this.canClick = b;
     }
     
+    @Override
+    public boolean canRender() {
+        return this.canRender;
+    }
+
+    @Override
+    public void setCanRender(boolean r) {
+        this.canRender = r;
+    }
 }

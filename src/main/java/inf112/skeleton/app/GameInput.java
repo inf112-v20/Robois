@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
+import inf112.skeleton.app.ui_objects.IRenderable;
+import inf112.skeleton.app.ui_objects.ProgramCardHand;
 import inf112.skeleton.app.utilities.RelativeDirection;
 
 public class GameInput implements InputProcessor{
@@ -39,6 +41,14 @@ public class GameInput implements InputProcessor{
         }
         if (keyCode == Input.Keys.SPACE) {
             GamePhase.runPhaseChange(game);
+        }
+        if (keyCode == Input.Keys.O) {
+            for (IRenderable r : this.gameRendering.getCurrentPanel().getObjects()) {
+                if (r instanceof ProgramCardHand) {
+                    ProgramCardHand p = (ProgramCardHand) r;
+                    p.getNewHand();
+                }
+            }
         }
         return false;
     }

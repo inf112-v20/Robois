@@ -3,9 +3,6 @@ package inf112.skeleton.app.objects.tiles;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.utilities.CardinalDirection;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Gear
  */

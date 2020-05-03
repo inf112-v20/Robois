@@ -1,10 +1,12 @@
 package inf112.skeleton.app;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
+import inf112.skeleton.app.objects.abstracts.Location;
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.objects.tiles.*;
 import inf112.skeleton.app.utilities.RelativeDirection;
@@ -19,13 +21,19 @@ public class GamePhase {
         System.out.println("Running phase nr: " + game.getPhase());
 
         List<Player> players = game.getPlayers();
+        List<Laser> lasers = game.getLasers();
 
         for (Player p : players) {
             doFCBeltPhaseTurn(p, game.getBoard(), game);
         }
         for (Player p : players) {
-            doPhaseTurn(p, game.getBoard(), game);
+            doMovementPhaseTurn(p, game.getBoard(), game);
         }
+        doLaserPhaseTurn(players, lasers, game.getBoard(), game);
+        for (Player p : players) {
+            doRecoverPhaseTurn(p, game.getBoard(), game);
+        }
+        
     }
 
     /**
@@ -59,7 +67,7 @@ public class GamePhase {
      * 
      * @param p a player
      */
-    private static void doPhaseTurn(Player p, Board board, Game game) {
+    private static void doMovementPhaseTurn(Player p, Board board, Game game) {
         Robot robot = p.getRobot();
         IDrawable tile = board.getTile(robot.getX(), robot.getY());
 
@@ -91,6 +99,11 @@ public class GamePhase {
             Gear gear = (Gear) tile;
             GameMovement.rotate(gear.getRotation(), robot);
         }
+    }
+
+    public static void doRecoverPhaseTurn (Player p, Board board, Game game) {
+        Robot robot = p.getRobot();
+        IDrawable tile = board.getTile(robot.getX(), robot.getY());
 
         if (tile instanceof Flag) {
             Flag f = (Flag) tile;
@@ -118,5 +131,52 @@ public class GamePhase {
                     break;
             }
         }
+        if (tile instanceof Wrench) {
+            Wrench wrench = (Wrench) tile;
+            p.repair(wrench.getDamage());
+        }
+        if (p.isDestroyed() == true) {
+            p.respawn();
+        }
     }
+
+    private static void doLaserPhaseTurn(List<Player> players, List<Laser> lasers, Board board, Game game) {
+        List<Beam> beams = new ArrayList<>();
+        for (Laser l : lasers) {
+            beams.add(new Beam(l.getBeamid(), l.getDamage(), l.getX(), l.getY())); // A laser will always fire its first beam.
+            Location prevTile = CardinalityUtility.getNextTile(l.getX(), l.getY(), CardinalityUtility.getOpposite(l.getLaserDirection()));
+            if (game.getMovable(prevTile.getX(), prevTile.getY(), l.getLaserDirection()) == null) {
+            getNextBeam(l, beams, board, game);
+            }
+        }
+
+        /* List<String> locations = new ArrayList<>();
+            for (Beam b : beams) {
+                locations.add(Integer.toString(b.getX()) + "." + Integer.toString(b.getY()));
+            }
+        System.out.println(locations); */
+
+        for (Player p : players) {
+            Robot robot = p.getRobot();
+            for (Beam b : beams) {
+                if (robot.getX() == b.getX() && robot.getY() == b.getY()) {
+                    p.takeDamage(b.getDamage());
+                }
+            }
+        }
+    }
+
+    private static List<Beam> getNextBeam(Laser l, List<Beam> beams, Board board, Game game) {
+        Beam lastBeam = beams.get(beams.size()-1);
+        if (board.canGo(lastBeam.getX(), lastBeam.getY(), l.getLaserDirection())) {
+            Location nextTile = CardinalityUtility.getNextTile(lastBeam.getX(), lastBeam.getY(), l.getLaserDirection());
+            beams.add(new Beam(l.getBeamid(), l.getDamage(), nextTile.getX(), nextTile.getY()));
+            if (game.getMovable(lastBeam.getX(), lastBeam.getY(), l.getLaserDirection()) == null) {
+                getNextBeam(l, beams, board, game);
+                return null;
+            }
+        }
+        return beams;
+    }
+    
 }

@@ -13,6 +13,7 @@ import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.abstracts.Location;
 import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.objects.tiles.Spawn;
+import inf112.skeleton.app.objects.tiles.Laser;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
@@ -22,6 +23,7 @@ import inf112.skeleton.app.utilities.CardinalityUtility;
 public class Game extends InputAdapter implements ApplicationListener {
     private Board board;
     private List<Player> players = new ArrayList<>();
+    private List<Laser> lasers = new ArrayList<>();
     private int r = 0;
     private int phaseNr = 0;
 
@@ -45,6 +47,10 @@ public class Game extends InputAdapter implements ApplicationListener {
                 if (board.getTile(x, y) instanceof Spawn) {
                     players.add(new Player(x, y));
                 }
+                if (board.getTile(x, y) instanceof Laser) {
+                    lasers.add((Laser) board.getTile(x, y));
+                }
+
             }
         }
     }
@@ -153,5 +159,14 @@ public class Game extends InputAdapter implements ApplicationListener {
      */
     public List<Player> getPlayers() {
         return this.players;
+    }
+
+    /**
+     * List of lasers
+     * 
+     * @return list of lasers.
+     */
+    public List<Laser> getLasers() {
+        return this.lasers;
     }
 }

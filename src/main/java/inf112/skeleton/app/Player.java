@@ -43,13 +43,18 @@ public class Player {
     public void takeDamage(int dmg) {
         this.HP -= dmg;
         if (HP <= 0) {
-            destroyed = true;
+            this.destroyed = true;
+            HP = 0;
         }
     }
 
-    public boolean isDestroyed() { return this.destroyed; }
+    public boolean isDestroyed() { 
+        return this.destroyed;
+    }
 
     public void respawn() {
+        robot.setX(robot.getSpawnX());
+        robot.setY(robot.getSpawnY());
         destroyed = false;
         HP = 9;
     }
@@ -66,6 +71,8 @@ public class Player {
     public void repair(int dmg) {
         if (HP <= (9-dmg)) {
             this.HP += dmg;
+        } else {
+            HP = 9;
         }
         updateRobotSpawn();
     }

@@ -42,4 +42,26 @@ public enum ProgramCardType {
         System.out.println(getRandomInt(MOVE1));
         System.out.println(getRandomInt(MOVE1));
     }
+
+    public static ProgramCardType getRandomCard() {
+        int c = (int)(Math.random() * (7 - 1 + 1) + 1);
+        switch (c) {
+            case 1:
+                return MOVE1;
+            case 2:
+                return MOVE2;
+            case 3:
+                return MOVE3;
+            case 4:
+                return BACKUP;
+            case 5:
+                return ROTATE_LEFT;
+            case 6:
+                return ROTATE_RIGTH;
+            case 7:
+                return UTURN;
+            default:
+                return null;
+        }
+    }
 }

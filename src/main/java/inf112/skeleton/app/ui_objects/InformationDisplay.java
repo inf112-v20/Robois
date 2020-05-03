@@ -1,33 +1,32 @@
 package inf112.skeleton.app.ui_objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+import inf112.skeleton.app.Game;
 import inf112.skeleton.app.objects.abstracts.Location;
 
-public class Panel implements IRenderable {
+public class InformationDisplay implements IRenderable {
     private Location location;
     private int width;
-    private int height;
+    private int height;    
     private boolean canClick = true;
     private boolean canRender = true;
-    private List<IRenderable> objects;
+    private Game game;
 
-    public Panel(int x, int y, int width, int height, List<IRenderable> objects) {
+    private BitmapFont font;
+
+    public InformationDisplay(int x, int y, int width, int height, Game game) {
         location = new Location(x, y);    
         this.width = width;
         this.height = height;
-        if (objects != null) this.objects = objects;
-        else this.objects = new ArrayList<>();
-    }
 
-    public void addObject(IRenderable r) {
-        this.objects.add(r);
-    }
-    public List<IRenderable> getObjects() {
-        return this.objects;
+        this.game = game;
+
+        this.font = new BitmapFont();
+        this.font.setColor(Color.GREEN);
+        this.font.getData().setScale(1.5f);
     }
 
     @Override
@@ -53,16 +52,12 @@ public class Panel implements IRenderable {
     @Override
     public void render(Batch batch) {
         if (!canRender()) return;
-        for (IRenderable r : this.getObjects()){
-            r.render(batch);
-        }
+        String phase = String.format("Current Phase: %d", game.getPhase());
+        font.draw(batch, phase, getX(), getY());
     }
 
     @Override
     public boolean click(int x, int y) {
-        for (IClickable c : this.getObjects()) {
-           c.click(x, y);
-        }
         return true;
     }
 
@@ -75,7 +70,7 @@ public class Panel implements IRenderable {
     public void setCanClick(boolean b) {
         this.canClick = b;
     }
-
+    
     @Override
     public boolean canRender() {
         return this.canRender;

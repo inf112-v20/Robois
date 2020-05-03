@@ -12,8 +12,7 @@ public class Main {
         int s = 100;
         cfg.width = (16 * s);
         cfg.height = (9 * s);
-
-        ProgramCardType.test();
+        cfg.resizable = false;
         
         new LwjglApplication(new Game(), cfg);
     }

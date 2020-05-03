@@ -8,11 +8,14 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
+import inf112.skeleton.app.ui_objects.InformationDisplay;
 import inf112.skeleton.app.ui_objects.Panel;
+import inf112.skeleton.app.ui_objects.ProgramCardHand;
 import inf112.skeleton.app.ui_objects.ProgramCardLocked;
 import inf112.skeleton.app.ui_objects.ProgramCardType;
 import inf112.skeleton.app.ui_objects.UIBoard;
@@ -26,13 +29,20 @@ public class GameRendering {
     private TextureRegion[][] regions;
     private HashMap<Integer, TextureRegion> textures;
 
-    Panel mainGamePanel;
+    private HashMap<Integer, Panel> scenes;
+    private Integer currentScene;
+
+    private TextureRegion bg;
+    private TextureRegion frame;
 
     public GameRendering(Game game) {
         this.board = game.getBoard();
         this.batch = new SpriteBatch();
         this.font = new BitmapFont();
         this.font.setColor(Color.RED);
+        this.scenes = new HashMap<>();
+        this.bg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/ui_background.png", 1920, 1080);
+        this.frame = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/frame.png", 858, 860);
         
         try {
             this.textures = TextureReader.getTextures();
@@ -42,19 +52,22 @@ public class GameRendering {
 
         createTextureRegions();
 
-        mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
-        mainGamePanel.addObject(new UIBoard(40, 230, 55*12, 55*12, game, this.regions, this.textures));
+        // CREATING UI
+        Panel mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
+        scenes.put(0, mainGamePanel);
+        currentScene = 0;
+
+        mainGamePanel.addObject(new UIBoard(148, 155, 622, 622, game, this.regions, this.textures));
         
+        mainGamePanel.addObject(new InformationDisplay(150, 100, 100, 100, game));
         
-        
-        ProgramCardLocked l = new ProgramCardLocked(1060, 20, 500, 155);
+        ProgramCardLocked l = new ProgramCardLocked(900, 20, 500, 155);
         mainGamePanel.addObject(l);
 
-        l.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
-        l.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
-        l.addCard(ProgramCardType.MOVE3, ProgramCardType.getRandomInt(ProgramCardType.MOVE3));
-        l.addCard(ProgramCardType.ROTATE_RIGTH, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_RIGTH));
-        l.addCard(ProgramCardType.ROTATE_LEFT, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_LEFT));
+        ProgramCardHand h = new ProgramCardHand(1000, 300, 300, 500, game, l);
+        mainGamePanel.addObject(h);
+
+        l.setHand(h);
     }
 
     /**
@@ -65,8 +78,20 @@ public class GameRendering {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Temp background rendering
         this.batch.begin();
-        this.mainGamePanel.render(this.batch);
+        Sprite s = new Sprite(this.bg);
+        s.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        s.draw(batch);
+        Sprite f = new Sprite(this.frame);
+        f.setX(110);
+        f.setY(103);
+        f.setSize(700,710);
+        f.draw(batch);
+        this.batch.end();
+
+        this.batch.begin();
+        getCurrentPanel().render(this.batch);
         this.batch.end();
 
         this.batch.begin();
@@ -90,5 +115,13 @@ public class GameRendering {
     public void dispose(){
         batch.dispose();
         font.dispose();
+    }
+
+    public void onMouseDown(int x, int y){
+        this.scenes.get(currentScene).click(x, y);
+    }
+
+    public Panel getCurrentPanel() {
+        return this.scenes.get(currentScene);
     }
 }

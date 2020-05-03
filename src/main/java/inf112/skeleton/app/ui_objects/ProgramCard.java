@@ -8,10 +8,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import inf112.skeleton.app.utilities.TextureReader;
 
 public class ProgramCard implements IRenderable {
-    int x, y, width, height, priority;
+    // Create getters and setters
+    public int x, y, width, height, priority;
+    private ProgramCardType type;
 
-    TextureRegion r;
-    BitmapFont priorityFont;
+    private boolean canClick = true;
+    private boolean canRender = true;
+
+    private TextureRegion r;
+    private BitmapFont priorityFont;
 
     public ProgramCard(int x, int y, int width, int priority, ProgramCardType type) {
         this.x = x;
@@ -19,6 +24,7 @@ public class ProgramCard implements IRenderable {
         this.width = width;
         this.height = (int) (width * ( 17f/11f));
         this.priority = priority;
+        this.type = type;
         
         this.priorityFont = new BitmapFont();
         this.priorityFont.setColor(Color.GREEN);
@@ -49,6 +55,7 @@ public class ProgramCard implements IRenderable {
 
     @Override
     public void render(Batch batch) {
+        if (!canRender()) return;
         batch.draw(this.r, getX(), getY(), getWidth(), getHeight());
         int startX;
         if (Integer.toString(this.priority).length() > 2) {
@@ -57,5 +64,41 @@ public class ProgramCard implements IRenderable {
             startX = (int) (getX()+(getWidth()/1.63f));
         }
         priorityFont.draw(batch, Integer.toString(this.priority), startX, (int) (getY()+getHeight()/1.125f));
+    }
+
+    @Override
+    public boolean click(int x, int y) {
+        if (x >= getX() && x < getX() + getWidth() && y >= getY() && y < getY() + getHeight() && canClick()) {
+            System.out.println(String.format("Clicked card at x:%d y:%d", x, y));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canClick() {
+        return this.canClick;
+    }
+
+    @Override
+    public void setCanClick(boolean b) {
+        this.canClick = b;
+    }
+
+    public ProgramCardType getType(){
+        return this.type;
+    }
+    public int getPriority(){
+        return this.priority;
+    }
+    
+    @Override
+    public boolean canRender() {
+        return this.canRender;
+    }
+
+    @Override
+    public void setCanRender(boolean r) {
+        this.canRender = r;
     }
 }

@@ -14,6 +14,7 @@ import inf112.skeleton.app.objects.abstracts.Location;
 import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.objects.tiles.Laser;
+import inf112.skeleton.app.ui_objects.ProgramCard;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
@@ -24,8 +25,11 @@ public class Game extends InputAdapter implements ApplicationListener {
     private Board board;
     private List<Player> players = new ArrayList<>();
     private List<Laser> lasers = new ArrayList<>();
+    private Player playablePlayer;
     private int r = 0;
     private int phaseNr = 0;
+
+    private List<ProgramCard> lockedProgramCards;
 
     private GameRendering gameRendering;
 
@@ -33,19 +37,20 @@ public class Game extends InputAdapter implements ApplicationListener {
     public void create() {
         Gdx.input.setInputProcessor(this);
         try {
-            board = new Board("b1.csv");
+            board = new Board("b_re.csv");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        this.gameRendering = new GameRendering(this);
 
         // Add players / spawns to the board.
         for (int x = 0; x < board.getWidth(); x++) {
             for (int y = 0; y < board.getHeight(); y++) {
                 if (board.getTile(x, y) instanceof Spawn) {
-                    players.add(new Player(x, y));
+                    Player p = new Player(x, y);
+                    if (playablePlayer == null) playablePlayer = p;
+                    players.add(p);
                 }
                 if (board.getTile(x, y) instanceof Laser) {
                     lasers.add((Laser) board.getTile(x, y));
@@ -53,22 +58,15 @@ public class Game extends InputAdapter implements ApplicationListener {
 
             }
         }
+
+        this.gameRendering = new GameRendering(this);
+        GameInput gameInput = new GameInput(this, this.gameRendering);
+        Gdx.input.setInputProcessor(gameInput);
     }
 
     @Override
     public void dispose() {
         gameRendering.dispose();
-    }
-
-    /**
-     * The keyUp function is Override so that we can implement cardinal movement to
-     * the game.
-     * 
-     * @param keyCode The key code of the input to be executed.
-     */
-    @Override
-    public boolean keyUp(int keyCode) {
-        return GameInput.executeKeyUp(keyCode, this);
     }
 
     /**
@@ -169,4 +167,11 @@ public class Game extends InputAdapter implements ApplicationListener {
     public List<Laser> getLasers() {
         return this.lasers;
     }
+    public List<ProgramCard> getLockedProgramCards() {
+        return this.lockedProgramCards;
+    }
+
+	  public Player getCurrentPlayer() {
+		    return this.playablePlayer;
+	  }
 }

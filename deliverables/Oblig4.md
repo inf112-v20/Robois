@@ -29,6 +29,55 @@ Se videre på hvordan vi skal visualisere forskjellige deler i spillvinduet, sli
 
 ---
 
+### **Fredag** | 24-04 (Jens, Kasper, Thomas)
+
+**På møtet:** 
+Lagde Enum for programkort og en klasse som viser kortene som er låst inn. Alle kort får også en tilfeldig
+prioriteringsverdi når de lages.  
+Kan nå vise 5 valgte kort som skal kjøres gjennom i løpet av en runde.
+
+**Til neste gang:**  
+Jens: Få laget et ordentlig spillbrett.
+
+---
+
+### **Fredag** | 01-05 (Jens, Kasper, Thomas)
+
+**Fra forrige gang:**  
+Jens: Lagde spillbrettet "Risky Exchange" fra regelboken. Mangler muligheten for å legge til
+spawn-område.
+
+**På møtet:**  
+Thomas & Kasper: Oppdaterte CSVReader / Board til å kunne lese alle board størrelser. Rendring av board er nå dynamisk, 
+slik at den holder seg inne i max-width og max-height, uansett størrelse og dimensjoner. Kan derfor nå legge til
+spawn-område.  
+Jens: Begynte å implementere de resterende "tiles" som skal aktiveres under en fase. Pushers og 
+Gears fungerer nå som de skal. Pushers fungerer som vegg i tilegg til å dytte robot i retningen den peker
+på runden pusheren er aktivert. Gears roterer roboten i retnigen pilene hviser.
+
+**Til neste gang:**  
+Jens: Legge inn riktig tiles til spawn-området. Legge til noen Pushers på brettet.
+
+---
+
+### **Lørdag** | 02-05 (Jens, Kasper, Thomas)
+
+**Fra forrige gang:**  
+Siden vi tok møtet dagen etterpå, ble ingenting gjort i mellopmtiden.
+
+**På møtet:**  
+Thomas & Kasper: Implementerte "Hand" klassen, hvor en spiller velger kortene sine, og har implementert bakgrunn til spillbrettet.
+Lagde informationDisplay UI klassen som kan vise informasjon til spilleren gjennom tekst.  
+Jens: Begynte å implemtere lasere. Disse oppfører seg nå som vegger, men gjør ikke skade enda.  
+Implementerte flag. Flag kan nå plukkes opp, men bare i riktig rekkefølge. Når man plukker opp et flag
+vil man endre respawn-location til der man plukket opp flagget.
+Player-klassen har nå flere funksjoner for å behandle skade, spawn og flag.
+
+**Til neste gang:**  
+Jens: Legge inn riktig tiles til spawn-området. Legge til noen Pushers på brettet.
+
+---
+
 ## Manuelle tester
 
 ### Robot Conveyor Belt Movement

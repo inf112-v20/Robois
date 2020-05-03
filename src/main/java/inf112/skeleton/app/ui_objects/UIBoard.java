@@ -21,6 +21,7 @@ public class UIBoard implements IRenderable {
     private int tileSize;
     private Board board;
     private Game game;
+    private boolean canClick = true;
 
     private TextureRegion[][] regions;
     private HashMap<Integer, TextureRegion> textures;
@@ -114,5 +115,20 @@ public class UIBoard implements IRenderable {
         if (r.getDirection() == CardinalDirection.WEST) {
             s.rotate90(false);
         }
+    }
+
+    @Override
+    public boolean click(int x, int y) {
+        return true;
+    }
+
+    @Override
+    public boolean canClick() {
+        return this.canClick;
+    }
+
+    @Override
+    public void setCanClick(boolean b) {
+        this.canClick = b;
     }
 }

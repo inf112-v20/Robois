@@ -29,7 +29,8 @@ public class GameRendering {
     private TextureRegion[][] regions;
     private HashMap<Integer, TextureRegion> textures;
 
-    Panel mainGamePanel;
+    private HashMap<Integer, Panel> scenes;
+    private Integer currentScene;
 
     private TextureRegion bg;
     private TextureRegion frame;
@@ -39,7 +40,7 @@ public class GameRendering {
         this.batch = new SpriteBatch();
         this.font = new BitmapFont();
         this.font.setColor(Color.RED);
-
+        this.scenes = new HashMap<>();
         this.bg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/ui_background.png", 1920, 1080);
         this.frame = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/frame.png", 858, 860);
         
@@ -51,7 +52,11 @@ public class GameRendering {
 
         createTextureRegions();
 
-        mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
+        // CREATING UI
+        Panel mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
+        scenes.put(0, mainGamePanel);
+        currentScene = 0;
+
         mainGamePanel.addObject(new UIBoard(148, 155, 622, 622, game, this.regions, this.textures));
         
         mainGamePanel.addObject(new InformationDisplay(150, 100, 100, 100, game));
@@ -59,13 +64,7 @@ public class GameRendering {
         ProgramCardLocked l = new ProgramCardLocked(900, 20, 500, 155);
         mainGamePanel.addObject(l);
 
-        l.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
-        l.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
-        l.addCard(ProgramCardType.MOVE3, ProgramCardType.getRandomInt(ProgramCardType.MOVE3));
-        l.addCard(ProgramCardType.ROTATE_RIGTH, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_RIGTH));
-        l.addCard(ProgramCardType.ROTATE_LEFT, ProgramCardType.getRandomInt(ProgramCardType.ROTATE_LEFT));
-
-        ProgramCardHand h = new ProgramCardHand(1100, 300, 300, 500, game);
+        ProgramCardHand h = new ProgramCardHand(1000, 300, 300, 500, game, l);
         mainGamePanel.addObject(h);
 
         h.addCard(ProgramCardType.MOVE1, ProgramCardType.getRandomInt(ProgramCardType.MOVE1));
@@ -100,7 +99,7 @@ public class GameRendering {
         this.batch.end();
 
         this.batch.begin();
-        this.mainGamePanel.render(this.batch);
+        this.scenes.get(currentScene).render(this.batch);
         this.batch.end();
 
         this.batch.begin();
@@ -124,5 +123,9 @@ public class GameRendering {
     public void dispose(){
         batch.dispose();
         font.dispose();
+    }
+
+    public void onMouseDown(int x, int y){
+        this.scenes.get(currentScene).click(x, y);
     }
 }

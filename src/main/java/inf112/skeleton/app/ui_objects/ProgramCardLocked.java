@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class ProgramCardLocked implements IRenderable {
     private int x, y, width, height;
-
+    private boolean canClick = true;
     List<ProgramCard> lockedCards;
 
     public ProgramCardLocked(int x, int y, int width, int height) {
@@ -20,12 +20,20 @@ public class ProgramCardLocked implements IRenderable {
 
     public void addCard(ProgramCardType type, int priority) {
         try {
-            if (this.lockedCards.size() >= 5) throw new IndexOutOfBoundsException();
+            if (!canAddCard()) throw new IndexOutOfBoundsException();
             ProgramCard c = new ProgramCard(this.x + (this.width / 5)*this.lockedCards.size() + (5*this.lockedCards.size()), this.y, this.width / 5, priority, type);
             this.lockedCards.add(c);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You have locked in all your cards.");
         }
+    }
+
+    public void addCard(ProgramCard card) {
+        addCard(card.getType(), card.getPriority());
+    }
+
+    public boolean canAddCard() {
+        return this.lockedCards.size() < 5;
     }
 
     @Override
@@ -53,6 +61,21 @@ public class ProgramCardLocked implements IRenderable {
         for (int x = 0; x < this.lockedCards.size(); x++){
             this.lockedCards.get(x).render(batch);
         }
+    }
+
+    @Override
+    public boolean click(int x, int y) {
+        return true;
+    }
+
+    @Override
+    public boolean canClick() {
+        return this.canClick;
+    }
+
+    @Override
+    public void setCanClick(boolean b) {
+        this.canClick = b;
     }
 
 }

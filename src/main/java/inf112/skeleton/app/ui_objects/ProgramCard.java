@@ -9,6 +9,9 @@ import inf112.skeleton.app.utilities.TextureReader;
 
 public class ProgramCard implements IRenderable {
     int x, y, width, height, priority;
+    ProgramCardType type;
+
+    boolean canClick = true;
 
     TextureRegion r;
     BitmapFont priorityFont;
@@ -19,6 +22,7 @@ public class ProgramCard implements IRenderable {
         this.width = width;
         this.height = (int) (width * ( 17f/11f));
         this.priority = priority;
+        this.type = type;
         
         this.priorityFont = new BitmapFont();
         this.priorityFont.setColor(Color.GREEN);
@@ -57,5 +61,35 @@ public class ProgramCard implements IRenderable {
             startX = (int) (getX()+(getWidth()/1.63f));
         }
         priorityFont.draw(batch, Integer.toString(this.priority), startX, (int) (getY()+getHeight()/1.125f));
+    }
+
+    @Override
+    public boolean click(int x, int y) {
+        if (x >= getX() && x < getX() + getWidth()) {
+            if (y >= getY() && y < getY() + getHeight()) {
+                if (canClick()){
+                    System.out.println(String.format("Clicked card at x:%d y:%d", x, y));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canClick() {
+        return this.canClick;
+    }
+
+    @Override
+    public void setCanClick(boolean b) {
+        this.canClick = b;
+    }
+
+    public ProgramCardType getType(){
+        return this.type;
+    }
+    public int getPriority(){
+        return this.priority;
     }
 }

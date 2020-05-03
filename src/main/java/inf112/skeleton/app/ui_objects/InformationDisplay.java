@@ -1,6 +1,5 @@
 package inf112.skeleton.app.ui_objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,7 +11,7 @@ public class InformationDisplay implements IRenderable {
     private Location location;
     private int width;
     private int height;
-
+    private boolean canClick = true;
     private Game game;
 
     private BitmapFont font;
@@ -53,6 +52,21 @@ public class InformationDisplay implements IRenderable {
     public void render(Batch batch) {
         String phase = String.format("Current Phase: %d", game.getPhase());
         font.draw(batch, phase, getX(), getY());
+    }
+
+    @Override
+    public boolean click(int x, int y) {
+        return true;
+    }
+
+    @Override
+    public boolean canClick() {
+        return this.canClick;
+    }
+
+    @Override
+    public void setCanClick(boolean b) {
+        this.canClick = b;
     }
     
 }

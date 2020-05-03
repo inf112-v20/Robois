@@ -9,16 +9,19 @@ import inf112.skeleton.app.Game;
 
 public class ProgramCardHand implements IRenderable {
     private int x, y, width, height, maxCapasity;
+    private boolean canClick = true;
     Game game;
     List<ProgramCard> hand;
+    ProgramCardLocked lockedHand;
     
 
-    public ProgramCardHand(int x, int y, int width, int height, Game game) {
+    public ProgramCardHand(int x, int y, int width, int height, Game game, ProgramCardLocked lockedHand) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.game = game;
+        this.lockedHand = lockedHand;
         this.maxCapasity = game.getCurrentPlayer().getHP();
         this.hand = new ArrayList<>();
     }
@@ -29,9 +32,9 @@ public class ProgramCardHand implements IRenderable {
             int cardX = this.x + (this.width / 3)*(Math.floorMod(this.hand.size(), 3)) + (5*Math.floorMod(this.hand.size(), 3));
             
             int cardY = this.y;
-            if (this.hand.size() > 6) {
+            if (this.hand.size() >= 6) {
                 cardY += 310;
-            } else if (this.hand.size() > 3) {
+            } else if (this.hand.size() > 2) {
                 cardY += 155;
             }
 
@@ -69,4 +72,26 @@ public class ProgramCardHand implements IRenderable {
         }
     }
 
+    @Override
+    public boolean click(int x, int y) {
+        for (ProgramCard c : this.hand) {
+            if (c.click(x, y) && this.lockedHand.canAddCard()) {
+                System.out.println("added card");
+                this.lockedHand.addCard(c);
+                this.hand.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canClick() {
+        return this.canClick;
+    }
+
+    @Override
+    public void setCanClick(boolean b) {
+        this.canClick = b;
+    }
 }

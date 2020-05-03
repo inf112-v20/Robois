@@ -2,7 +2,6 @@ package inf112.skeleton.app;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -31,12 +30,13 @@ public class Game extends InputAdapter implements ApplicationListener {
     private List<ProgramCard> lockedProgramCards;
 
     private GameRendering gameRendering;
+    private GameInput gameInput;
 
     @Override
     public void create() {
         Gdx.input.setInputProcessor(this);
         try {
-            board = new Board("b0.csv");
+            board = new Board("b_re.csv");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -55,22 +55,13 @@ public class Game extends InputAdapter implements ApplicationListener {
         }
 
         this.gameRendering = new GameRendering(this);
+        this.gameInput = new GameInput(this, this.gameRendering);
+        Gdx.input.setInputProcessor(this.gameInput);
     }
 
     @Override
     public void dispose() {
         gameRendering.dispose();
-    }
-
-    /**
-     * The keyUp function is Override so that we can implement cardinal movement to
-     * the game.
-     * 
-     * @param keyCode The key code of the input to be executed.
-     */
-    @Override
-    public boolean keyUp(int keyCode) {
-        return GameInput.executeKeyUp(keyCode, this);
     }
 
     /**

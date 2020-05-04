@@ -54,6 +54,7 @@ public class InformationDisplay implements IRenderable {
         if (!canRender()) return;
         String phase = String.format("Current Phase: %d", game.getPhase());
         font.draw(batch, phase, getX(), getY());
+        font.draw(batch, String.format("HP: %d", game.getCurrentPlayer().getHP()), getX(), getY()-40);
     }
 
     @Override

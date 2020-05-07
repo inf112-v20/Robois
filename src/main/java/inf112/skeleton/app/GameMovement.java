@@ -60,9 +60,9 @@ public class GameMovement {
                             }
                         }
                     } else {
-                            returnToSpawn(movable);
-                            return true;
-                            }
+                        returnToSpawn(movable);
+                    }
+                    return true;
                 } else {
                     // This is here so that we can test without a game parameter.
                     if (game != null){

@@ -58,7 +58,7 @@ public class Player {
         life -= 1;
         System.out.println(life);
         if (life <= 0) {
-            //TODO insert player Lost functionality
+            GamePhase.setWonGame(false);
             System.out.println("Robot permanently destroyed");
         } else {
             GameMovement.returnToSpawn(robot);
@@ -88,5 +88,4 @@ public class Player {
         robot.setSpawnX(robot.getX());
         robot.setSpawnY(robot.getY());
     }
-
 }

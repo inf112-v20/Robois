@@ -118,36 +118,40 @@ public class Board {
 	}
 
 	public boolean canGo(int x, int y, CardinalDirection dir) {
+		Boolean canGoOut = true;
 		if (getTile(x, y) instanceof Wall) {
 			Wall w = (Wall) getTile(x, y);
-			return !w.getWallPositions().contains(dir);
+			canGoOut = !w.getWallPositions().contains(dir);
 		}else if (getTile(x, y) instanceof Pusher) {
 			Pusher p = (Pusher) getTile(x, y);
-			return (p.getPusherWallPosition() != dir);
+			canGoOut = (p.getPusherWallPosition() != dir);
 		}else if (getTile(x, y) instanceof Laser) {
 			Laser l = (Laser) getTile(x, y);
-			return (l.getLaserWallPosition() != dir);
+			canGoOut = (l.getLaserWallPosition() != dir);
 		}
 
-		Location loc = CardinalityUtility.getNextTile(x, y, dir);
-		x = loc.getX();
-		y = loc.getY();
+		if (canGoOut) {
+			Location loc = CardinalityUtility.getNextTile(x, y, dir);
+			x = loc.getX();
+			y = loc.getY();
 
-		if (x > width - 1 || y > height - 1 || x < 0 || y < 0) {
+			if (x > width - 1 || y > height - 1 || x < 0 || y < 0) {
+				return true;
+			}
+
+			if (getTile(x, y) instanceof Wall) {
+				Wall w = (Wall) getTile(x, y);
+				return !w.getWallPositions().contains(CardinalityUtility.getOpposite(dir));
+			} else if (getTile(x, y) instanceof Pusher) {
+				Pusher p = (Pusher) getTile(x, y);
+				return (p.getPusherWallPosition() != CardinalityUtility.getOpposite(dir));
+			} else if (getTile(x, y) instanceof Laser) {
+				Laser l = (Laser) getTile(x, y);
+				return (l.getLaserWallPosition() != CardinalityUtility.getOpposite(dir));
+			}
 			return true;
 		}
-
-		if (getTile(x, y) instanceof Wall) {
-			Wall w = (Wall) getTile(x, y);
-			return !w.getWallPositions().contains(CardinalityUtility.getOpposite(dir));
-		}else if (getTile(x, y) instanceof Pusher) {
-			Pusher p = (Pusher) getTile(x, y);
-			return (p.getPusherWallPosition() != CardinalityUtility.getOpposite(dir));
-		}else if (getTile(x, y) instanceof Laser) {
-			Laser l = (Laser) getTile(x, y);
-			return (l.getLaserWallPosition() != CardinalityUtility.getOpposite(dir));
-		}
-		return true;
+		return false;
 	}
 
 	public boolean isOutOfBounds(int x, int y, CardinalDirection dir) {

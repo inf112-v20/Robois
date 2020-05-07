@@ -65,7 +65,6 @@ public class Player {
 
     public void pickupFlag(Flag f) {
         flags.add(f.getFlagNr());
-        updateRobotSpawn();
     }
 
     public void repair(int dmg) {

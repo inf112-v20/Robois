@@ -139,6 +139,7 @@ public class GamePhase {
                 default:
                     break;
             }
+            p.repair(1);
         }
         if (tile instanceof Wrench) {
             Wrench wrench = (Wrench) tile;

@@ -50,8 +50,19 @@ public class GameMovement {
         if (steps != 0) {
             if (board.canGo(movable.getX(), movable.getY(), dir)) {
                 if (board.isOutOfBounds(movable.getX(), movable.getY(), dir)) {
-                    retrunToSpawn(movable);
-                    return true;
+                    // This is here so that we can test without a game parameter.
+                    if (game != null){
+                        for (Player p : game.getPlayers()) {
+                            if ( p.getRobot() == movable) {
+                                //need to use respawn from Player class so that all field will be updated.
+                                p.respawn();
+                                return true;
+                            }
+                        }
+                    } else {
+                            returnToSpawn(movable);
+                            return true;
+                            }
                 } else {
                     // This is here so that we can test without a game parameter.
                     if (game != null){
@@ -85,7 +96,7 @@ public class GameMovement {
      * @param movable   a movable object.
      */    }
 
-    private static void retrunToSpawn(IMovable movable) {
+    public static void returnToSpawn(IMovable movable) {
         movable.setX(movable.getSpawnX());
         movable.setY(movable.getSpawnY());
     }

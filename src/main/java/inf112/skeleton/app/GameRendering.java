@@ -60,10 +60,10 @@ public class GameRendering {
         
         mainGamePanel.addObject(new InformationDisplay(150, 100, 100, 100, game));
         
-        ProgramCardLocked l = new ProgramCardLocked(900, 20, 500, 155);
+        ProgramCardLocked l = new ProgramCardLocked(904, 119, 500, 155);
         mainGamePanel.addObject(l);
 
-        ProgramCardHand h = new ProgramCardHand(1000, 300, 300, 500, game, l);
+        ProgramCardHand h = new ProgramCardHand(1010, 335, 300, 500, game, l);
         mainGamePanel.addObject(h);
 
         l.setHand(h);

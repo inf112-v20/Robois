@@ -14,13 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
 
-import inf112.skeleton.app.ui_objects.IRenderable;
-import inf112.skeleton.app.ui_objects.InformationDisplay;
-import inf112.skeleton.app.ui_objects.Panel;
-import inf112.skeleton.app.ui_objects.ProgramCardHand;
-import inf112.skeleton.app.ui_objects.ProgramCardLocked;
-import inf112.skeleton.app.ui_objects.StartRoundButton;
-import inf112.skeleton.app.ui_objects.UIBoard;
+import inf112.skeleton.app.ui_objects.*;
 
 import inf112.skeleton.app.utilities.TextureReader;
 
@@ -163,7 +157,7 @@ public class GameRendering {
     public static void setCurrentScene(int scene) { currentScene = scene; }
   
 	  public void resetCards() {
-          for (IRenderable r : this.getCurrentPanel().getObjects()) {
+          for (IRenderable r : this.getCurrentScene().getObjects()) {
              if (r instanceof ProgramCardHand) {
                   ProgramCardHand p = (ProgramCardHand) r;
                   p.getNewHand();

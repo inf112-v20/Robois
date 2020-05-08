@@ -123,17 +123,17 @@ public class GamePhase {
                     }
                     break;
                 case (2):
-                    if (p.getFlags().contains(1)) {
+                    if (p.getFlags().size() == 1) {
                         p.pickupFlag(f);
                     }
                     break;
                 case (3):
-                    if (p.getFlags().containsAll(Arrays.asList(1,2))) {
+                    if (p.getFlags().size() == 2) {
                         p.pickupFlag(f);
                     }
                     break;
                 case (4):
-                    if (p.getFlags().containsAll(Arrays.asList(1,2,3))) {
+                    if (p.getFlags().size() == 3) {
                         p.pickupFlag(f);
                     }
                 default:

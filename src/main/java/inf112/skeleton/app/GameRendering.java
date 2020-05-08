@@ -27,7 +27,7 @@ public class GameRendering {
     private HashMap<Integer, TextureRegion> textures;
 
     private HashMap<Integer, Panel> scenes;
-    static private Integer currentScene;
+    private Integer currentScene;
 
     private TextureRegion bg;
     private TextureRegion frame;
@@ -60,10 +60,10 @@ public class GameRendering {
         
         mainGamePanel.addObject(new InformationDisplay(150, 100, 100, 100, game));
         
-        ProgramCardLocked l = new ProgramCardLocked(900, 20, 500, 155);
+        ProgramCardLocked l = new ProgramCardLocked(904, 119, 500, 155);
         mainGamePanel.addObject(l);
 
-        ProgramCardHand h = new ProgramCardHand(1000, 300, 300, 500, game, l);
+        ProgramCardHand h = new ProgramCardHand(1010, 335, 300, 500, game, l);
         mainGamePanel.addObject(h);
 
         l.setHand(h);
@@ -154,14 +154,14 @@ public class GameRendering {
         return this.scenes.get(currentScene);
     }
 
-    public static void setCurrentScene(int scene) { currentScene = scene; }
+    public void setCurrentScene(int scene) { this.currentScene = scene; }
   
-	  public void resetCards() {
-          for (IRenderable r : this.getCurrentScene().getObjects()) {
-             if (r instanceof ProgramCardHand) {
-                  ProgramCardHand p = (ProgramCardHand) r;
-                  p.getNewHand();
-             }
-          }
-	  }
+    public void resetCards() {
+        for (IRenderable r : this.getCurrentScene().getObjects()) {
+            if (r instanceof ProgramCardHand) {
+                ProgramCardHand p = (ProgramCardHand) r;
+                p.getNewHand();
+            }
+        }
+    }
 }

@@ -41,18 +41,24 @@ public class GameLoop{
     }
 
     public void render() {
-        if (!executingRound) return;
-        executeRound();
-        if (!executeCards) return;
+        if (executingRound){
+            executeRound();
+            if (executeCards) {
+                execute();
+            }
+        }
+        
+    }
+    
+    private void execute() {
         timeSeconds += Gdx.graphics.getRawDeltaTime();
         if(timeSeconds > period){
             timeSeconds-=period;
+            
             if (moves.size() <= 0){
                 this.executeCards = false;
                 return;
             }
-            System.out.println("doing");
-
 
             Map.Entry<Integer, Move> minEntry = null;
 
@@ -68,36 +74,39 @@ public class GameLoop{
             ProgramCardType c = minEntry.getValue().getProgramCard().getType();
             Player p = minEntry.getValue().getPlayer();
             Robot r = p.getRobot();
-            System.out.println(String.format("R: %d,%d, C: %s", r.getSpawnX(), r.getSpawnY(), c.toString()));
-            switch (c) {
-                case MOVE1:
-                    GameMovement.move(1, r, board, game);
-                    break;
-                case MOVE2:
-                    GameMovement.move(2, r, board, game);
-                    break;
-                case MOVE3:
-                    GameMovement.move(3, r, board, game);
-                    break;
-                case BACKUP:
-                    GameMovement.moveBackwards(1, r, board, game);
-                    break;
-                case ROTATE_LEFT:
-                    GameMovement.rotate(RelativeDirection.LEFT, r);
-                    break;
-                case ROTATE_RIGTH:
-                    GameMovement.rotate(RelativeDirection.RIGHT, r);
-                    break;
-                case UTURN:
-                    GameMovement.rotate(RelativeDirection.LEFT, r);
-                    GameMovement.rotate(RelativeDirection.LEFT, r);
-                    break;
-                default:
-                    break;
-            }
+            executeCard(c, r);
         }
     }
-    
+
+    private void executeCard(ProgramCardType c, Robot r) {
+        switch (c) {
+            case MOVE1:
+                GameMovement.move(1, r, board, game);
+                break;
+            case MOVE2:
+                GameMovement.move(2, r, board, game);
+                break;
+            case MOVE3:
+                GameMovement.move(3, r, board, game);
+                break;
+            case BACKUP:
+                GameMovement.moveBackwards(1, r, board, game);
+                break;
+            case ROTATE_LEFT:
+                GameMovement.rotate(RelativeDirection.LEFT, r);
+                break;
+            case ROTATE_RIGTH:
+                GameMovement.rotate(RelativeDirection.RIGHT, r);
+                break;
+            case UTURN:
+                GameMovement.rotate(RelativeDirection.LEFT, r);
+                GameMovement.rotate(RelativeDirection.LEFT, r);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void addMove(ProgramCard c, Player p) {
         this.moves.put(c.getPriority(), new Move(p, c));
     }
@@ -120,10 +129,11 @@ public class GameLoop{
         
         for (int i = 0; i < hand.length; i++){
             ProgramCard c = hand[i];
-            if (c == null) continue;
-            this.addMove(c, game.getCurrentPlayer());
-            this.hand[i] = null;
-            break;
+            if (c != null){
+                this.addMove(c, game.getCurrentPlayer());
+                this.hand[i] = null;
+                break;
+            }
         }
 
         if (currentRound > maxRound) {
@@ -139,7 +149,7 @@ public class GameLoop{
 
     private void addAIMove(Player exludedPlayer) {
         for (Player p : game.getPlayers()) {
-            if (p != exludedPlayer) {
+            if (!p.equals(exludedPlayer)) {
                 ProgramCardType t = ProgramCardType.getRandomCard();
                 ProgramCard c = new ProgramCard(1, 1, 1, ProgramCardType.getRandomInt(t), t);
                 addMove(c, p);

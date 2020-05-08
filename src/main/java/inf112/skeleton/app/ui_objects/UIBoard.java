@@ -29,6 +29,9 @@ public class UIBoard implements IRenderable {
 
     private TextureRegion[][] regions;
     private HashMap<Integer, TextureRegion> textures;
+    
+    private float timeSeconds = 0f;
+    private float period = 0.5f;
 
     public UIBoard(int x, int y, int width, int height, Game game, TextureRegion[][] regions, HashMap<Integer, TextureRegion> textures) {
 
@@ -69,8 +72,6 @@ public class UIBoard implements IRenderable {
         return this.height;
     }
 
-    private float timeSeconds = 0f;
-    private float period = 0.5f;
 
     @Override
     public void render(Batch batch) {

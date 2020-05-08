@@ -1,7 +1,5 @@
 package inf112.skeleton.app.ui_objects;
 
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class ProgramCardLocked implements IRenderable {

@@ -1,6 +1,5 @@
 package inf112.skeleton.app.objects.tiles;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import inf112.skeleton.app.objects.interfaces.IDrawable;

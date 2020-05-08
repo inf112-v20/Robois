@@ -1,7 +1,6 @@
 package inf112.skeleton.app.ui_objects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -14,6 +13,8 @@ public class StartRoundButton implements IRenderable {
     private ProgramCardLocked hand;
     
     private TextureRegion r;
+    private boolean canClick;
+    private boolean canRender;
 
     public StartRoundButton(int x, int y, int w, int h, float scale, String src, Game game, ProgramCardLocked hand) {
         this.x = x;
@@ -23,6 +24,8 @@ public class StartRoundButton implements IRenderable {
         this.game = game;
         this.hand = hand;
         this.r = TextureReader.getSpecificTexture(src, w, h);
+        this.canClick = true;
+        this.canRender = true;
     }
     @Override
     public int getX() {
@@ -55,12 +58,12 @@ public class StartRoundButton implements IRenderable {
 
     @Override
     public boolean canRender() {
-        return true;
+        return this.canRender;
     }
 
     @Override
     public void setCanRender(boolean r) {
-
+        this.canRender = r;
     }
 
     @Override
@@ -76,12 +79,12 @@ public class StartRoundButton implements IRenderable {
 
     @Override
     public boolean canClick() {
-        return true;
+        return this.canClick;
     }
 
     @Override
     public void setCanClick(boolean b) {
-
+        this.canClick = b;
     }
     
 }

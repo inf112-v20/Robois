@@ -1,14 +1,27 @@
-# Oblig 3
+# Oblig 4
 
 ## Deloppgave 1: Team og prosjekt
+
+### Hvordan fungerer rollene i teamet?
+
+- Rollene har fungert bra, men etter at vi mistet ett medlem så har vi måtta fordele litt ekstra ansvar på oss som var igjen.
+
+- Vi måtte endre på hvem som gjorde hva etter Yafet ikke skulle være med på gruppen lengere.
+
+- Kasper har gjordt en god job som design ansvarlig, han har laget alt av grafiske assets.
+
+- Jens har holdt styr på alle spillreglene og passet på at Svar.md filene våre var gode.
+
+### Er det noen erfaringer enten team-messig eller mtp prosjektmetodikk som er verdt å nevne?
+
+- Det er vanskelig og krever mye tid å holde seg til en måte å jobbe på dersom ingen har gjort det før. Vi begynte med tdd, men gjikk bort fra det ettersom prosjektet ble større og var vanskelig å teste automatisk.  
+Bortsett fra det synes vi at vi har tatt gode valg.
+
+
 
 ## Deloppgave 2: Krav
 
 ## Deloppgave 3: Produktleveranse og kodekvalitet
-
-Programmet startes ved å kjøre main. Da vil det dannes en ny innstans av game(), som lager brettet og tilhørende objekter.
-Testene sjekker at brettet blir laget korrekt(Ingen endring siden forrige Oblig) og at Roboten beveger seg som den skal. Dvs. at den går riktig utifra hvor mange ruten den har fått beskjed om å bevege seg og at roboten ikke kan gå gjennom vegger. I tilegg sjekkes det at den roteres riktig.
-Tester at spiller visuelt ser korrekt ut ved å kjøre gjennom manuelt. Dette er å sjekke at bildet av roboten viser riktig utifra hva roboten faktisk gjør, og at veggene blokkerer i riktig retning. Sjekker dette ved å styre roboten på alle mulige måter og prøve å bevege roboten gjennom de forskjellige typene vegger (både fra en Wall-tile og fra en Floor-tile inn i en Wall-tile).
 
 ## Møtereferat
 
@@ -89,11 +102,15 @@ Fasehåndteringen er delt inn i de forskjellige delene, slik at beveglse skjer f
 
 **Fra forrige gang:**  
 Thomas: Startet implementasjon av game loopen. Før dette måtte vi bruke WASD for å styre roboten, nå ble det mulig å velge kortene, men denne implementasjonen ble ikke helt ferdig.
+Jens: Implementerte måte å vinne og tape spillet på. La til EndGameScreen og StartGAmeScreen. Knapp i EndGameScreen for å gå tilbake til StartGameScreen.  
+Viser nå all informasjon i displayet under Spillbrettet.  
+Player har np liv i tilegg til hp. Man starter med 3 liv og dersom man mister alle livene, er man helt ute av spillet (Spillet avsluttes siden du er eneste spiller).
 
 **På møtet:**  
-Vi ullførte implementasjon av game loopen med en random AI, la også inn en knapp for å starte game loopen. Selve logikken var ikke så veldig vanskelig, men å legge inn et delay mellom hvert move så ble det mye vanskeligere.
-
+Alle: Vi ullførte implementasjon av game loopen med en random AI, la også inn en knapp for å starte game loopen. Selve logikken var ikke så veldig vanskelig, men å legge inn et delay mellom hvert move så ble det mye vanskeligere.  
 Fullførte designet på spillet, dvs, grafiske elementer rundt kort, endgame display, og start display.
+
+Kasper: Lagde flere UI-elementer.
 
 ---
 

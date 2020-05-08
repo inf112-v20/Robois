@@ -13,13 +13,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
-import inf112.skeleton.app.ui_objects.IRenderable;
-import inf112.skeleton.app.ui_objects.InformationDisplay;
-import inf112.skeleton.app.ui_objects.Panel;
-import inf112.skeleton.app.ui_objects.ProgramCardHand;
-import inf112.skeleton.app.ui_objects.ProgramCardLocked;
-import inf112.skeleton.app.ui_objects.StartRoundButton;
-import inf112.skeleton.app.ui_objects.UIBoard;
+
+import inf112.skeleton.app.ui_objects.*;
+
 import inf112.skeleton.app.utilities.TextureReader;
 
 public class GameRendering {
@@ -31,10 +27,11 @@ public class GameRendering {
     private HashMap<Integer, TextureRegion> textures;
 
     private HashMap<Integer, Panel> scenes;
-    private Integer currentScene;
+    static private Integer currentScene;
 
     private TextureRegion bg;
     private TextureRegion frame;
+    private TextureRegion startbg;
 
     public GameRendering(Game game) {
         this.board = game.getBoard();
@@ -44,6 +41,7 @@ public class GameRendering {
         this.scenes = new HashMap<>();
         this.bg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/ui_background.png", 1920, 1080);
         this.frame = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/frame.png", 858, 860);
+        this.startbg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/pad.png", 820, 1100);
         
         try {
             this.textures = TextureReader.getTextures();
@@ -56,7 +54,7 @@ public class GameRendering {
         // CREATING UI
         Panel mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
         scenes.put(0, mainGamePanel);
-        currentScene = 0;
+        this.currentScene = 0;
 
         mainGamePanel.addObject(new UIBoard(148, 155, 622, 622, game, this.regions, this.textures));
         
@@ -69,6 +67,16 @@ public class GameRendering {
         mainGamePanel.addObject(h);
 
         l.setHand(h);
+
+        //START GAME - Usikker på dette
+        Panel startGamePanel = new Panel(0, 0, 16*80, 9*80, null);
+        scenes.put(1, startGamePanel);
+
+        //END GAME
+        Panel endGamePanel = new Panel(0, 0, 16*80, 9*80, null);
+        scenes.put(2, endGamePanel);
+
+        endGamePanel.addObject(new EndGameDisplay(350, 600, 140, 25, game));
         
         String src = "src/main/java/inf112/skeleton/app/assets/sprites/arrow_button.png";
         mainGamePanel.addObject(new StartRoundButton(820, 65, 600, 600, 0.1f, src, game, l));
@@ -82,16 +90,29 @@ public class GameRendering {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Temp background rendering
         this.batch.begin();
-        Sprite s = new Sprite(this.bg);
-        s.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        s.draw(batch);
-
+        switch (currentScene) {
+            case 1:
+                Sprite s = new Sprite(this.startbg);
+                s.setSize(1600, 900);
+                s.draw(batch);
+                break;
+            default:
+                // Temp background rendering
+                Sprite b = new Sprite(this.bg);
+                b.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                b.draw(batch);
+                Sprite f = new Sprite(this.frame);
+                f.setX(110);
+                f.setY(103);
+                f.setSize(700, 710);
+                f.draw(batch);
+                break;
+        }
         this.batch.end();
 
         this.batch.begin();
-        getCurrentPanel().render(this.batch);
+        getCurrentScene().render(this.batch);
         this.batch.end();
 
         this.batch.begin();
@@ -129,16 +150,18 @@ public class GameRendering {
         this.scenes.get(currentScene).click(x, y);
     }
 
-    public Panel getCurrentPanel() {
+    public Panel getCurrentScene() {
         return this.scenes.get(currentScene);
     }
 
-	public void resetCards() {
-        for (IRenderable r : this.getCurrentPanel().getObjects()) {
-            if (r instanceof ProgramCardHand) {
-                ProgramCardHand p = (ProgramCardHand) r;
-                p.getNewHand();
-            }
-        }
-	}
+    public static void setCurrentScene(int scene) { currentScene = scene; }
+  
+	  public void resetCards() {
+          for (IRenderable r : this.getCurrentScene().getObjects()) {
+             if (r instanceof ProgramCardHand) {
+                  ProgramCardHand p = (ProgramCardHand) r;
+                  p.getNewHand();
+             }
+          }
+	  }
 }

@@ -43,7 +43,7 @@ public class GameInput implements InputProcessor{
             GamePhase.runPhaseChange(game);
         }
         if (keyCode == Input.Keys.O) {
-            for (IRenderable r : this.gameRendering.getCurrentPanel().getObjects()) {
+            for (IRenderable r : this.gameRendering.getCurrentScene().getObjects()) {
                 if (r instanceof ProgramCardHand) {
                     ProgramCardHand p = (ProgramCardHand) r;
                     p.getNewHand();

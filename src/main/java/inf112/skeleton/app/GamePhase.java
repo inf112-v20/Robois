@@ -1,7 +1,6 @@
 package inf112.skeleton.app;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import inf112.skeleton.app.objects.Board;
@@ -20,6 +19,8 @@ import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
 public class GamePhase {
+    //private static Boolean wonGame = null;
+
     /**
      * Run a new phase change
      */
@@ -40,7 +41,6 @@ public class GamePhase {
         for (Player p : players) {
             doRecoverPhaseTurn(p, game.getBoard(), game);
         }
-        
     }
 
     /**
@@ -108,7 +108,7 @@ public class GamePhase {
         }
     }
 
-    public static void doRecoverPhaseTurn (Player p, Board board, Game game) {
+    private static void doRecoverPhaseTurn (Player p, Board board, Game game) {
         Robot robot = p.getRobot();
         IDrawable tile = board.getTile(robot.getX(), robot.getY());
 
@@ -122,22 +122,25 @@ public class GamePhase {
                     }
                     break;
                 case (2):
-                    if (p.getFlags().contains(1)) {
+                    if (p.getFlags().size() == 1) {
                         p.pickupFlag(f);
                     }
                     break;
                 case (3):
-                    if (p.getFlags().containsAll(Arrays.asList(1,2))) {
+                    if (p.getFlags().size() == 2) {
                         p.pickupFlag(f);
                     }
                     break;
                 case (4):
-                    if (p.getFlags().containsAll(Arrays.asList(1,2,3))) {
+                    if (p.getFlags().size() == 3) {
                         p.pickupFlag(f);
                     }
                     break;
                 default:
                     break;
+            }
+            if (p.getFlags().size() == game.getFlags().size()) {
+                setWonGame(true);
             }
             p.repair(1);
         }
@@ -191,5 +194,10 @@ public class GamePhase {
             }
         }
         return beams;
+    }
+
+    public static void setWonGame(boolean won) {
+        GameRendering.setCurrentScene(2);
+        //wonGame = won;
     }
 }

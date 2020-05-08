@@ -57,6 +57,7 @@ public class GameLoop{
             
             if (moves.size() <= 0){
                 this.executeCards = false;
+                GamePhase.runPhaseChange(game);
                 return;
             }
 
@@ -138,9 +139,7 @@ public class GameLoop{
 
         if (currentRound > maxRound) {
             this.executingRound = false;
-            GamePhase.runPhaseChange(game);
             game.getGameRendering().resetCards();
-            
         }
 
         timeSeconds = 0f;

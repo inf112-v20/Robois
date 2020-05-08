@@ -25,4 +25,8 @@ public interface IMovable {
     int getSpawnX();
 
     int getSpawnY();
+
+    void setSpawnX(int x);
+
+    void setSpawnY(int y);
 }

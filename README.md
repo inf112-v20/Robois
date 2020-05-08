@@ -1,10 +1,17 @@
 # INF112 Maven template 
 Simple skeleton with libgdx. 
 
-## Project Setup Documentation
-Programmet startes ved å kjøre main. Da vil det dannes en ny innstans av game(), som lager brettet og tilhørende objekter.
-Testene sjekker at brettet blir laget korrekt(Ingen endring siden forrige Oblig) og at Roboten beveger seg som den skal. Dvs. at den går riktig utifra hvor mange ruten den har fått beskjed om å bevege seg og at roboten ikke kan gå gjennom vegger. I tilegg sjekkes det at den roteres riktig.
-Tester at spiller visuelt ser korrekt ut ved å kjøre gjennom manuelt.
+## Project Setup
+
+**You will need Maven to build the game**
+
+Download: `https://maven.apache.org/download.cgi`
+
+###Linux/Mac
+
+
+
+
 
 ## Known bugs
 Currently throws "WARNING: An illegal reflective access operation has occurred", 

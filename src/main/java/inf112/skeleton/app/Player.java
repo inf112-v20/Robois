@@ -13,6 +13,7 @@ public class Player {
     private Robot robot;
     private int spawnX;
     private int spawnY;
+    private int life;
     private int HP;
     private boolean destroyed = false;
     private ArrayList<Integer> flags = new ArrayList<>();
@@ -22,6 +23,7 @@ public class Player {
         this.spawnX = x;
         this.spawnY = y;
         this.HP = 10;
+        this.life = 3;
     }
 
     public Robot getRobot() {
@@ -53,10 +55,16 @@ public class Player {
     }
 
     public void respawn() {
-        robot.setX(robot.getSpawnX());
-        robot.setY(robot.getSpawnY());
-        destroyed = false;
-        HP = 10;
+        life -= 1;
+        System.out.println(life);
+        if (life <= 0) {
+            GamePhase.setWonGame(false);
+            System.out.println("Robot permanently destroyed");
+        } else {
+            GameMovement.returnToSpawn(robot);
+            destroyed = false;
+            HP = 10;
+        }
     }
 
     public ArrayList<Integer> getFlags() {
@@ -68,10 +76,10 @@ public class Player {
     }
 
     public void repair(int dmg) {
-        if (HP <= (9-dmg)) {
+        if (HP <= (10-dmg)) {
             this.HP += dmg;
         } else {
-            HP = 9;
+            HP = 10;
         }
         updateRobotSpawn();
     }
@@ -80,5 +88,4 @@ public class Player {
         robot.setSpawnX(robot.getX());
         robot.setSpawnY(robot.getY());
     }
-
 }

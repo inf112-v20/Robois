@@ -132,7 +132,7 @@ public class GameLoop{
             ProgramCard c = hand[i];
             if (c != null){
                 this.addMove(c, game.getCurrentPlayer());
-                this.hand[i] = null;
+                hand[i] = null;
                 break;
             }
         }
@@ -140,6 +140,7 @@ public class GameLoop{
         if (currentRound > maxRound) {
             this.executingRound = false;
             game.getGameRendering().resetCards();
+            game.getGameRendering().resetLockedCards();
         }
 
         timeSeconds = 0f;
@@ -149,7 +150,7 @@ public class GameLoop{
     private void addAIMove(Player exludedPlayer) {
         for (Player p : game.getPlayers()) {
             if (!p.equals(exludedPlayer)) {
-                ProgramCardType t = ProgramCardType.MOVE1;
+                ProgramCardType t = ProgramCardType.getRandomCard();
                 ProgramCard c = new ProgramCard(1, 1, 1, ProgramCardType.getRandomInt(t), t);
                 addMove(c, p);
             }
@@ -162,5 +163,9 @@ public class GameLoop{
         this.executeCards = false;
         this.moves.clear();
         this.currentRound = 0;
+    }
+
+    public boolean getExecutingRound() {
+        return this.executingRound;
     }
 }

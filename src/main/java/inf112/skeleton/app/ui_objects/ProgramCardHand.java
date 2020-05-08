@@ -58,7 +58,7 @@ public class ProgramCardHand implements IRenderable {
         }
     }
     private int getMaxCapasity() {
-        return game.getCurrentPlayer().getHP();
+        return game.getCurrentPlayer().getHP()-1;
     }
 
     public void getNewHand() {
@@ -104,6 +104,7 @@ public class ProgramCardHand implements IRenderable {
 
     @Override
     public boolean click(int x, int y) {
+        if (!canClick()) return false;
         for (int i = 0; i < this.hand.length; i++){
             if (this.hand[i] != null && this.hand[i].click(x, y) && this.lockedHand.canAddCard()) {
                 this.lockedHand.addCard(this.hand[i]);
@@ -117,7 +118,7 @@ public class ProgramCardHand implements IRenderable {
 
     @Override
     public boolean canClick() {
-        return this.canClick;
+        return !game.getGameLoop().getExecutingRound();
     }
 
     @Override

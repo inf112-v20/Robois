@@ -7,22 +7,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import inf112.skeleton.app.Game;
 import inf112.skeleton.app.utilities.TextureReader;
 
-public class StartRoundButton implements IRenderable {
+public class StartGameButton implements IRenderable {
     private int x, y, w, h;
     private Game game;
-    private ProgramCardLocked hand;
     
     private TextureRegion r;
     private boolean canClick;
     private boolean canRender;
 
-    public StartRoundButton(int x, int y, int w, int h, float scale, String src, Game game, ProgramCardLocked hand) {
+    public StartGameButton(int x, int y, int w, int h, float scale, String src, Game game) {
         this.x = x;
         this.y = y;
         this.w = (int)(w*scale);
         this.h = (int)(h*scale);
         this.game = game;
-        this.hand = hand;
         this.r = TextureReader.getSpecificTexture(src, w, h);
         this.canClick = true;
         this.canRender = true;
@@ -58,7 +56,7 @@ public class StartRoundButton implements IRenderable {
 
     @Override
     public boolean canRender() {
-        return !game.getGameLoop().getExecutingRound();
+        return this.canRender;
     }
 
     @Override
@@ -68,17 +66,13 @@ public class StartRoundButton implements IRenderable {
 
     @Override
     public boolean click(int x, int y) {
-        if (x >= getX() && x < getX() + getWidth() && y >= getY() && y < getY() + getHeight() && canClick()) {
-            if (!this.hand.isFull()) return false;
-            game.startRound(this.hand.getCards());
-            return true;
-        }
-        return false;
+        game.getGameRendering().setCurrentScene(0);
+        return true;
     }
 
     @Override
     public boolean canClick() {
-        return !game.getGameLoop().getExecutingRound();
+        return this.canClick;
     }
 
     @Override

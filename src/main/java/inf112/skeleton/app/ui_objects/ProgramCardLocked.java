@@ -1,6 +1,12 @@
 package inf112.skeleton.app.ui_objects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
+
+import inf112.skeleton.app.Game;
 
 public class ProgramCardLocked implements IRenderable {
     private int x, y, width, height;
@@ -10,12 +16,15 @@ public class ProgramCardLocked implements IRenderable {
 
     private ProgramCardHand hand;
 
-    public ProgramCardLocked(int x, int y, int width, int height) {
+    private Game game;
+
+    public ProgramCardLocked(int x, int y, int width, int height, Game game) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         lockedCards = new ProgramCard[5];
+        this.game = game;
     }
 
     public void addCard(ProgramCard c) {
@@ -85,6 +94,7 @@ public class ProgramCardLocked implements IRenderable {
 
     @Override
     public boolean click(int x, int y) {
+        if (!canClick()) return false;
         for (int i = 0; i < this.lockedCards.length; i++){
             if (this.lockedCards[i] != null && this.lockedCards[i].click(x, y)) {
                 this.hand.addCard(this.lockedCards[i]);
@@ -98,7 +108,7 @@ public class ProgramCardLocked implements IRenderable {
 
     @Override
     public boolean canClick() {
-        return this.canClick;
+        return !game.getGameLoop().getExecutingRound();
     }
 
     @Override
@@ -125,6 +135,39 @@ public class ProgramCardLocked implements IRenderable {
         for (int i = 0; i < this.lockedCards.length; i++) {
             this.lockedCards[i] = null;
         }
+	}
+
+	public void updateHand() {
+        List<Integer> toBeLocked = new ArrayList<>();
+
+        for (int i = 1; i <= 5; i++) {
+            if (game.getCurrentPlayer().getHP() <= i){
+                toBeLocked.add(i);
+            } else {
+                lockedCards[i-1] = null;
+            }
+        }
+
+        lockCard(toBeLocked);
+	}   
+
+    private void lockCard(List<Integer> i) {
+        for (int j = 0; j < lockedCards.length; j++) {
+            if (lockedCards[j] == null) continue;
+            lockedCards[j].setCanClick(true);
+        }
+        for (int x : i) {
+            if (lockedCards[x-1] == null) continue;
+            lockedCards[x-1].setCanClick(false);
+        }
+        
+    }
+
+	public boolean isFull() {
+		for (int i = 0; i < lockedCards.length; i++) {
+            if (lockedCards[i] == null) return false;
+        }
+        return true;
 	}
 
 }

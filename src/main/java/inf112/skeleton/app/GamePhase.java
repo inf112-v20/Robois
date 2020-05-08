@@ -165,12 +165,6 @@ public class GamePhase {
             l.setBeams(beams);
         }
 
-        /* List<String> locations = new ArrayList<>();
-            for (Beam b : beams) {
-                locations.add(Integer.toString(b.getX()) + "." + Integer.toString(b.getY()));
-            }
-        System.out.println(locations); */
-
         for (Player p : players) {
             Robot robot = p.getRobot();
             for (Beam b : beams) {

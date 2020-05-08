@@ -58,10 +58,8 @@ public class InformationDisplay implements IRenderable {
     public void render(Batch batch) {
         if (!canRender()) return;
 
-        String phase = String.format("> Current Phase: %d", game.getPhase());
-        font.draw(batch, phase, getX(), getY());
-        font.draw(batch, String.format("HP: %d", game.getCurrentPlayer().getHP()), getX()+300, getY());
-        font.draw(batch, String.format("Lives: %d", game.getCurrentPlayer().getLife()), getX()+200, getY());
+        String text = String.format("> Current Phase: %d  |  HP: %d  |  Lives: %d", game.getPhase(), game.getCurrentPlayer().getHP(), game.getCurrentPlayer().getLife());
+        font.draw(batch, text, getX(), getY());
 
         timeSeconds += Gdx.graphics.getRawDeltaTime();
         if(timeSeconds > period){

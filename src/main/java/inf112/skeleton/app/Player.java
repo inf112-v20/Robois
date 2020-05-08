@@ -56,14 +56,25 @@ public class Player {
 
     public void respawn(Game game) {
         life -= 1;
-        System.out.println(life);
         if (life <= 0) {
-            GamePhase.setWonGame(game, false);
-            System.out.println("Robot permanently destroyed");
+            if (this.equals(game.getCurrentPlayer())) {
+                GamePhase.setWonGame(game, false);
+                return;
+            } else {
+                game.deletePlayer(this);
+                if (game.allEnemiesAreDead()) {
+                    GamePhase.setWonGame(game, true);
+                    return;
+                }
+            }
+
         } else {
+            HP = 8;
             GameMovement.returnToSpawn(robot);
+            if (this.equals(game.getCurrentPlayer())) {
+                game.getGameRendering().resetLockedCards();
+            }
             destroyed = false;
-            HP = 10;
         }
     }
 

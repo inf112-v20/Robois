@@ -16,6 +16,7 @@ import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.objects.tiles.Beam;
 import inf112.skeleton.app.objects.tiles.Laser;
 import inf112.skeleton.app.utilities.CardinalDirection;
+import inf112.skeleton.app.utilities.TextureReader;
 
 public class UIBoard implements IRenderable {
     private Location location;
@@ -122,7 +123,12 @@ public class UIBoard implements IRenderable {
         // Robot
         for (Player player : game.getPlayers()) {
             Robot robot = player.getRobot();
-            Sprite s = new Sprite(this.textures.get(robot.getImageId()));
+            Sprite s;
+            if (player.equals(game.getCurrentPlayer())) {
+                s = new Sprite(TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/friendly_robot.png", 300, 300));
+            }else {
+                s = new Sprite(TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/enemy_robot.png", 300, 300));
+            }
             int ym = game.getBoard().getHeight() - robot.getY() - 1;
             s.setPosition(robot.getX() * this.tileSize + getX(), ym * this.tileSize + getY());
             s.setSize(this.tileSize, this.tileSize);

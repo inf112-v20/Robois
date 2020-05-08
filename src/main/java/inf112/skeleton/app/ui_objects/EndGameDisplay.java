@@ -55,9 +55,9 @@ public class EndGameDisplay implements IRenderable {
     public void render(Batch batch) {
         if (!canRender()) return;
         if (game.wonGame()) {
-            font1.draw(batch, "Victory!", getX()+40, getY());
+            font1.draw(batch, "Victory!", getX()+40, getY()-100);
         } else {   
-            font1.draw(batch, "Game Over", getX(), getY());
+            font1.draw(batch, "Game Over", getX(), getY()-100);
         }
         font2.draw(batch, "Main Menu", getX()+40, getY()-200);
     }
@@ -66,6 +66,7 @@ public class EndGameDisplay implements IRenderable {
     public boolean click(int x, int y) {
         if (x >= getX()+40 && x < getX()+40 + getWidth() && y <= getY()-200 && y > getY()-200 - getHeight() && canClick()) {
             game.getGameRendering().setCurrentScene(1);
+            game.clearPreviousGame();
         }
         return true;
     }

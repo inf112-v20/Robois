@@ -36,15 +36,28 @@ public class Game extends InputAdapter implements ApplicationListener {
 
     @Override
     public void create() {
+         
         try {
-            board = new Board("b1t.csv");
+            board = new Board("b_re.csv");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        // Add players / spawns to the board.
-        for (int x = 0; x < board.getWidth(); x++) {
+        clearPreviousGame();
+
+    }
+
+    public void clearPreviousGame() {
+        this.players.clear();
+        this.lasers.clear();
+        this.flags.clear();
+        this.playablePlayer = null;
+        this.phaseNr = 0;
+        this.wonGame = false;
+
+         // Add players / spawns to the board.
+         for (int x = 0; x < board.getWidth(); x++) {
             for (int y = 0; y < board.getHeight(); y++) {
                 if (board.getTile(x, y) instanceof Spawn) {
                     Player p = new Player(x, y);
@@ -61,7 +74,6 @@ public class Game extends InputAdapter implements ApplicationListener {
 
             }
         }
-        this.wonGame = false;
 
         this.gameRendering = new GameRendering(this);
         GameInput gameInput = new GameInput(this, this.gameRendering);
@@ -129,7 +141,7 @@ public class Game extends InputAdapter implements ApplicationListener {
      * @return the current phase
      */
     public int getPhase() {
-        return this.phaseNr;
+        return Math.floorMod(this.phaseNr, 5)+1;
     }
 
     /**
@@ -194,4 +206,17 @@ public class Game extends InputAdapter implements ApplicationListener {
     public GameLoop getGameLoop() {
         return this.gameLoop;
     }
+
+	public void deletePlayer(Player player) {
+        this.players.remove(player);
+	}
+
+	public boolean allEnemiesAreDead() {
+        for (Player p : this.players) {
+            if (!p.equals(this.getCurrentPlayer())) {
+                return false;
+            }
+        }    
+        return true;   
+	}
 }

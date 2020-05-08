@@ -31,7 +31,7 @@ public class GameRendering {
 
     private TextureRegion bg;
     private TextureRegion frame;
-    private TextureRegion startbg;
+    private TextureRegion basicbg;
 
     public GameRendering(Game game) {
         this.board = game.getBoard();
@@ -39,9 +39,9 @@ public class GameRendering {
         this.font = new BitmapFont();
         this.font.setColor(Color.RED);
         this.scenes = new HashMap<>();
-        this.bg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/ui_background.png", 1920, 1080);
+        this.bg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/ui_background.png", 1250, 703);
         this.frame = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/frame.png", 858, 860);
-        this.startbg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/pad.png", 820, 1100);
+        this.basicbg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/basicbg.png", 1250, 703);
         
         try {
             this.textures = TextureReader.getTextures();
@@ -54,13 +54,13 @@ public class GameRendering {
         // CREATING UI
         Panel mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
         scenes.put(0, mainGamePanel);
-        this.currentScene = 0;
+        this.currentScene = 1;
 
         mainGamePanel.addObject(new UIBoard(148, 155, 622, 622, game, this.regions, this.textures));
         
         mainGamePanel.addObject(new InformationDisplay(166, 90, 100, 100, game));
         
-        ProgramCardLocked l = new ProgramCardLocked(868, 146, 500, 155);
+        ProgramCardLocked l = new ProgramCardLocked(868, 146, 500, 155, game);
         mainGamePanel.addObject(l);
 
         ProgramCardHand h = new ProgramCardHand(1010, 333, 300, 500, game, l);
@@ -68,9 +68,12 @@ public class GameRendering {
 
         l.setHand(h);
 
-        //START GAME - Usikker på dette
+        //START GAME
         Panel startGamePanel = new Panel(0, 0, 16*80, 9*80, null);
         scenes.put(1, startGamePanel);
+        String startbuttonsrc = "src/main/java/inf112/skeleton/app/assets/sprites/start.png";
+
+        startGamePanel.addObject(new StartGameButton(355, 400, 142, 56, 1.5f, startbuttonsrc, game));
 
         //END GAME
         Panel endGamePanel = new Panel(0, 0, 16*80, 9*80, null);
@@ -78,8 +81,8 @@ public class GameRendering {
 
         endGamePanel.addObject(new EndGameDisplay(350, 600, 140, 25, game));
         
-        String src = "src/main/java/inf112/skeleton/app/assets/sprites/locked_in.jpg";
-        mainGamePanel.addObject(new StartRoundButton(1055, 30, 175, 47, 1.3f, src, game, l));
+        String startroundbuttonsrc = "src/main/java/inf112/skeleton/app/assets/sprites/locked_in.jpg";
+        mainGamePanel.addObject(new StartRoundButton(1055, 30, 175, 47, 1.3f, startroundbuttonsrc, game, l));
     }
 
     /**
@@ -90,30 +93,36 @@ public class GameRendering {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        this.batch.begin();
-        switch (currentScene) {
-            case 1:
-                Sprite s = new Sprite(this.startbg);
-                s.setSize(1600, 900);
-                s.draw(batch);
-                break;
-            default:
-                // Temp background rendering
-                Sprite b = new Sprite(this.bg);
-                b.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                b.draw(batch);
-                Sprite f = new Sprite(this.frame);
-                f.setX(110);
-                f.setY(103);
-                f.setSize(700, 710);
-                f.draw(batch);
-                break;
-        }
-        this.batch.end();
 
-        this.batch.begin();
-        getCurrentScene().render(this.batch);
-        this.batch.end();
+        if (currentScene == 1) {
+            this.batch.begin();
+            Sprite b = new Sprite(this.basicbg);
+            b.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            b.draw(batch);
+            
+            this.batch.end();
+
+            renderScene();
+        } else if (currentScene == 2) {
+            this.batch.begin();
+            Sprite b = new Sprite(this.basicbg);
+            b.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            b.draw(batch);
+            
+            this.batch.end();
+            renderScene();
+        } else {
+            this.batch.begin();
+            // Temp background rendering
+            Sprite b = new Sprite(this.bg);
+            b.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            b.draw(batch);
+            this.batch.end();
+    
+            renderScene();
+    
+
+        }
 
         this.batch.begin();
         Sprite f = new Sprite(this.frame);
@@ -125,6 +134,12 @@ public class GameRendering {
 
         this.batch.begin();
         font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
+        this.batch.end();
+    }
+
+    private void renderScene() {
+        this.batch.begin();
+        getCurrentScene().render(this.batch);
         this.batch.end();
     }
 
@@ -161,6 +176,15 @@ public class GameRendering {
             if (r instanceof ProgramCardHand) {
                 ProgramCardHand p = (ProgramCardHand) r;
                 p.getNewHand();
+            }
+        }
+    }
+
+    public void resetLockedCards() {
+        for (IRenderable r : this.getCurrentScene().getObjects()) {
+            if (r instanceof ProgramCardLocked) {
+                ProgramCardLocked p = (ProgramCardLocked) r;
+                p.updateHand();
             }
         }
     }

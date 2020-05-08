@@ -5,7 +5,7 @@ Simple skeleton with libgdx.
 
 **You will need Maven to build the game**
 
-Download: https://maven.apache.org/download.cgi
+Download: `https://maven.apache.org/download.cgi`
 
 ###Linux/Mac
 

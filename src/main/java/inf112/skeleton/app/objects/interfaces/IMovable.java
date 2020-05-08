@@ -1,6 +1,5 @@
 package inf112.skeleton.app.objects.interfaces;
 
-import inf112.skeleton.app.Player;
 import inf112.skeleton.app.utilities.CardinalDirection;
 
 /**

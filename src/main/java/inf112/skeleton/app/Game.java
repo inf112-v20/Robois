@@ -31,7 +31,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private Player playablePlayer;
     private int r = 0;
     private int phaseNr = 0;
-    private String wonGame;
+    public String wonGame;
 
     private GameRendering gameRendering;
     private GameLoop gameLoop;

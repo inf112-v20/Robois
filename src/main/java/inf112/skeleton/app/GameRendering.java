@@ -54,7 +54,7 @@ public class GameRendering {
         // CREATING UI
         Panel mainGamePanel = new Panel(0, 0, 16*80, 9*80, null);
         scenes.put(0, mainGamePanel);
-        currentScene = 0;
+        this.currentScene = 0;
 
         mainGamePanel.addObject(new UIBoard(148, 155, 622, 622, game, this.regions, this.textures));
         

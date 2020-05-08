@@ -1,7 +1,6 @@
 package inf112.skeleton.app;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import inf112.skeleton.app.objects.Board;
@@ -20,7 +19,7 @@ import inf112.skeleton.app.utilities.RelativeDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
 public class GamePhase {
-    private static Boolean wonGame = null;
+    //private static Boolean wonGame = null;
 
     /**
      * Run a new phase change
@@ -136,6 +135,7 @@ public class GamePhase {
                     if (p.getFlags().size() == 3) {
                         p.pickupFlag(f);
                     }
+                    break;
                 default:
                     break;
             }
@@ -198,6 +198,6 @@ public class GamePhase {
 
     public static void setWonGame(boolean won) {
         GameRendering.setCurrentScene(2);
-        wonGame = won;
+        //wonGame = won;
     }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import inf112.skeleton.app.Game;
-import inf112.skeleton.app.GameRendering;
 import inf112.skeleton.app.objects.abstracts.Location;
 
 public class EndGameDisplay implements IRenderable {
@@ -55,7 +54,11 @@ public class EndGameDisplay implements IRenderable {
     @Override
     public void render(Batch batch) {
         if (!canRender()) return;
-        font1.draw(batch, "Game Over", getX(), getY());
+        if (game.wonGame()) {
+            font1.draw(batch, "Victory!", getX()+40, getY());
+        } else {   
+            font1.draw(batch, "Game Over", getX(), getY());
+        }
         font2.draw(batch, "Main Menu", getX()+40, getY()-200);
     }
 
@@ -63,7 +66,6 @@ public class EndGameDisplay implements IRenderable {
     public boolean click(int x, int y) {
         if (x >= getX()+40 && x < getX()+40 + getWidth() && y <= getY()-200 && y > getY()-200 - getHeight() && canClick()) {
             game.getGameRendering().setCurrentScene(1);
-            System.out.println(game.wonGame);
         }
         return true;
     }

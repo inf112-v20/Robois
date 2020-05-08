@@ -58,22 +58,18 @@ public class InformationDisplay implements IRenderable {
     public void render(Batch batch) {
         if (!canRender()) return;
 
+        String phase = String.format("> Current Phase: %d", game.getPhase());
+        font.draw(batch, phase, getX(), getY());
+        font.draw(batch, String.format("HP: %d", game.getCurrentPlayer().getHP()), getX()+100, getY()-30);
+        font.draw(batch, String.format("> Lives: %d", game.getCurrentPlayer().getLife()), getX(), getY()-30);
 
         timeSeconds += Gdx.graphics.getRawDeltaTime();
         if(timeSeconds > period){
             timeSeconds-=period;
         } else if (timeSeconds > period/2){
-            String phase = String.format("Current Phase: %d", game.getPhase());
-            font.draw(batch, phase, getX(), getY());
-            font.draw(batch, String.format("HP: %d_", game.getCurrentPlayer().getHP()), getX()+100, getY()-30);
-            font.draw(batch, String.format("Lives: %d", game.getCurrentPlayer().getLife()), getX(), getY()-30);
-            font.draw(batch, String.format("Flags: %d", game.getCurrentPlayer().getFlags().size()), getX(), getY()-60);
+            font.draw(batch, String.format("> Flags: %d_", game.getCurrentPlayer().getFlags().size()), getX(), getY()-60);
         }else{
-            String phase = String.format("Current Phase: %d", game.getPhase());
-            font.draw(batch, phase, getX(), getY());
-            font.draw(batch, String.format("HP: %d", game.getCurrentPlayer().getHP()), getX()+100, getY()-30);
-            font.draw(batch, String.format("Lives: %d", game.getCurrentPlayer().getLife()), getX(), getY()-30);
-            font.draw(batch, String.format("Flags: %d", game.getCurrentPlayer().getFlags().size()), getX(), getY()-60);
+            font.draw(batch, String.format("> Flags: %d", game.getCurrentPlayer().getFlags().size()), getX(), getY()-60);
         }
     }
 

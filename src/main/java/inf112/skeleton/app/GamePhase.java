@@ -140,7 +140,8 @@ public class GamePhase {
                     break;
             }
             if (p.getFlags().size() == game.getFlags().size()) {
-                setWonGame(game, true);
+                boolean won = p.equals(game.getCurrentPlayer()) ? true : false;
+                setWonGame(game, won);
             }
             p.repair(1);
         }
@@ -198,6 +199,7 @@ public class GamePhase {
 
     public static void setWonGame(Game game, boolean won) {
         game.getGameRendering().setCurrentScene(2);
-        //wonGame = won;
+        game.setWonGame(won);
+        game.getGameLoop().endGame();
     }
 }

@@ -29,7 +29,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private List<Integer> flags = new ArrayList<>();
     private Player playablePlayer;
     private int phaseNr = 0;
-    public String wonGame;
+    private boolean wonGame;
 
     private GameRendering gameRendering;
     private GameLoop gameLoop;
@@ -37,7 +37,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public void create() {
         try {
-            board = new Board("b_re.csv");
+            board = new Board("b1t.csv");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -61,6 +61,7 @@ public class Game extends InputAdapter implements ApplicationListener {
 
             }
         }
+        this.wonGame = false;
 
         this.gameRendering = new GameRendering(this);
         GameInput gameInput = new GameInput(this, this.gameRendering);
@@ -169,13 +170,28 @@ public class Game extends InputAdapter implements ApplicationListener {
      */
     public List<Integer> getFlags() {
         return flags;
-	  }
+    }
 
-	  public void startRound(ProgramCard[] hand) {
+    public void startRound(ProgramCard[] hand) {
         this.gameLoop.startRound(hand);
     }
 
-	  public GameRendering getGameRendering() {
-		    return this.gameRendering;
-	  }
+    public GameRendering getGameRendering() {
+        return this.gameRendering;
+    }
+
+    public boolean wonGame() {
+        return this.wonGame;
+    }
+
+    public void setWonGame(boolean b) {
+        this.wonGame = b;
+    }
+
+    /**
+     * @return the gameLoop
+     */
+    public GameLoop getGameLoop() {
+        return this.gameLoop;
+    }
 }

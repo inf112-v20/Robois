@@ -149,11 +149,18 @@ public class GameLoop{
     private void addAIMove(Player exludedPlayer) {
         for (Player p : game.getPlayers()) {
             if (!p.equals(exludedPlayer)) {
-                ProgramCardType t = ProgramCardType.getRandomCard();
+                ProgramCardType t = ProgramCardType.MOVE1;
                 ProgramCard c = new ProgramCard(1, 1, 1, ProgramCardType.getRandomInt(t), t);
                 addMove(c, p);
             }
         }
         
+    }
+
+    public void endGame() {
+        this.executingRound = false;
+        this.executeCards = false;
+        this.moves.clear();
+        this.currentRound = 0;
     }
 }

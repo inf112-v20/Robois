@@ -58,12 +58,12 @@ public class GameRendering {
 
         mainGamePanel.addObject(new UIBoard(148, 155, 622, 622, game, this.regions, this.textures));
         
-        mainGamePanel.addObject(new InformationDisplay(150, 100, 100, 100, game));
+        mainGamePanel.addObject(new InformationDisplay(166, 90, 100, 100, game));
         
-        ProgramCardLocked l = new ProgramCardLocked(904, 119, 500, 155);
+        ProgramCardLocked l = new ProgramCardLocked(868, 146, 500, 155);
         mainGamePanel.addObject(l);
 
-        ProgramCardHand h = new ProgramCardHand(1010, 335, 300, 500, game, l);
+        ProgramCardHand h = new ProgramCardHand(1010, 333, 300, 500, game, l);
         mainGamePanel.addObject(h);
 
         l.setHand(h);

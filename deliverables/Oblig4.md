@@ -142,7 +142,7 @@ På møtene har vi hele tiden brukt liveShare i vs code for å jobbe sammen, så
 >- Implementere Flag-klassen
 >- Legge til en måte å plukke opp flagg i GamePhase og sjekke om man har vunnet spillet.
 
-**Brukerhistorie (Programkort)**:
+**Brukerhistorie (ProgramCard)**:
 
 >Som spiller trenger jeg programkort for å programmere roboten slik at jeg kan gjennomføre en runde
 >**Akseptansekriterier:**  
@@ -158,7 +158,6 @@ På møtene har vi hele tiden brukt liveShare i vs code for å jobbe sammen, så
 - Har ikke gjort noen store endringer siden sist mtp hva som skal være med i MVP. Dvs at vi fortsatt følger det som har blitt gitt av kunden.  
 Hovedkravene vi annser som en del av MVP er å implementere de tilesene som er blitt oppgitt. Kunne programmere en robot med programkort til å plukke opp flagg, ta skade, dø eller å vinne spillet.  
 Eneste endring er at vi ikke skal ha multiplayer pga. nedstegning av universitetet og at vi mistet ett team-medlem som skulle ta seg av dette. Istedenfor har vi lagt inn bots. Disse gjør bare tilfeldige trekk, men gjør at spillet er spillbart med flere roboter.
-
 
 ## Møtereferat
 
@@ -245,7 +244,8 @@ Player har np liv i tilegg til hp. Man starter med 3 liv og dersom man mister al
 
 **På møtet:**  
 Alle: Vi ullførte implementasjon av game loopen med en random AI, la også inn en knapp for å starte game loopen. Selve logikken var ikke så veldig vanskelig, men å legge inn et delay mellom hvert move så ble det mye vanskeligere.  
-Fullførte designet på spillet, dvs, grafiske elementer rundt kort, endgame display, og start display.
+Fullførte designet på spillet, dvs, grafiske elementer rundt kort, endgame display, og start display.  
+Implementerte laserene til robotene.
 
 Kasper: Lagde flere UI-elementer.
 
@@ -258,12 +258,12 @@ Automatiske tester ligger i `src/test/java/inf112.skeleton.app`
 ### Manuelle tester
 
 Bruker [test controls](../README.md#test-controls) for å plassere roboten der vi vil ha den.  
-**Før man tester:** Gå inn i `src/main/java/inf112.skeleton.app/Game` og sjekk at `filename: "b1.csv"`  
+**Før man tester:** Gå inn i `src/main/java/inf112.skeleton.app/Game.java` og sjekk at `filename: "b1.csv"`  
 
-```
-40 | public void create() {
-41 |     try {
-42 |          board = new Board(filename);
+```java
+39 | public void create() {
+40 |     try {
+41 |          board = new Board(filename);
 ```
 
 Husk å skifte tilbake til `filename: "b_re.csv"` når man vil spille spillet.

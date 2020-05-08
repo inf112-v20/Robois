@@ -36,13 +36,6 @@ public enum ProgramCardType {
         return x*10;
     }
 
-    public static void test() {
-        System.out.println(getRandomInt(MOVE1));
-        System.out.println(getRandomInt(MOVE1));
-        System.out.println(getRandomInt(MOVE1));
-        System.out.println(getRandomInt(MOVE1));
-    }
-
     public static ProgramCardType getRandomCard() {
         int c = (int)(Math.random() * (7 - 1 + 1) + 1);
         switch (c) {

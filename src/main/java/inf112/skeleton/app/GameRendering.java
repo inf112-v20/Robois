@@ -41,7 +41,7 @@ public class GameRendering {
         this.scenes = new HashMap<>();
         this.bg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/ui_background.png", 1250, 703);
         this.frame = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/frame.png", 858, 860);
-        this.basicbg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/basicbg.png", 1250, 703);
+        this.basicbg = TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/basicbg.png", 1104, 621);
         
         try {
             this.textures = TextureReader.getTextures();

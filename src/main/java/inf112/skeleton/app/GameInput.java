@@ -19,6 +19,9 @@ public class GameInput implements InputProcessor{
 
     @Override
     public boolean keyDown(int keyCode) {
+        if (!game.getDebugging()) {
+            return false;
+        }
         if (keyCode == Input.Keys.W) {
             GameMovement.move(1, game.getCurrentPlayer().getRobot(), game.getBoard(), game);
             return true;
@@ -64,7 +67,6 @@ public class GameInput implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (button == Input.Buttons.LEFT) {
-            System.out.println(String.format("(%d, %d)", screenX, Gdx.graphics.getHeight() - screenY));
             this.gameRendering.onMouseDown(screenX, Gdx.graphics.getHeight() - screenY);
             return true;
         }

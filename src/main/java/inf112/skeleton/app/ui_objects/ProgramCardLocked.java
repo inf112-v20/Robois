@@ -1,7 +1,6 @@
 package inf112.skeleton.app.ui_objects;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,7 +9,6 @@ import inf112.skeleton.app.Game;
 
 public class ProgramCardLocked implements IRenderable {
     private int x, y, width, height;
-    private boolean canClick = true;
     private boolean canRender = true;
     private ProgramCard[] lockedCards;
 
@@ -113,7 +111,7 @@ public class ProgramCardLocked implements IRenderable {
 
     @Override
     public void setCanClick(boolean b) {
-        this.canClick = b;
+        return;
     }
 
     

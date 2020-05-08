@@ -6,7 +6,6 @@ import inf112.skeleton.app.Game;
 
 public class ProgramCardHand implements IRenderable {
     private int x, y, width, height;
-    private boolean canClick = true;
     private boolean canRender = true;
     private ProgramCard[] hand;
     private ProgramCardLocked lockedHand;
@@ -123,7 +122,7 @@ public class ProgramCardHand implements IRenderable {
 
     @Override
     public void setCanClick(boolean b) {
-        this.canClick = b;
+        return;
     }
     
     @Override

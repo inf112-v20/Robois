@@ -48,6 +48,14 @@ Press on the blue arrow to confirm selection and start a game round.
 
 ### Test Controls
 
+>**Important!:** Before test controls can be used you have to set
+>
+>```java
+>26 | private final boolean debugging = true;
+>```
+>
+>In the class `src/main/java/inf112.skeleton.app/Game.java`
+
 #### Movement
 
 - Forward: **W**

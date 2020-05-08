@@ -74,6 +74,7 @@ public class GameLoop{
 
             ProgramCardType c = minEntry.getValue().getProgramCard().getType();
             Player p = minEntry.getValue().getPlayer();
+            if (p.getRobot() == null) return;
             Robot r = p.getRobot();
             executeCard(c, r);
         }

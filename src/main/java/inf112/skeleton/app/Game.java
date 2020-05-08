@@ -23,6 +23,7 @@ import inf112.skeleton.app.utilities.CardinalityUtility;
  * Where the main gameplay loop runs.
  */
 public class Game extends InputAdapter implements ApplicationListener {
+    private final boolean debugging = false;
     private Board board;
     private List<Player> players = new ArrayList<>();
     private List<Laser> lasers = new ArrayList<>();
@@ -36,7 +37,6 @@ public class Game extends InputAdapter implements ApplicationListener {
 
     @Override
     public void create() {
-         
         try {
             board = new Board("b_re.csv");
 
@@ -119,6 +119,7 @@ public class Game extends InputAdapter implements ApplicationListener {
      */
     public IMovable getMovable(int x, int y, CardinalDirection dir) {
         for (Player p : this.players) {
+            if (p.getRobot() == null) continue;
             Robot r = p.getRobot();
             Location l = CardinalityUtility.getNextTile(x, y, dir);
             if (r.getX() == l.getX() && r.getY() == l.getY()) {
@@ -209,14 +210,21 @@ public class Game extends InputAdapter implements ApplicationListener {
 
 	public void deletePlayer(Player player) {
         this.players.remove(player);
+        if (this.allEnemiesAreDead()) {
+            GamePhase.setWonGame(this, true);
+        }
 	}
 
 	public boolean allEnemiesAreDead() {
         for (Player p : this.players) {
-            if (!p.equals(this.getCurrentPlayer())) {
+            if (!p.equals(this.getCurrentPlayer()) && p.getRobot() != null) {
                 return false;
             }
         }    
         return true;   
-	}
+    }
+    
+    public boolean getDebugging() {
+        return debugging;
+    }
 }

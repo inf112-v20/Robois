@@ -123,6 +123,7 @@ public class UIBoard implements IRenderable {
         // Robot
         for (Player player : game.getPlayers()) {
             Robot robot = player.getRobot();
+            if (robot == null) continue;
             Sprite s;
             if (player.equals(game.getCurrentPlayer())) {
                 s = new Sprite(TextureReader.getSpecificTexture("src/main/java/inf112/skeleton/app/assets/sprites/friendly_robot.png", 300, 300));

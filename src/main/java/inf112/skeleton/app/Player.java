@@ -57,17 +57,7 @@ public class Player {
     public void respawn(Game game) {
         life -= 1;
         if (life <= 0) {
-            if (this.equals(game.getCurrentPlayer())) {
-                GamePhase.setWonGame(game, false);
-                return;
-            } else {
-                game.deletePlayer(this);
-                if (game.allEnemiesAreDead()) {
-                    GamePhase.setWonGame(game, true);
-                    return;
-                }
-            }
-
+            checkWin(game);
         } else {
             HP = 8;
             GameMovement.returnToSpawn(robot);
@@ -103,4 +93,17 @@ public class Player {
     public int getLife() {
         return life;
     }
+
+    private void checkWin(Game game) {
+        if (this.equals(game.getCurrentPlayer())) {
+            GamePhase.setWonGame(game, false);
+            return;
+        } else {
+            this.robot = null;
+            if (game.allEnemiesAreDead()) {
+                GamePhase.setWonGame(game, true);
+            }
+        }
+    }
+
 }

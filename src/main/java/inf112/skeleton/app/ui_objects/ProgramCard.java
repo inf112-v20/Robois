@@ -69,7 +69,6 @@ public class ProgramCard implements IRenderable {
     @Override
     public boolean click(int x, int y) {
         if (x >= getX() && x < getX() + getWidth() && y >= getY() && y < getY() + getHeight() && canClick()) {
-            System.out.println(String.format("Clicked card at x:%d y:%d", x, y));
             return true;
         }
         return false;

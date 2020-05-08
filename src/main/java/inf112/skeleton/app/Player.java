@@ -88,4 +88,8 @@ public class Player {
         robot.setSpawnX(robot.getX());
         robot.setSpawnY(robot.getY());
     }
+
+    public int getLife() {
+        return life;
+    }
 }

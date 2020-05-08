@@ -118,22 +118,6 @@ public class Game extends InputAdapter implements ApplicationListener {
     }
 
     /**
-     * Update the current player variable to the next player
-     */
-    public void nextPlayer() {
-        this.r = (this.r + 1) % this.players.size();
-    }
-
-    /**
-     * Get the current robot in use.
-     * 
-     * @return the current robot.
-     */
-    public IMovable getCurrentRobot() {
-        return players.get(r).getRobot();
-    }
-
-    /**
      * Increment the phase number to the next one.
      */
     public void nextPhase() {

@@ -20,23 +20,19 @@ public class GameInput implements InputProcessor{
     @Override
     public boolean keyDown(int keyCode) {
         if (keyCode == Input.Keys.W) {
-            GameMovement.move(1, game.getCurrentRobot(), game.getBoard(), game);
-            game.nextPlayer();
+            GameMovement.move(1, game.getCurrentPlayer().getRobot(), game.getBoard(), game);
             return true;
         }
         if (keyCode == Input.Keys.D) {
-            GameMovement.rotate(RelativeDirection.RIGHT, game.getCurrentRobot());
-            game.nextPlayer();
+            GameMovement.rotate(RelativeDirection.RIGHT, game.getCurrentPlayer().getRobot());
             return true;
         }
         if (keyCode == Input.Keys.S) {
-            GameMovement.moveBackwards(1, game.getCurrentRobot(), game.getBoard(), game);
-            game.nextPlayer();
+            GameMovement.moveBackwards(1, game.getCurrentPlayer().getRobot(), game.getBoard(), game);
             return true;
         }
         if (keyCode == Input.Keys.A) {
-            GameMovement.rotate(RelativeDirection.LEFT, game.getCurrentRobot());
-            game.nextPlayer();
+            GameMovement.rotate(RelativeDirection.LEFT, game.getCurrentPlayer().getRobot());
             return true;
         }
         if (keyCode == Input.Keys.SPACE) {

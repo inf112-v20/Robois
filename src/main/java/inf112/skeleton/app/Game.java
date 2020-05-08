@@ -15,7 +15,6 @@ import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.objects.tiles.Flag;
 import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.objects.tiles.Laser;
-import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.ui_objects.ProgramCard;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
@@ -29,7 +28,6 @@ public class Game extends InputAdapter implements ApplicationListener {
     private List<Laser> lasers = new ArrayList<>();
     private List<Integer> flags = new ArrayList<>();
     private Player playablePlayer;
-    private int r = 0;
     private int phaseNr = 0;
     public String wonGame;
 

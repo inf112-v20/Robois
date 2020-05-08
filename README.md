@@ -1,4 +1,4 @@
-# INF112 Maven template 
+# INF112 Robois
 Simple implementation of the board game RoboRally.
 
 [![Build Status](https://travis-ci.com/inf112-v20/Robois.svg?branch=master)](https://travis-ci.com/inf112-v20/Robois)
@@ -12,7 +12,7 @@ Download: `https://maven.apache.org/download.cgi`
 
 **You will also need Java 13 to run**
 
-###Linux/Mac
+### Linux/Mac
 
 **1.** Clone the repository
 ```
@@ -30,7 +30,7 @@ mvn clean verify assembly:single
 java -jar target/mvn-app-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
-###Windows
+### Windows
 
 **1.** Intall Java IDE (etc. vs code/IntelliJ IDEA)
 
@@ -38,24 +38,24 @@ java -jar target/mvn-app-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 **3.** Run the game with Main.java. Located in `main/java/inf112/skeleton/app
 
-##How to Play
+## How to Play
 
-###Gameplay
+### Gameplay
 
 Select cards you want to execute by clicking on the cards with your mouse. 
 You can return cards by clicking on a card you previously selected.
 Press on the blue arrow to confirm selection and start a game round.
 
-###Test Controls
+### Test Controls
 
-####Movement
+#### Movement
 
 - Forward: **W**
 - Backward: **S**
 - Turn right: **D**
 - Turn left: **A**
 
-####Gameboard
+#### Gameboard
 
 - Run phase: **Space**
 - Refresh cards: **O**

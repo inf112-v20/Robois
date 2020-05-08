@@ -54,11 +54,11 @@ public class Player {
         return this.destroyed;
     }
 
-    public void respawn() {
+    public void respawn(Game game) {
         life -= 1;
         System.out.println(life);
         if (life <= 0) {
-            GamePhase.setWonGame(false);
+            GamePhase.setWonGame(game, false);
             System.out.println("Robot permanently destroyed");
         } else {
             GameMovement.returnToSpawn(robot);

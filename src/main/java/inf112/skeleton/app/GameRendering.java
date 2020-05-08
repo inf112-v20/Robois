@@ -27,7 +27,7 @@ public class GameRendering {
     private HashMap<Integer, TextureRegion> textures;
 
     private HashMap<Integer, Panel> scenes;
-    static private Integer currentScene;
+    private Integer currentScene;
 
     private TextureRegion bg;
     private TextureRegion frame;
@@ -154,14 +154,14 @@ public class GameRendering {
         return this.scenes.get(currentScene);
     }
 
-    public static void setCurrentScene(int scene) { currentScene = scene; }
+    public void setCurrentScene(int scene) { this.currentScene = scene; }
   
-	  public void resetCards() {
-          for (IRenderable r : this.getCurrentScene().getObjects()) {
-             if (r instanceof ProgramCardHand) {
-                  ProgramCardHand p = (ProgramCardHand) r;
-                  p.getNewHand();
-             }
-          }
-	  }
+    public void resetCards() {
+        for (IRenderable r : this.getCurrentScene().getObjects()) {
+            if (r instanceof ProgramCardHand) {
+                ProgramCardHand p = (ProgramCardHand) r;
+                p.getNewHand();
+            }
+        }
+    }
 }

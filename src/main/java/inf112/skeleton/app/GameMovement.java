@@ -55,7 +55,7 @@ public class GameMovement {
                         for (Player p : game.getPlayers()) {
                             if ( p.getRobot() == movable) {
                                 //need to use respawn from Player class so that all field will be updated.
-                                p.respawn();
+                                p.respawn(game);
                                 return true;
                             }
                         }

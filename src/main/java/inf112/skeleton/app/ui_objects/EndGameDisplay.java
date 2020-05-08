@@ -62,7 +62,7 @@ public class EndGameDisplay implements IRenderable {
     @Override
     public boolean click(int x, int y) {
         if (x >= getX()+40 && x < getX()+40 + getWidth() && y <= getY()-200 && y > getY()-200 - getHeight() && canClick()) {
-            GameRendering.setCurrentScene(1);
+            game.getGameRendering().setCurrentScene(1);
             System.out.println(game.wonGame);
         }
         return true;

@@ -140,7 +140,7 @@ public class GamePhase {
                     break;
             }
             if (p.getFlags().size() == game.getFlags().size()) {
-                setWonGame(true);
+                setWonGame(game, true);
             }
             p.repair(1);
         }
@@ -149,7 +149,7 @@ public class GamePhase {
             p.repair(wrench.getDamage());
         }
         if (p.isDestroyed()) {
-            p.respawn();
+            p.respawn(game);
         }
     }
 
@@ -196,8 +196,8 @@ public class GamePhase {
         return beams;
     }
 
-    public static void setWonGame(boolean won) {
-        GameRendering.setCurrentScene(2);
+    public static void setWonGame(Game game, boolean won) {
+        game.getGameRendering().setCurrentScene(2);
         //wonGame = won;
     }
 }

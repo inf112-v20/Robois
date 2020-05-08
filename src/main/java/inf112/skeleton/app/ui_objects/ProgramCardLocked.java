@@ -37,7 +37,7 @@ public class ProgramCardLocked implements IRenderable {
     public void reDraw() {
         for (int i = 0; i < lockedCards.length; i++) {
             if (lockedCards[i] == null) continue;
-            lockedCards[i].x = this.x + (this.width / 5)*i + (5*i);
+            lockedCards[i].x = this.x + (this.width / 5)*i + (24*i);
             lockedCards[i].y = this.y;
             lockedCards[i].width = this.width / 5;
         }

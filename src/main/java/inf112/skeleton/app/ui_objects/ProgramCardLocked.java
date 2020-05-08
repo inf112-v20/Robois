@@ -117,4 +117,14 @@ public class ProgramCardLocked implements IRenderable {
         this.canRender = r;
     }
 
+	public ProgramCard[] getCards() {
+		return this.lockedCards;
+	}
+
+	public void removeAll() {
+        for (int i = 0; i < this.lockedCards.length; i++) {
+            this.lockedCards[i] = null;
+        }
+	}
+
 }

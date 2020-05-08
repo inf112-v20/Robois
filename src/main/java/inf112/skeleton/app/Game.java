@@ -15,6 +15,8 @@ import inf112.skeleton.app.objects.interfaces.IMovable;
 import inf112.skeleton.app.objects.tiles.Flag;
 import inf112.skeleton.app.objects.tiles.Spawn;
 import inf112.skeleton.app.objects.tiles.Laser;
+import inf112.skeleton.app.objects.tiles.Spawn;
+import inf112.skeleton.app.ui_objects.ProgramCard;
 import inf112.skeleton.app.utilities.CardinalDirection;
 import inf112.skeleton.app.utilities.CardinalityUtility;
 
@@ -32,6 +34,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     private String wonGame;
 
     private GameRendering gameRendering;
+    private GameLoop gameLoop;
 
     @Override
     public void create() {
@@ -42,13 +45,13 @@ public class Game extends InputAdapter implements ApplicationListener {
             e.printStackTrace();
         }
 
-
         // Add players / spawns to the board.
         for (int x = 0; x < board.getWidth(); x++) {
             for (int y = 0; y < board.getHeight(); y++) {
                 if (board.getTile(x, y) instanceof Spawn) {
                     Player p = new Player(x, y);
-                    if (playablePlayer == null) playablePlayer = p;
+                    if (playablePlayer == null)
+                        playablePlayer = p;
                     players.add(p);
                 }
                 if (board.getTile(x, y) instanceof Laser) {
@@ -64,6 +67,8 @@ public class Game extends InputAdapter implements ApplicationListener {
         this.gameRendering = new GameRendering(this);
         GameInput gameInput = new GameInput(this, this.gameRendering);
         Gdx.input.setInputProcessor(gameInput);
+
+        this.gameLoop = new GameLoop(this);
     }
 
     @Override
@@ -78,6 +83,7 @@ public class Game extends InputAdapter implements ApplicationListener {
     @Override
     public void render() {
         gameRendering.render();
+        gameLoop.render();
     }
 
     @Override
@@ -181,5 +187,13 @@ public class Game extends InputAdapter implements ApplicationListener {
      */
     public List<Integer> getFlags() {
         return flags;
+	  }
+
+	  public void startRound(ProgramCard[] hand) {
+        this.gameLoop.startRound(hand);
     }
+
+	  public GameRendering getGameRendering() {
+		    return this.gameRendering;
+	  }
 }

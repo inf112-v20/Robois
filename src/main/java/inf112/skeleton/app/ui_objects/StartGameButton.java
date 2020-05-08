@@ -66,8 +66,11 @@ public class StartGameButton implements IRenderable {
 
     @Override
     public boolean click(int x, int y) {
-        game.getGameRendering().setCurrentScene(0);
-        return true;
+        if (x >= getX() && x < getX() + getWidth() && y >= getY() && y < getY() + getHeight() && canClick()) {
+            game.getGameRendering().setCurrentScene(0);
+            return true;
+        }
+        return false;
     }
 
     @Override

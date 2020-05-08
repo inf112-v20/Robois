@@ -1,5 +1,7 @@
 package inf112.skeleton.app.objects.tiles;
 
+import java.util.List;
+
 import inf112.skeleton.app.objects.interfaces.IDrawable;
 import inf112.skeleton.app.utilities.CardinalDirection;
 
@@ -14,6 +16,7 @@ public class Laser implements IDrawable {
     private int beamid;
     private int x;
     private int y;
+    private List<Beam> beams;
 
     public Laser(int type, int damage, int x, int y) {
         switch (type) {
@@ -21,29 +24,29 @@ public class Laser implements IDrawable {
                 laserDirection = CardinalDirection.NORTH;
                 laserWallPosition = CardinalDirection.SOUTH;
                 if (type == 1) { 
-                    beamid = 112; } 
-                else { beamid = 115; }
+                    beamid = 2; } 
+                else { beamid = 5; }
                 break;
             case 2: case 6:
                 laserDirection = CardinalDirection.EAST;
                 laserWallPosition = CardinalDirection.WEST;
                 if (type == 2) { 
-                    beamid = 111; } 
-                else { beamid = 114; }
+                    beamid = 1; } 
+                else { beamid = 4; }
                 break;
             case 3: case 7:
                 laserDirection = CardinalDirection.SOUTH;
                 laserWallPosition = CardinalDirection.NORTH;
                 if (type == 3) { 
-                    beamid = 112; } 
-                else { beamid = 115; }
+                    beamid = 2; } 
+                else { beamid = 5; }
                 break;
             case 4: case 8:
                 laserDirection = CardinalDirection.WEST;
                 laserWallPosition = CardinalDirection.EAST;
                 if (type == 4) {
-                    beamid = 111; } 
-                else { beamid = 114; }
+                    beamid = 1; } 
+                else { beamid = 4; }
                 break;
             default:
                 break;
@@ -52,6 +55,7 @@ public class Laser implements IDrawable {
         this.damage = damage;
         this.x = x;
         this.y = y;
+        this.beams = null;
     }
 
     /**
@@ -101,5 +105,13 @@ public class Laser implements IDrawable {
     @Override
     public boolean needBackground() {
         return true;
+    }
+
+    public List<Beam> getBeams() {
+        return this.beams;
+    }
+
+    public void setBeams(List<Beam> beams) {
+        this.beams = beams;
     }
 }

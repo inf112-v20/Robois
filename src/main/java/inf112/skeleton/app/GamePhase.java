@@ -158,6 +158,7 @@ public class GamePhase {
             if (game.getMovable(prevTile.getX(), prevTile.getY(), l.getLaserDirection()) == null) {
             getNextBeam(l, beams, board, game);
             }
+            l.setBeams(beams);
         }
 
         /* List<String> locations = new ArrayList<>();
@@ -178,6 +179,9 @@ public class GamePhase {
 
     private static List<Beam> getNextBeam(Laser l, List<Beam> beams, Board board, Game game) {
         Beam lastBeam = beams.get(beams.size()-1);
+        if (lastBeam.getX() < 0 || lastBeam.getY() < 0) return beams;
+        if (lastBeam.getX() >= board.getWidth() || lastBeam.getY() >= board.getHeight()) return beams;
+
         if (board.canGo(lastBeam.getX(), lastBeam.getY(), l.getLaserDirection())) {
             Location nextTile = CardinalityUtility.getNextTile(lastBeam.getX(), lastBeam.getY(), l.getLaserDirection());
             beams.add(new Beam(l.getBeamid(), l.getDamage(), nextTile.getX(), nextTile.getY()));
@@ -188,5 +192,4 @@ public class GamePhase {
         }
         return beams;
     }
-    
 }

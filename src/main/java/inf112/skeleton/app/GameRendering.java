@@ -13,10 +13,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import inf112.skeleton.app.objects.Board;
+import inf112.skeleton.app.ui_objects.IRenderable;
 import inf112.skeleton.app.ui_objects.InformationDisplay;
 import inf112.skeleton.app.ui_objects.Panel;
 import inf112.skeleton.app.ui_objects.ProgramCardHand;
 import inf112.skeleton.app.ui_objects.ProgramCardLocked;
+import inf112.skeleton.app.ui_objects.StartRoundButton;
 import inf112.skeleton.app.ui_objects.UIBoard;
 import inf112.skeleton.app.utilities.TextureReader;
 
@@ -67,6 +69,9 @@ public class GameRendering {
         mainGamePanel.addObject(h);
 
         l.setHand(h);
+        
+        String src = "src/main/java/inf112/skeleton/app/assets/sprites/arrow_button.png";
+        mainGamePanel.addObject(new StartRoundButton(820, 65, 600, 600, 0.1f, src, game, l));
     }
 
     /**
@@ -82,15 +87,19 @@ public class GameRendering {
         Sprite s = new Sprite(this.bg);
         s.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         s.draw(batch);
+
+        this.batch.end();
+
+        this.batch.begin();
+        getCurrentPanel().render(this.batch);
+        this.batch.end();
+
+        this.batch.begin();
         Sprite f = new Sprite(this.frame);
         f.setX(110);
         f.setY(103);
         f.setSize(700,710);
         f.draw(batch);
-        this.batch.end();
-
-        this.batch.begin();
-        getCurrentPanel().render(this.batch);
         this.batch.end();
 
         this.batch.begin();
@@ -123,4 +132,13 @@ public class GameRendering {
     public Panel getCurrentPanel() {
         return this.scenes.get(currentScene);
     }
+
+	public void resetCards() {
+        for (IRenderable r : this.getCurrentPanel().getObjects()) {
+            if (r instanceof ProgramCardHand) {
+                ProgramCardHand p = (ProgramCardHand) r;
+                p.getNewHand();
+            }
+        }
+	}
 }

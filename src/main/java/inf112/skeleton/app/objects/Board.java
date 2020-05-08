@@ -115,6 +115,7 @@ public class Board {
 	 */
 	public void setTile(int x, int y, IDrawable tile) {
 		this.board[y][x] = tile;
+
 	}
 
 	public boolean canGo(int x, int y, CardinalDirection dir) {

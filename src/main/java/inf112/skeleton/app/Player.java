@@ -21,7 +21,7 @@ public class Player {
         this.robot = new Robot(x, y, CardinalDirection.NORTH);
         this.spawnX = x;
         this.spawnY = y;
-        this.HP = 9;
+        this.HP = 10;
     }
 
     public Robot getRobot() {
@@ -56,7 +56,7 @@ public class Player {
         robot.setX(robot.getSpawnX());
         robot.setY(robot.getSpawnY());
         destroyed = false;
-        HP = 9;
+        HP = 10;
     }
 
     public ArrayList<Integer> getFlags() {

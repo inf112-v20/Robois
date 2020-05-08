@@ -2,6 +2,7 @@ package inf112.skeleton.app.ui_objects;
 
 import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,6 +13,8 @@ import inf112.skeleton.app.objects.Board;
 import inf112.skeleton.app.objects.Robot;
 import inf112.skeleton.app.objects.abstracts.Location;
 import inf112.skeleton.app.objects.interfaces.IMovable;
+import inf112.skeleton.app.objects.tiles.Beam;
+import inf112.skeleton.app.objects.tiles.Laser;
 import inf112.skeleton.app.utilities.CardinalDirection;
 
 public class UIBoard implements IRenderable {
@@ -66,6 +69,9 @@ public class UIBoard implements IRenderable {
         return this.height;
     }
 
+    private float timeSeconds = 0f;
+    private float period = 0.5f;
+
     @Override
     public void render(Batch batch) {
         if (!canRender()) return;
@@ -79,8 +85,36 @@ public class UIBoard implements IRenderable {
                 renderTile(batch, y, x, ym, false);
             }
         }
+
+        renderLaserBeams(batch);
+
+        timeSeconds += Gdx.graphics.getRawDeltaTime();
+        if(timeSeconds > period){
+            timeSeconds-=period;
+            for (Laser l : game.getLasers()) {
+                l.setBeams(null);
+            }
+        }
+
+
         
         renderRobot(batch);
+    }
+
+    private void renderLaserBeams(Batch batch) {
+        for (Laser l : game.getLasers()) {
+            if (l.getBeams() != null){
+                for (Beam b : l.getBeams()){
+                    Sprite s = new Sprite(this.textures.get(b.getImageId()));
+                    int ym = game.getBoard().getHeight() - b.getY() - 1;
+                    s.setPosition(b.getX() * this.tileSize + getX(), ym * this.tileSize + getY());
+                    s.setSize(this.tileSize, this.tileSize);
+                    s.draw(batch);
+                }
+            } else {
+                timeSeconds = 0f;
+            }
+        }
     }
 
     private void renderRobot(Batch batch) {

@@ -1,5 +1,7 @@
 package inf112.skeleton.app.ui_objects;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class ProgramCardLocked implements IRenderable {
@@ -116,5 +118,15 @@ public class ProgramCardLocked implements IRenderable {
     public void setCanRender(boolean r) {
         this.canRender = r;
     }
+
+	public ProgramCard[] getCards() {
+		return this.lockedCards;
+	}
+
+	public void removeAll() {
+        for (int i = 0; i < this.lockedCards.length; i++) {
+            this.lockedCards[i] = null;
+        }
+	}
 
 }

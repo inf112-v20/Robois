@@ -60,16 +60,16 @@ public class InformationDisplay implements IRenderable {
 
         String phase = String.format("> Current Phase: %d", game.getPhase());
         font.draw(batch, phase, getX(), getY());
-        font.draw(batch, String.format("HP: %d", game.getCurrentPlayer().getHP()), getX()+100, getY()-30);
-        font.draw(batch, String.format("> Lives: %d", game.getCurrentPlayer().getLife()), getX(), getY()-30);
+        font.draw(batch, String.format("HP: %d", game.getCurrentPlayer().getHP()), getX()+300, getY());
+        font.draw(batch, String.format("Lives: %d", game.getCurrentPlayer().getLife()), getX()+200, getY());
 
         timeSeconds += Gdx.graphics.getRawDeltaTime();
         if(timeSeconds > period){
             timeSeconds-=period;
         } else if (timeSeconds > period/2){
-            font.draw(batch, String.format("> Flags: %d_", game.getCurrentPlayer().getFlags().size()), getX(), getY()-60);
+            font.draw(batch, String.format("> Flags: %d_", game.getCurrentPlayer().getFlags().size()), getX(), getY()-30);
         }else{
-            font.draw(batch, String.format("> Flags: %d", game.getCurrentPlayer().getFlags().size()), getX(), getY()-60);
+            font.draw(batch, String.format("> Flags: %d", game.getCurrentPlayer().getFlags().size()), getX(), getY()-30);
         }
     }
 

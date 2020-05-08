@@ -78,8 +78,8 @@ public class GameRendering {
 
         endGamePanel.addObject(new EndGameDisplay(350, 600, 140, 25, game));
         
-        String src = "src/main/java/inf112/skeleton/app/assets/sprites/arrow_button.png";
-        mainGamePanel.addObject(new StartRoundButton(820, 65, 600, 600, 0.1f, src, game, l));
+        String src = "src/main/java/inf112/skeleton/app/assets/sprites/locked_in.jpg";
+        mainGamePanel.addObject(new StartRoundButton(1055, 30, 175, 47, 1.3f, src, game, l));
     }
 
     /**
